@@ -52,6 +52,30 @@ namespace EvaluationApp.Core
                 Sections = sections
             });
 
+            forms.Add(new Form
+            {
+                Id = 1,
+                Name = "Core Technical .NET",
+                Description = "Form for all technicall staff using .NET technologies.",
+                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Status = true,
+                CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Sections = sections
+            });
+
+            forms.Add(new Form
+            {
+                Id = 1,
+                Name = "Team Lead Evaluation",
+                Description = "Evaluates team lead specific skills.",
+                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Status = false,
+                CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Sections = sections
+            });
+
             return forms;
         }
     }
