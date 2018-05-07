@@ -4,14 +4,11 @@ using System.Text;
 
 namespace EvaluationApp.Domain.FormMockup
 {
-    public class Criteria
+    public class EvaluationScale
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
-        public int CreatedBy { get; set; }
-        public int ModifiedBy { get; set; }
+        public string Description { get; set; }
+        public virtual ICollection<EvaluationScaleOption> EvaluationScaleOptions { get; set; }
     }
 }

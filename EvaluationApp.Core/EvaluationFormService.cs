@@ -12,14 +12,14 @@ namespace EvaluationApp.Core
         {
             ICollection<Form> forms = new List<Form>();
 
-            ICollection<Criteria> criterias_1 = new List<Criteria>();
-            criterias_1.Add(new Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0)});
-            criterias_1.Add(new Criteria { Id = 2, Name = "Method Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
-            criterias_1.Add(new Criteria { Id = 3, Name = "Class Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            ICollection<Criteria> criteria_1 = new List<Criteria>();
+            criteria_1.Add(new Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0)});
+            criteria_1.Add(new Criteria { Id = 2, Name = "Method Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_1.Add(new Criteria { Id = 3, Name = "Class Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
 
-            ICollection<Criteria> criterias_2 = new List<Criteria>();
-            criterias_2.Add(new Criteria { Id = 4, Name = "Class Coupling", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
-            criterias_2.Add(new Criteria { Id = 5, Name = "Open Close Criterion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            ICollection<Criteria> criteria_2 = new List<Criteria>();
+            criteria_2.Add(new Criteria { Id = 4, Name = "Class Coupling", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_2.Add(new Criteria { Id = 5, Name = "Open Close Criterion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
 
             ICollection<Section> sections = new List<Section>();
             sections.Add(new Section
@@ -28,7 +28,7 @@ namespace EvaluationApp.Core
                 Name = "Software Engineering",
                 Description = "Basic Software Engineering Principles",
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
-                Criterias = criterias_1
+                Criteria = criteria_1
             });
 
             sections.Add(new Section
@@ -37,7 +37,7 @@ namespace EvaluationApp.Core
                 Name = "Programming",
                 Description = "Basic Programming Principles",
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
-                Criterias = criterias_2
+                Criteria = criteria_2
             });
 
 
