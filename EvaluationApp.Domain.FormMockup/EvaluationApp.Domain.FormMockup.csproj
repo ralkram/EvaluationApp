@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

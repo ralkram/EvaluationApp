@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp", "EvaluationApp\EvaluationApp.csproj", "{991AF6BC-7CED-4068-BB90-5316A388DD87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp", "EvaluationApp\EvaluationApp.csproj", "{991AF6BC-7CED-4068-BB90-5316A388DD87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{BD84B80D-A2E7-4370-8F5A-F9FD5B264362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Core", "EvaluationApp.Core\EvaluationApp.Core.csproj", "{7BECD02F-B9C7-4926-B401-45A728D28AE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Core", "EvaluationApp.Core\EvaluationApp.Core.csproj", "{7BECD02F-B9C7-4926-B401-45A728D28AE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Core.Shared", "EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj", "{79A57125-62AA-498E-B762-F1212CEF8F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Core.Shared", "EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj", "{79A57125-62AA-498E-B762-F1212CEF8F8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{1E716218-A5A3-4080-8EFA-83DA89AFDAE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Persistence.EF", "EvaluationApp.Persistence.EF\EvaluationApp.Persistence.EF.csproj", "{F26A591B-05A0-4961-AD83-AF1E5E5B7851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Persistence.EF", "EvaluationApp.Persistence.EF\EvaluationApp.Persistence.EF.csproj", "{F26A591B-05A0-4961-AD83-AF1E5E5B7851}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1203343D-43E9-49B6-92D2-5565A7DC9A46}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{C0608083-0D5E-4A9B-A050-BC0B0F761848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Domain", "EvaluationApp.Domain\EvaluationApp.Domain.csproj", "{5BA1773B-7F43-48FE-A966-C4086C6FD1E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Domain", "EvaluationApp.Domain\EvaluationApp.Domain.csproj", "{5BA1773B-7F43-48FE-A966-C4086C6FD1E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Persistence.Shared", "EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj", "{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Persistence.Shared", "EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj", "{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Domain.FormMockup", "EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj", "{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{F26A591B-05A0-4961-AD83-AF1E5E5B7851} = {1E716218-A5A3-4080-8EFA-83DA89AFDAE7}
 		{5BA1773B-7F43-48FE-A966-C4086C6FD1E2} = {C0608083-0D5E-4A9B-A050-BC0B0F761848}
 		{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E} = {1E716218-A5A3-4080-8EFA-83DA89AFDAE7}
+		{A7BC6301-FEFD-46FF-8DC6-ADF510B38220} = {C0608083-0D5E-4A9B-A050-BC0B0F761848}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25131FD0-933E-4768-B7EE-7BF2A6E8402B}
