@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Domain", "Eva
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Persistence.Shared", "EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj", "{47986D19-01E1-4E6A-AAC2-3CD02B7BA92E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Domain.FormMockup", "EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj", "{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Domain.FormMockup", "EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj", "{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

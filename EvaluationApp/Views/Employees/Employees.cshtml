@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EvaluationApp.Domain.FormMockup.Employee>
+
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <img src="~/images/person1.png" width="16" height="16"/>
+                            @item.Name
+                        </td>
+                        <td>@item.Position</td>
+                        <td>@item.Team</td>
+                        <td>
+                            <img src="~/images/completed.png" />
+                            <img src="~/images/progress.png" />
+                            <img src="~/images/start.png" />
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+        </div>
+    </div>
+</div>

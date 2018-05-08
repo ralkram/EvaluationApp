@@ -8,6 +8,36 @@ namespace EvaluationApp.Core
 {
     public class EvaluationFormService : IEvaluationFormService
     {
+        public ICollection<Employee> GetEmployees()
+        {
+            ICollection<Employee> employees = new List<Employee>();
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Paige Turner",
+                Position = "Team Lead",
+                Team = "Team 1"
+            });
+
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Sam Samuels",
+                Position = "Developer",
+                Team = "Team 2"
+            });
+
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Leana Stevens",
+                Position = "QA Engineer",
+                Team = "Team 3"
+            });
+
+            return employees;
+        }
+
         public ICollection<Form> GetForms(int userId)
         {
             ICollection<Form> forms = new List<Form>();
