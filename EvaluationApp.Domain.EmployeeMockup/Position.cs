@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.Domain.FormMockup
+namespace EvaluationApp.Domain.EmployeeMockup
 {
-    public class Employee
+    public class Position
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
-
-        public string Position { get; set; }
-
-        public string Team { get; set; }
     }
 }
