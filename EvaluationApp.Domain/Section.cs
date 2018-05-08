@@ -13,6 +13,7 @@ namespace EvaluationApp.Domain
 
         public virtual EvaluationScale EvaluationScale { get; set; }
 
+        public DateTime CreateddDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
         public int CreatedBy { get; set; }
