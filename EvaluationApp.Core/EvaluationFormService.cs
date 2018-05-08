@@ -8,6 +8,36 @@ namespace EvaluationApp.Core
 {
     public class EvaluationFormService : IEvaluationFormService
     {
+        public ICollection<Employee> GetEmployees()
+        {
+            ICollection<Employee> employees = new List<Employee>();
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Paige Turner",
+                Position = "Team Lead",
+                Team = "Team 1"
+            });
+
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Sam Samuels",
+                Position = "Developer",
+                Team = "Team 2"
+            });
+
+            employees.Add(new Employee
+            {
+                Id = 1,
+                Name = "Leana Stevens",
+                Position = "QA Engineer",
+                Team = "Team 3"
+            });
+
+            return employees;
+        }
+
         public ICollection<Form> GetForms(int userId)
         {
             ICollection<Form> forms = new List<Form>();
@@ -48,6 +78,30 @@ namespace EvaluationApp.Core
                 Description = "Form to be used for evaluating skills specific for the Philadelphia Project",
                 Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
                 Status = true, CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Sections = sections
+            });
+
+            forms.Add(new Form
+            {
+                Id = 1,
+                Name = "Core Technical .NET",
+                Description = "Form for all technicall staff using .NET technologies.",
+                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Status = true,
+                CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Sections = sections
+            });
+
+            forms.Add(new Form
+            {
+                Id = 1,
+                Name = "Team Lead Evaluation",
+                Description = "Evaluates team lead specific skills.",
+                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Status = false,
+                CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
                 Sections = sections
             });

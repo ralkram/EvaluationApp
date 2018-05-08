@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using EvaluationApp.Core.Shared
+@inject IEvaluationFormService formService
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,9 +32,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Forms" asp-action="Index">Evaluation Forms (@formService.GetForms(0).Count)</a></li>
+                    <li><a asp-area="" asp-controller="Employees" asp-action="Index">Employees (@formService.GetEmployees().Count) </a></li>
+                    <li><a asp-area="" asp-controller="Forms" asp-action="Index">In progress evaluations</a></li>
+                    <li><a asp-area="" asp-controller="Forms" asp-action="Index">Completed evaluations</a></li>
                 </ul>
             </div>
         </div>

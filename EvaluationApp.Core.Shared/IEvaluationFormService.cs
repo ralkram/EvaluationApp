@@ -8,5 +8,6 @@ namespace EvaluationApp.Core.Shared
     public interface IEvaluationFormService
     {
         ICollection<Form> GetForms(int userId);
+        ICollection<Employee> GetEmployees();
     }
 }

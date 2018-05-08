@@ -6,10 +6,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Core\EvaluationApp.Core.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Domain\EvaluationApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
