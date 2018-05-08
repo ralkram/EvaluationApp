@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Domain.EmployeeMockup\EvaluationApp.Domain.EmployeeMockup.csproj" />
   </ItemGroup>
 
 </Project>
