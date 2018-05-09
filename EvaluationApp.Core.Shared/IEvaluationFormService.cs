@@ -13,5 +13,6 @@ namespace EvaluationApp.Core.Shared
         ICollection<Employee> GetEmployees();
         ICollection<Evaluation> GetInProgressEvaluations();
         ICollection<Evaluation> GetCompletedEvaluations();
+        Evaluation GetEvaluationForm();
     }
 }

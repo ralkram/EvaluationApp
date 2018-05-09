@@ -74,6 +74,44 @@ namespace EvaluationApp.Core
             return employees;
         }
 
+        public Evaluation GetEvaluationForm()
+        {
+            var evaluation = new Evaluation();
+            evaluation.EvaluationName = "Philadelphia Project";
+
+            ICollection<EvaluationApp.Domain.Criteria> criteria_1 = new List<EvaluationApp.Domain.Criteria>();
+            criteria_1.Add(new EvaluationApp.Domain.Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_1.Add(new EvaluationApp.Domain.Criteria { Id = 2, Name = "Method Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_1.Add(new EvaluationApp.Domain.Criteria { Id = 3, Name = "Class Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+
+            ICollection<EvaluationApp.Domain.Criteria> criteria_2 = new List<EvaluationApp.Domain.Criteria>();
+            criteria_2.Add(new EvaluationApp.Domain.Criteria { Id = 4, Name = "Class Coupling", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_2.Add(new EvaluationApp.Domain.Criteria { Id = 5, Name = "Open Close Criterion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+
+            ICollection<EvaluationApp.Domain.Section> sections = new List<EvaluationApp.Domain.Section>();
+            sections.Add(new EvaluationApp.Domain.Section
+            {
+                Id = 1,
+                Name = "Software Engineering",
+                Description = "Basic Software Engineering Principles",
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Criteria = criteria_1
+            });
+
+            sections.Add(new EvaluationApp.Domain.Section
+            {
+                Id = 2,
+                Name = "Programming",
+                Description = "Basic Programming Principles",
+                ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
+                Criteria = criteria_2
+            });
+
+            evaluation.Sections = sections;
+
+            return evaluation;
+        }
+
         public ICollection<Form> GetForms(int userId)
         {
             ICollection<Form> forms = new List<Form>();
