@@ -16,5 +16,6 @@ namespace EvaluationApp.Core.Shared
 
         void StartEvaluation(Form form, Employee employee);
         void ContinueEvaluation(int evaluationId);
+        Evaluation GetEvaluationForm();
     }
 }
