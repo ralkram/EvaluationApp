@@ -18,6 +18,8 @@
     <ProjectReference Include="..\EvaluationApp.Core\EvaluationApp.Core.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain\EvaluationApp.Domain.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Persistence.EF\EvaluationApp.Persistence.EF.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,7 @@ namespace EvaluationApp.Core
 {
     public class EvaluationFormService : IEvaluationFormService
     {
+
         public ICollection<Evaluation> GetCompletedEvaluations()
         {
             ICollection<Evaluation> evaluations = new List<Evaluation>();
@@ -19,8 +20,8 @@ namespace EvaluationApp.Core
                 Id = 1,
                 EvaluationName = "Core Skills",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Sam Samuels" },
-                LastEvaluator = new Employee { Name = "Paige Turner" }
+                EmployeeId = 1,
+                LastEvaluatorId = 3
             });
 
             evaluations.Add(new Evaluation
@@ -28,8 +29,8 @@ namespace EvaluationApp.Core
                 Id = 2,
                 EvaluationName = "Core Skills",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Cassey Chambers" },
-                LastEvaluator = new Employee { Name = "Paige Turner" }
+                EmployeeId = 2,
+                LastEvaluatorId = 3
             });
 
             evaluations.Add(new Evaluation
@@ -37,8 +38,8 @@ namespace EvaluationApp.Core
                 Id = 3,
                 EvaluationName = "Philadelphia Project",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Lena Stevens" },
-                LastEvaluator = new Employee { Name = "Paige Turner" }
+                EmployeeId = 3,
+                LastEvaluatorId = 3
             });
 
             return evaluations;
@@ -155,8 +156,8 @@ namespace EvaluationApp.Core
                 Id = 1,
                 EvaluationName = "Core Skills",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Sam Samuels"},
-                LastEvaluator = new Employee { Name = "Paige Turner"}
+                EmployeeId = 1,
+                LastEvaluatorId = 3
             });
 
             evaluations.Add(new Evaluation
@@ -164,8 +165,8 @@ namespace EvaluationApp.Core
                 Id = 2,
                 EvaluationName = "Core Skills",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Cassey Chambers" },
-                LastEvaluator = new Employee { Name = "Paige Turner" }
+                EmployeeId = 2,
+                LastEvaluatorId = 3
             });
 
             evaluations.Add(new Evaluation
@@ -173,11 +174,22 @@ namespace EvaluationApp.Core
                 Id = 3,
                 EvaluationName = "Philadelphia Project",
                 FormName = "Core Technical .NET",
-                Employee = new Employee { Name = "Lena Stevens" },
-                LastEvaluator = new Employee { Name = "Paige Turner" }
+                EmployeeId = 3,
+                LastEvaluatorId = 3
             });
 
             return evaluations;
         }
+
+        public void StartEvaluation(Form form, Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ContinueEvaluation(int evaluationId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

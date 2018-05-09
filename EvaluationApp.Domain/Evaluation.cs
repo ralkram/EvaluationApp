@@ -21,8 +21,8 @@ namespace EvaluationApp.Domain
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public Employee Employee { get; set; }
-        public Employee LastEvaluator { get; set; }
+        public int EmployeeId { get; set; }
+        public int LastEvaluatorId { get; set; }
 
         public bool IsCompleted { get; set; }
     }

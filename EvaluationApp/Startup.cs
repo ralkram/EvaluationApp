@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EvaluationApp.Core;
 using EvaluationApp.Core.Shared;
+using EvaluationApp.Persistence.EF;
+using EvaluationApp.Persistence.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +27,13 @@ namespace EvaluationApp
         {
             // Add application services.
             services.AddScoped<IEvaluationFormService, EvaluationFormService>();
+
+            services.AddScoped<IPersistenceContext, PersistenceContext>();
+            var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
+            if (dataService != null)
+            {
+                dataService.InitializeContext(services, Configuration);
+            }
 
             services.AddMvc();
         }
