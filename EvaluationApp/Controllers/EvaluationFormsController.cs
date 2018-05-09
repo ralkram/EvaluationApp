@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvaluationApp.Controllers
 {
-    public class FormsController : Controller
+    public class EvaluationFormsController : Controller
     {
         private readonly IEvaluationFormService _formService;
-        public FormsController(IEvaluationFormService formService)
+        public EvaluationFormsController(IEvaluationFormService formService)
         {
             _formService = formService;
         }
