@@ -4,6 +4,7 @@ using EvaluationApp.Domain.EmployeeMockup;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EvaluationApp.Domain;
 
 namespace EvaluationApp.Core
 {
@@ -43,17 +44,17 @@ namespace EvaluationApp.Core
         {
             ICollection<Form> forms = new List<Form>();
 
-            ICollection<Criteria> criteria_1 = new List<Criteria>();
-            criteria_1.Add(new Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
-            criteria_1.Add(new Criteria { Id = 2, Name = "Method Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
-            criteria_1.Add(new Criteria { Id = 3, Name = "Class Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            ICollection<EvaluationApp.Domain.FormMockup.Criteria> criteria_1 = new List<EvaluationApp.Domain.FormMockup.Criteria>();
+            criteria_1.Add(new EvaluationApp.Domain.FormMockup.Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_1.Add(new EvaluationApp.Domain.FormMockup.Criteria { Id = 2, Name = "Method Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_1.Add(new EvaluationApp.Domain.FormMockup.Criteria { Id = 3, Name = "Class Cohesion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
 
-            ICollection<Criteria> criteria_2 = new List<Criteria>();
-            criteria_2.Add(new Criteria { Id = 4, Name = "Class Coupling", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
-            criteria_2.Add(new Criteria { Id = 5, Name = "Open Close Criterion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            ICollection<EvaluationApp.Domain.FormMockup.Criteria> criteria_2 = new List<EvaluationApp.Domain.FormMockup.Criteria>();
+            criteria_2.Add(new EvaluationApp.Domain.FormMockup.Criteria { Id = 4, Name = "Class Coupling", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
+            criteria_2.Add(new EvaluationApp.Domain.FormMockup.Criteria { Id = 5, Name = "Open Close Criterion", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
 
-            ICollection<Section> sections = new List<Section>();
-            sections.Add(new Section
+            ICollection<EvaluationApp.Domain.FormMockup.Section> sections = new List<EvaluationApp.Domain.FormMockup.Section>();
+            sections.Add(new EvaluationApp.Domain.FormMockup.Section
             {
                 Id = 1,
                 Name = "Software Engineering",
@@ -62,7 +63,7 @@ namespace EvaluationApp.Core
                 Criteria = criteria_1
             });
 
-            sections.Add(new Section
+            sections.Add(new EvaluationApp.Domain.FormMockup.Section
             {
                 Id = 2,
                 Name = "Programming",
@@ -77,7 +78,7 @@ namespace EvaluationApp.Core
                 Id = 1,
                 Name = "Philadelphia Project",
                 Description = "Form to be used for evaluating skills specific for the Philadelphia Project",
-                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Importance = new EvaluationApp.Domain.FormMockup.Importance { Id = 1, Name = "Very important", Level = 5 },
                 Status = true,
                 CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
@@ -89,7 +90,7 @@ namespace EvaluationApp.Core
                 Id = 1,
                 Name = "Core Technical .NET",
                 Description = "Form for all technicall staff using .NET technologies.",
-                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Importance = new EvaluationApp.Domain.FormMockup.Importance { Id = 1, Name = "Very important", Level = 5 },
                 Status = true,
                 CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
@@ -101,7 +102,7 @@ namespace EvaluationApp.Core
                 Id = 1,
                 Name = "Team Lead Evaluation",
                 Description = "Evaluates team lead specific skills.",
-                Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
+                Importance = new EvaluationApp.Domain.FormMockup.Importance { Id = 1, Name = "Very important", Level = 5 },
                 Status = false,
                 CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
@@ -109,6 +110,22 @@ namespace EvaluationApp.Core
             });
 
             return forms;
+        }
+
+        public ICollection<Evaluation> GetInProgressEvaluations()
+        {
+            ICollection<Evaluation> evaluations = new List<Evaluation>();
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 1,
+                EvaluationName = "Core Skills",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Sam Samuels"},
+                LastEvaluator = new Employee { Name = "Paige Turner"}
+            });
+
+            return evaluations;
         }
     }
 }
