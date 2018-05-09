@@ -23,6 +23,20 @@ namespace EvaluationApp.Controllers
             return View("EvaluationForms", vm);
         }
 
+        public IActionResult InProgress()
+        {
+            var vm = _formService.GetInProgressEvaluations();
+
+            return View(vm);
+        }
+
+        public IActionResult Completed()
+        {
+            var vm = _formService.GetCompletedEvaluations();
+
+            return View(vm);
+        }
+
         // GET: Forms/Details/5
         public ActionResult Details(int id)
         {

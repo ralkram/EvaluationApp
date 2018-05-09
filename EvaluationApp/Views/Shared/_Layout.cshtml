@@ -34,8 +34,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Forms" asp-action="Index">Evaluation Forms (@formService.GetForms(0).Count)</a></li>
                     <li><a asp-area="" asp-controller="Employees" asp-action="Index">Employees (@formService.GetEmployees().Count) </a></li>
-                    <li><a asp-area="" asp-controller="Forms" asp-action="Index">In progress evaluations</a></li>
-                    <li><a asp-area="" asp-controller="Forms" asp-action="Index">Completed evaluations</a></li>
+                    <li><a asp-area="" asp-controller="Forms" asp-action="InProgress">In progress evaluations (@formService.GetInProgressEvaluations().Count)</a></li>
+                    <li><a asp-area="" asp-controller="Forms" asp-action="Completed">Completed evaluations (@formService.GetCompletedEvaluations().Count)</a></li>
                 </ul>
             </div>
         </div>

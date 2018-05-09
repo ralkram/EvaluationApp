@@ -10,6 +10,40 @@ namespace EvaluationApp.Core
 {
     public class EvaluationFormService : IEvaluationFormService
     {
+        public ICollection<Evaluation> GetCompletedEvaluations()
+        {
+            ICollection<Evaluation> evaluations = new List<Evaluation>();
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 1,
+                EvaluationName = "Core Skills",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Sam Samuels" },
+                LastEvaluator = new Employee { Name = "Paige Turner" }
+            });
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 2,
+                EvaluationName = "Core Skills",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Cassey Chambers" },
+                LastEvaluator = new Employee { Name = "Paige Turner" }
+            });
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 3,
+                EvaluationName = "Philadelphia Project",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Lena Stevens" },
+                LastEvaluator = new Employee { Name = "Paige Turner" }
+            });
+
+            return evaluations;
+        }
+
         public ICollection<Employee> GetEmployees()
         {
             ICollection<Employee> employees = new List<Employee>();
@@ -123,6 +157,24 @@ namespace EvaluationApp.Core
                 FormName = "Core Technical .NET",
                 Employee = new Employee { Name = "Sam Samuels"},
                 LastEvaluator = new Employee { Name = "Paige Turner"}
+            });
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 2,
+                EvaluationName = "Core Skills",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Cassey Chambers" },
+                LastEvaluator = new Employee { Name = "Paige Turner" }
+            });
+
+            evaluations.Add(new Evaluation
+            {
+                Id = 3,
+                EvaluationName = "Philadelphia Project",
+                FormName = "Core Technical .NET",
+                Employee = new Employee { Name = "Lena Stevens" },
+                LastEvaluator = new Employee { Name = "Paige Turner" }
             });
 
             return evaluations;
