@@ -16,7 +16,6 @@ namespace EvaluationApp.Controllers
         private readonly IEvaluationsService evaluationsService;
         private readonly IAuthenticationService authenticationService;
 
-
         public EvaluationFormsController(IEvaluationFormsService evaluationformsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService)
@@ -29,7 +28,7 @@ namespace EvaluationApp.Controllers
         public ActionResult Index()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var vm = evaluationformsService.GetEvaluationFormsForEmployee(loggedEmployeeId);
+            var vm = evaluationformsService.GetAllSharedFormsForEmployee(loggedEmployeeId);
 
             return View("EvaluationForms", vm);
         }

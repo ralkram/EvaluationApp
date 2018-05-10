@@ -9,7 +9,9 @@ namespace EvaluationApp.Core.Shared
 {
     public interface IEvaluationFormsService
     {
-        ICollection<Form> GetEvaluationFormsForEmployee(int employeeId);
+        ICollection<Form> GetAllSharedFormsForEmployee(int employeeId);
+        ICollection<Form> GetEnabledSharedFormsForEmployee(int employeeId);
+
         Form GetEvaluationForm(int formId);
     }
 }

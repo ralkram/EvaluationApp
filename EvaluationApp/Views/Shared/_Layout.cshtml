@@ -35,7 +35,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Index">Evaluation Forms (@evaluationFormService.GetEvaluationFormsForEmployee(1).Count)</a></li>
+                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Index">Evaluation Forms (@evaluationFormService.GetAllSharedFormsForEmployee(1).Count)</a></li>
                     <li><a asp-area="" asp-controller="Employees" asp-action="Index">Employees (@employeesService.GetEmployeesToEvaluate(1).Count) </a></li>
                     <li><a asp-area="" asp-controller="EvaluationForms" asp-action="InProgress">In progress evaluations (@evaluationsService.GetInProgressEvaluations(1).Count)</a></li>
                     <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Completed">Completed evaluations (@evaluationsService.GetCompletedEvaluations(1).Count)</a></li>
