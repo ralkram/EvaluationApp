@@ -9,11 +9,11 @@ using EvaluationApp.Persistence.Shared;
 
 namespace EvaluationApp.Core
 {
-    public class EvaluationFormService : IEvaluationFormService
+    public class EvaluationFormsService : IEvaluationFormsService
     {
         private readonly IPersistenceContext _persistenceContext;
 
-        public EvaluationFormService(IPersistenceContext persistenceContext)
+        public EvaluationFormsService(IPersistenceContext persistenceContext)
         {
             _persistenceContext = persistenceContext;
         }

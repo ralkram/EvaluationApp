@@ -33,7 +33,9 @@ namespace EvaluationApp
             }
 
             // Add application services.
-            services.AddScoped<IEvaluationFormService, EvaluationFormService>();            
+            services.AddScoped<IEvaluationFormsService, EvaluationFormsService>();
+            services.AddScoped<IEvaluationsService, EvaluationsService>();
+            services.AddScoped<IEmployeesService, EmployeesService>();
 
             services.AddMvc();
         }

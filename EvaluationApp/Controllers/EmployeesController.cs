@@ -9,8 +9,8 @@ namespace EvaluationApp.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly IEvaluationFormService _formService;
-        public EmployeesController(IEvaluationFormService formService)
+        private readonly IEvaluationFormsService _formService;
+        public EmployeesController(IEvaluationFormsService formService)
         {
             _formService = formService;
         }

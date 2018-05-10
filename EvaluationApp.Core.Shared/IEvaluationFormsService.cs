@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EvaluationApp.Core.Shared
 {
-    public interface IEvaluationFormService
+    public interface IEvaluationFormsService
     {
         ICollection<Form> GetForms(int userId);
         ICollection<Employee> GetEmployees();

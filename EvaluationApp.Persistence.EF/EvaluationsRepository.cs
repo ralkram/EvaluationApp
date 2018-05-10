@@ -7,9 +7,9 @@ using System.Text;
 
 namespace EvaluationApp.Persistence.EF
 {
-    public class EvaluationRepository : Repository<Evaluation>, IEvaluationRepository 
+    public class EvaluationsRepository : Repository<Evaluation>, IEvaluationsRepository 
     {
-        public EvaluationRepository(EvaluationDbContext context)
+        public EvaluationsRepository(EvaluationDbContext context)
             : base(context)
         {
 

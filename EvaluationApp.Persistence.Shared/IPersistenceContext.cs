@@ -8,7 +8,7 @@ namespace EvaluationApp.Persistence.Shared
 {
     public interface IPersistenceContext : IDisposable
     {
-        IEvaluationRepository Evaluations { get; }
+        IEvaluationsRepository Evaluations { get; }
         int Complete();
         void InitializeContext(IServiceCollection services, IConfiguration config);
         void InitializeData(IServiceProvider serviceProvider);

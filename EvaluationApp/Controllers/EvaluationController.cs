@@ -11,11 +11,11 @@ namespace EvaluationApp.Controllers
 {
     public class EvaluationController : Controller
     {
-        private readonly IEvaluationFormService evaluationFormService;
+        private readonly IEvaluationFormsService evaluationFormsService;
 
-        public EvaluationController(IEvaluationFormService evaluationFormService)
+        public EvaluationController(IEvaluationFormsService evaluationFormsService)
         {
-            this.evaluationFormService = evaluationFormService;
+            this.evaluationFormsService = evaluationFormsService;
         }
     }
 }
