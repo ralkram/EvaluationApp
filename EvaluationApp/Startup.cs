@@ -25,15 +25,15 @@ namespace EvaluationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add application services.
-            services.AddScoped<IEvaluationFormService, EvaluationFormService>();
-
             services.AddScoped<IPersistenceContext, PersistenceContext>();
             var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
             if (dataService != null)
             {
                 dataService.InitializeContext(services, Configuration);
             }
+
+            // Add application services.
+            services.AddScoped<IEvaluationFormService, EvaluationFormService>();            
 
             services.AddMvc();
         }

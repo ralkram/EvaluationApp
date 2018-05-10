@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EvaluationApp.Core.Shared;
+using EvaluationApp.Domain;
+using EvaluationApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,8 +27,33 @@ namespace EvaluationApp.Controllers
 
         public IActionResult StartEvaluation()
         {
-            var vm = _formService.GetEvaluationForm();
+            var vm = new EvaluationViewModel();
+            var eval = _formService.GetEvaluationForm();
+
+            vm.EvaluationName = eval.EvaluationName;
+            vm.FormName = eval.FormName;
+            vm.Sections = eval.Sections;
             return View("StartEvaluation", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StartEvaluation(EvaluationViewModel evaluation)
+        {
+            if (ModelState.IsValid)
+            {
+                var eval = new Evaluation
+                {
+                    FormName = evaluation.FormName,
+                    EvaluationName = evaluation.EvaluationName,
+                    Sections = evaluation.Sections
+                };
+
+                _formService.StartEvaluation(eval);
+                return RedirectToAction(nameof(Index));
+            }            
+
+            return View("StartEvaluation", evaluation);
         }
 
         public IActionResult InProgress()

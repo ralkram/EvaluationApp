@@ -10,7 +10,7 @@ namespace EvaluationApp.Persistence.EF
 {
     public class PersistenceContext : IPersistenceContext
     {
-        private EvaluationDbContext context;
+        private EvaluationDbContext context = null;
 
         public IEvaluationRepository Evaluations { get; set; }
 

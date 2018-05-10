@@ -9,5 +9,6 @@ namespace EvaluationApp.Persistence.Shared
     {
         IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
         IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
+        //void StartEvaluation(Evaluation evaluation);
     }
 }
