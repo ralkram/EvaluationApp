@@ -32,11 +32,11 @@
                         <p> Criteria - @anchorTarget</p>
                         @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
                         {
-                        <div class="form-group">
-                            <label class="control-label"> @criteria.Name</label>
-                            <input asp-for="@criteria.Grade.Value" class="form-control" />
-                            <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label"> @criteria.Name</label>
+                                <input asp-for="@criteria.Grade.Value" class="form-control" />
+                                <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
+                            </div>
                         }
                     </div>
                 }
@@ -62,4 +62,14 @@
     </div>
 </form>
 
-
+<div class="side-by-side clearfix">
+    <div>
+        <em>single Select Shop id</em>
+        <select data-placeholder="Your Favorite Types of Bear" class="chosen-select" tabindex="-1">
+            <option value=""></option>
+            <option selected>Test1sautet</option>
+            <option>Test2</option>
+            <option>Test3</option>
+        </select>
+    </div>
+</div>

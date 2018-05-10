@@ -6,3 +6,6 @@
         });
 });
 
+$(function () {
+    $("select").chosen();
+});
