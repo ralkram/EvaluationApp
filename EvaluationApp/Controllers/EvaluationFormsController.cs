@@ -12,15 +12,24 @@ namespace EvaluationApp.Controllers
 {
     public class EvaluationFormsController : Controller
     {
-        private readonly IEvaluationFormsService _formService;
-        public EvaluationFormsController(IEvaluationFormsService formService)
+        private readonly IEvaluationFormsService evaluationformsService;
+        private readonly IEvaluationsService evaluationsService;
+        private readonly IAuthenticationService authenticationService;
+
+
+        public EvaluationFormsController(IEvaluationFormsService evaluationformsService,
+            IEvaluationsService evaluationsService,
+            IAuthenticationService authenticationService)
         {
-            _formService = formService;
+            this.evaluationformsService = evaluationformsService;
+            this.evaluationsService = evaluationsService;
+            this.authenticationService = authenticationService;
         }
         // GET: Forms
         public ActionResult Index()
         {
-            var vm = _formService.GetForms(1);
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var vm = evaluationformsService.GetEvaluationFormsForEmployee(loggedEmployeeId);
 
             return View("EvaluationForms", vm);
         }
@@ -28,11 +37,44 @@ namespace EvaluationApp.Controllers
         public IActionResult StartEvaluation()
         {
             var vm = new EvaluationViewModel();
-            var eval = _formService.GetEvaluationForm();
+            int evaluationFormId = 1;
+            var form = evaluationformsService.GetEvaluationForm(evaluationFormId);
 
-            vm.EvaluationName = eval.EvaluationName;
-            vm.FormName = eval.FormName;
-            vm.Sections = eval.Sections;
+            vm.EvaluationName = "Evaluation Test";
+            vm.FormName = form.Name;
+            vm.Sections = new List<EvaluationApp.Domain.Section>();
+
+
+            foreach (EvaluationApp.Domain.FormMockup.Section section in form.Sections)
+            {
+                EvaluationApp.Domain.Section evaluationSection = new EvaluationApp.Domain.Section();
+                ICollection<EvaluationApp.Domain.Criteria> sectionCriteria = new List<EvaluationApp.Domain.Criteria>();
+
+
+                foreach (EvaluationApp.Domain.FormMockup.Criteria criteria in section.Criteria)
+                {
+                    EvaluationApp.Domain.Criteria EvaluationCriteria = new EvaluationApp.Domain.Criteria
+                    {
+                        Id = criteria.Id,
+                        Name = criteria.Name,
+                        ModifiedDate = criteria.ModifiedDate,
+                        CreatedBy = criteria.CreatedBy,
+                        ModifiedBy = criteria.ModifiedBy
+                    };
+
+                    sectionCriteria.Add(EvaluationCriteria);
+                }
+                evaluationSection.Id = section.Id;
+                evaluationSection.Name = section.Name;
+                evaluationSection.Description = section.Description;
+                evaluationSection.Criteria = sectionCriteria;
+                // evaluationSection.EvaluationScale = section.EvaluationScale;
+                evaluationSection.ModifiedDate = section.ModifiedDate;
+                evaluationSection.CreatedBy = section.CreatedBy;
+                evaluationSection.ModifiedBy = section.ModifiedBy;
+                vm.Sections.Add(evaluationSection);
+            }
+
             return View("StartEvaluation", vm);
         }
 
@@ -49,23 +91,25 @@ namespace EvaluationApp.Controllers
                     Sections = evaluation.Sections
                 };
 
-                _formService.StartEvaluation(eval);
+                evaluationsService.StartEvaluation(eval);
                 return RedirectToAction(nameof(Index));
-            }            
+            }
 
             return View("StartEvaluation", evaluation);
         }
 
         public IActionResult InProgress()
         {
-            var vm = _formService.GetInProgressEvaluations();
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var vm = evaluationsService.GetInProgressEvaluations(loggedEmployeeId);
 
             return View(vm);
         }
 
         public IActionResult Completed()
         {
-            var vm = _formService.GetCompletedEvaluations();
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var vm = evaluationsService.GetCompletedEvaluations(loggedEmployeeId);
 
             return View(vm);
         }

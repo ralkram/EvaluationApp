@@ -36,6 +36,7 @@ namespace EvaluationApp
             services.AddScoped<IEvaluationFormsService, EvaluationFormsService>();
             services.AddScoped<IEvaluationsService, EvaluationsService>();
             services.AddScoped<IEmployeesService, EmployeesService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddMvc();
         }

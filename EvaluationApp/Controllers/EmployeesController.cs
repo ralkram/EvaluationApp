@@ -9,15 +9,20 @@ namespace EvaluationApp.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly IEvaluationFormsService _formService;
-        public EmployeesController(IEvaluationFormsService formService)
+        private readonly IEmployeesService employeeService;
+        private readonly IAuthenticationService authenticationService;
+
+        public EmployeesController(IEmployeesService employeeService, IAuthenticationService authenticationService)
         {
-            _formService = formService;
+            this.employeeService = employeeService;
+            this.authenticationService = authenticationService;
         }
 
         public IActionResult Index()
         {
-            var vm = _formService.GetEmployees();
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var vm = employeeService.GetEmployeesToEvaluate(loggedEmployeeId);
+
             return View("Employees", vm);
         }
     }

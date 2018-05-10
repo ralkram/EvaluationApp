@@ -1,5 +1,7 @@
 ﻿@using EvaluationApp.Core.Shared
-@inject IEvaluationFormsService formService
+@inject IEvaluationFormsService evaluationFormService
+@inject IEvaluationsService evaluationsService
+@inject IEmployeesService employeesService
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +34,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Index">Evaluation Forms (@formService.GetForms(0).Count)</a></li>
-                    <li><a asp-area="" asp-controller="Employees" asp-action="Index">Employees (@formService.GetEmployees().Count) </a></li>
-                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="InProgress">In progress evaluations (@formService.GetInProgressEvaluations().Count)</a></li>
-                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Completed">Completed evaluations (@formService.GetCompletedEvaluations().Count)</a></li>
+                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Index">Evaluation Forms (@evaluationFormService.GetEvaluationFormsForEmployee(1).Count)</a></li>
+                    <li><a asp-area="" asp-controller="Employees" asp-action="Index">Employees (@employeesService.GetEmployeesToEvaluate(1).Count) </a></li>
+                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="InProgress">In progress evaluations (@evaluationsService.GetInProgressEvaluations(1).Count)</a></li>
+                    <li><a asp-area="" asp-controller="EvaluationForms" asp-action="Completed">Completed evaluations (@evaluationsService.GetCompletedEvaluations(1).Count)</a></li>
                 </ul>
             </div>
         </div>

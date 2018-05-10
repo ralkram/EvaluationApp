@@ -9,13 +9,7 @@ namespace EvaluationApp.Core.Shared
 {
     public interface IEvaluationFormsService
     {
-        ICollection<Form> GetForms(int userId);
-        ICollection<Employee> GetEmployees();
-        ICollection<Evaluation> GetInProgressEvaluations();
-        ICollection<Evaluation> GetCompletedEvaluations();
-
-        void StartEvaluation(Evaluation evaluation);
-        void ContinueEvaluation(int evaluationId);
-        Evaluation GetEvaluationForm();
+        ICollection<Form> GetEvaluationFormsForEmployee(int employeeId);
+        Form GetEvaluationForm(int formId);
     }
 }
