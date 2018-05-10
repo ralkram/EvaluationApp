@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvaluationApp.Controllers
 {
-    public class EvaluationController : Controller
+    public class EvaluationsController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;
 
-        public EvaluationController(IEvaluationFormsService evaluationFormsService)
+        public EvaluationsController(IEvaluationFormsService evaluationFormsService)
         {
             this.evaluationFormsService = evaluationFormsService;
         }
