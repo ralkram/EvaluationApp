@@ -24,5 +24,18 @@ namespace EvaluationApp.Persistence.EF
         {
             throw new NotImplementedException();
         }
+
+        //public void StartEvaluation(Evaluation evaluation)
+        //{
+        //    EvaluationDbContext.Evaluations.Add(evaluation);
+        //}
+
+        public EvaluationDbContext EvaluationDbContext
+        {
+            get
+            {
+                return Context as EvaluationDbContext;
+            }
+        }
     }
 }

@@ -5,11 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using EvaluationApp.Domain;
+using EvaluationApp.Persistence.Shared;
 
 namespace EvaluationApp.Core
 {
     public class EvaluationFormService : IEvaluationFormService
     {
+        private readonly IPersistenceContext _persistenceContext;
+
+        public EvaluationFormService(IPersistenceContext persistenceContext)
+        {
+            _persistenceContext = persistenceContext;
+        }
 
         public ICollection<Evaluation> GetCompletedEvaluations()
         {
@@ -219,9 +226,10 @@ namespace EvaluationApp.Core
             return evaluations;
         }
 
-        public void StartEvaluation(Form form, Employee employee)
+        public void StartEvaluation(Evaluation evaluation)
         {
-            throw new NotImplementedException();
+            _persistenceContext.Evaluations.Insert(evaluation);
+            _persistenceContext.Complete();
         }
 
         public void ContinueEvaluation(int evaluationId)
