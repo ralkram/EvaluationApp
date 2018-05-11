@@ -101,5 +101,10 @@ namespace EvaluationApp.Core
         {
             throw new NotImplementedException();
         }
+
+        public Evaluation GetEvaluationById(int evaluationId)
+        {
+            return persistenceContext.Evaluations.GetById(evaluationId);
+        }
     }
 }

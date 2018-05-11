@@ -8,6 +8,7 @@ namespace EvaluationApp.Core.Shared
 {
     public interface IEvaluationsService
     {
+        Evaluation GetEvaluationById(int evaluationId);
         ICollection<Evaluation> GetInProgressEvaluations(int employeeId);
         ICollection<Evaluation> GetCompletedEvaluations(int employeeId);
 

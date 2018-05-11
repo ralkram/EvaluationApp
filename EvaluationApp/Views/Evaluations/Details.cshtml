@@ -1,0 +1,54 @@
+﻿@model EvaluationApp.Models.EvaluationViewModel
+<br /> <br />
+
+<h2>Evaluation | @Model.EvaluationName | @Model.Employee.Name</h2>
+<div>
+    <ul class="nav nav-tabs nav-justified">
+        @foreach (var item in Model.Sections)
+        {
+            string anchorTarget = "#panel" + item.Id;
+            <li class="nav-item">
+                <a data-toggle="tab" href="@anchorTarget" role="tab">@item.Name</a>
+            </li>
+        }
+
+    </ul>
+    <div class="container">
+
+        <div class="tab-content">
+            @for (int i = 0; i < Model.Sections.Count; i++)
+            {
+                string anchorTarget = "panel" + (i + 1);
+
+                if (Model.Sections.ElementAt(i).Id == 1)
+                {
+                    <div class="tab-pane fade in active" id="@anchorTarget">
+                        <br>
+                        <p> Criteria - @anchorTarget</p>
+                        @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+                        {
+                            <div class="form-group">
+                                <label class="control-label"> @criteria.Name</label>
+                                <input asp-for="@criteria.Grade.Value" class="form-control" />
+                                <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
+                            </div>
+                        }
+                    </div>
+                }
+
+                <div id="@anchorTarget" class="tab-pane fade">
+                    <br>
+                    <p> Criteria - @anchorTarget</p>
+                    @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+                    {
+                        <div class="form-group">
+                            <label class="control-label"> @criteria.Name</label>
+                            <input asp-for="@criteria.Grade.Value" class="form-control" />
+                            <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

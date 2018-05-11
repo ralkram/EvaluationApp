@@ -73,6 +73,7 @@ namespace EvaluationApp.Controllers
         {
             EvaluationViewModel evaluationViewModel = new EvaluationViewModel
             {
+                Id = evaluation.Id,
                 EvaluationName = evaluation.EvaluationName,
                 FormName = evaluation.FormName,
                 IsCompleted = evaluation.IsCompleted,
@@ -92,6 +93,21 @@ namespace EvaluationApp.Controllers
                 evaluationViewModels.Add(GenerateEvaluationViewModel(evaluation));
             }
             return evaluationViewModels;
+        }
+
+        public IActionResult Details(int evaluationId)
+        {
+            var evaluation = evaluationsService.GetEvaluationById(evaluationId);
+
+            if (evaluationId == 0 || (evaluation == null))
+            {
+                return RedirectToAction("Completed");
+            }
+            else
+            {
+                var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
+                return View(evaluationViewModel);
+            }
         }
     }
 }

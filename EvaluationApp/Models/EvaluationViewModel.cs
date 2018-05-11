@@ -10,6 +10,8 @@ namespace EvaluationApp.Models
 {
     public class EvaluationViewModel
     {
+        public int Id { get; set; }
+
         public string EvaluationName { get; set; }
 
         public string FormName { get; set; }
