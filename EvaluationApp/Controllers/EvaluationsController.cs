@@ -19,7 +19,7 @@ namespace EvaluationApp.Controllers
         public EvaluationsController(
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
-            IAuthenticationService authenticationService, 
+            IAuthenticationService authenticationService,
             IEmployeesService employeesService)
         {
             this.evaluationFormsService = evaluationFormsService;
@@ -67,8 +67,8 @@ namespace EvaluationApp.Controllers
             }
             return View("StartEvaluation", evaluation);
         }
-         
-    private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
+
+        private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
         {
             EvaluationViewModel evaluationViewModel = new EvaluationViewModel
             {
@@ -81,8 +81,6 @@ namespace EvaluationApp.Controllers
             };
             return evaluationViewModel;
         }
-
-
 
         private ICollection<EvaluationViewModel> GenerateEvaluationViewModels(ICollection<Evaluation> evaluations)
         {
