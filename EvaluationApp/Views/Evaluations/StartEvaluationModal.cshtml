@@ -10,7 +10,7 @@
         <h4 class="modal-title">Start Evaluation</h4>
     </div>
     <div class="modal-body">
-        <form role="form" asp-controller="Evaluations" asp-action="StartEvaluationModal" method="post">
+        <form role="form" method="post">
             <div class="form-group">
                 <label for="name">Evaluation Name</label>
                 <input type="text" class="form-control" id="name">
@@ -32,7 +32,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" data-dismiss="modal"
-                    onclick="location.href='@Url.Action("StartEvaluation", "EvaluationForms")'">
+                    onclick="location.href='@Url.Action("StartEvaluationModal", "Evaluations")'">
                 Start Evaluation
             </button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

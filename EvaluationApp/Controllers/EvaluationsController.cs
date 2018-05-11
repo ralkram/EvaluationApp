@@ -64,8 +64,9 @@ namespace EvaluationApp.Controllers
                     FormName = evaluation.FormName
                 };
                 evaluationsService.StartEvaluation(eval);
+                return View("StartEvaluation", evaluation);
             }
-            return View("StartEvaluation", evaluation);
+            return RedirectToAction(nameof(StartEvaluationModal));
         }
 
         private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
