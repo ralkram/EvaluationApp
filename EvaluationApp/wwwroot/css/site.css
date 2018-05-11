@@ -34,3 +34,7 @@
     }
 }
 
+/* For the select inside the modal*/
+.chosen-container {
+    width: 100% !important;
+}

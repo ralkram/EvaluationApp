@@ -66,16 +66,26 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Evaluation Form</label>
-                        <input type="text" class="form-control" id="form">
+                        <select data-placeholder="Your Favorite Types of Bear" class="chosen-select" tabindex="-1">
+                            <option selected>Philadelphia Project</option>
+                            <option>Core Technical .NET</option>
+                            <option>Team Lead Evaluation</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Employee</label>
-                        <input type="text" class="form-control" id="name">
+                            <select data-placeholder="Your Favorite Types of Bear" class="chosen-select" tabindex="-1">
+                                <option selected>Sam Samuels</option>
+                                <option>Leana Stevens</option>
+                                <option>John Smith</option>
+                            </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" 
-                          onclick="location.href='@Url.Action("StartEvaluation", "EvaluationForms")'">Start Evaluation</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                            onclick="location.href='@Url.Action("StartEvaluation", "EvaluationForms")'">
+                        Start Evaluation
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </form>
+                </form>                
             </div>  
             
         </div>

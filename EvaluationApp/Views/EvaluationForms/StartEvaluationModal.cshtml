@@ -1,0 +1,44 @@
+﻿<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Start Evaluation</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="name">Evaluation Name</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Evaluation Form</label>
+                        <select data-placeholder="Your Favorite Types of Bear" class="chosen-select" tabindex="-1">
+                            <option selected>Philadelphia Project</option>
+                            <option>Core Technical .NET</option>
+                            <option>Team Lead Evaluation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Employee</label>
+                        <select data-placeholder="Your Favorite Types of Bear" class="chosen-select" tabindex="-1">
+                            <option selected>Sam Samuels</option>
+                            <option>Leana Stevens</option>
+                            <option>John Smith</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                            onclick="location.href='@Url.Action("StartEvaluation", "EvaluationForms")'">
+                        Start Evaluation
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
