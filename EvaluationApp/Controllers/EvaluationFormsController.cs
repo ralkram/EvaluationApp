@@ -98,48 +98,6 @@ namespace EvaluationApp.Controllers
             return View("StartEvaluation", evaluation);
         }
 
-        public IActionResult InProgress()
-        {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var inProgressEvaluations = evaluationsService.GetInProgressEvaluations(loggedEmployeeId);
-            var evaluationViewModels = GenerateEvaluationViewModels(inProgressEvaluations);
-
-            return View(evaluationViewModels);
-        }
-        public IActionResult Completed()
-        {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var completedEvaluations = evaluationsService.GetCompletedEvaluations(loggedEmployeeId);
-            var evaluationViewModels = GenerateEvaluationViewModels(completedEvaluations);
-
-            return View(evaluationViewModels);
-        }
-
-        private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
-        {
-            EvaluationViewModel evaluationViewModel = new EvaluationViewModel {
-                EvaluationName = evaluation.EvaluationName,
-                FormName = evaluation.FormName,
-                IsCompleted = evaluation.IsCompleted,
-                Sections = evaluation.Sections, 
-                Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
-                LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId)};
-
-            return evaluationViewModel;
-        }
-
-        private ICollection<EvaluationViewModel> GenerateEvaluationViewModels(ICollection<Evaluation> evaluations)
-        {
-            ICollection<EvaluationViewModel> evaluationViewModels = new List<EvaluationViewModel>();
-
-            foreach (var evaluation in evaluations)
-            {
-                evaluationViewModels.Add(GenerateEvaluationViewModel(evaluation));
-            }
-            return evaluationViewModels;
-        }
-
-
         // GET: Forms/Details/5
         public ActionResult Details(int id)
         {

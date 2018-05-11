@@ -5,9 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.Domain.EmployeeMockup\EvaluationApp.Domain.EmployeeMockup.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain\EvaluationApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IdentityServer.Domain">
+      <HintPath>..\ExternalDependencies\IdentityServer.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
