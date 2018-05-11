@@ -88,8 +88,6 @@ namespace EvaluationApp.Controllers
             {
                 var eval = new Evaluation
                 {
-                    FormName = evaluation.FormName,
-                    EvaluationName = evaluation.EvaluationName,
                     Sections = evaluation.Sections
                 };
 

@@ -44,8 +44,31 @@ namespace EvaluationApp.Controllers
 
             return View(evaluationViewModels);
         }
+        [HttpGet]
+        public IActionResult StartEvaluationModal()
+        {
+            var vm = new EvaluationViewModel();
 
-        private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StartEvaluationModal(EvaluationViewModel evaluation)
+        {
+            if (ModelState.IsValid)
+            {
+                var eval = new Evaluation
+                {
+                    EvaluationName = evaluation.EvaluationName,
+                    FormName = evaluation.FormName
+                };
+                evaluationsService.StartEvaluation(eval);
+            }
+            return View("StartEvaluation", evaluation);
+        }
+         
+    private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
         {
             EvaluationViewModel evaluationViewModel = new EvaluationViewModel
             {
@@ -56,9 +79,10 @@ namespace EvaluationApp.Controllers
                 Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
                 LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId)
             };
-
             return evaluationViewModel;
         }
+
+
 
         private ICollection<EvaluationViewModel> GenerateEvaluationViewModels(ICollection<Evaluation> evaluations)
         {

@@ -11,3 +11,7 @@ $(function () {
 });
 
 
+function createModal(url) {
+    $('#modelContent').load(url);
+    $('#myModal').modal('show');
+}
