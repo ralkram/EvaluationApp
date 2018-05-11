@@ -1,5 +1,6 @@
 ﻿using EvaluationApp.Domain;
 using EvaluationApp.Domain.EmployeeMockup;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace EvaluationApp.Models
         public string EvaluationName { get; set; }
 
         public string FormName { get; set; }
+        public IEnumerable<SelectListItem> Forms { get; set; }
 
         public bool IsCompleted { get; set; }
 

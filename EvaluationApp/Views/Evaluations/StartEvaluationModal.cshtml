@@ -10,17 +10,16 @@
         <h4 class="modal-title">Start Evaluation</h4>
     </div>
     <div class="modal-body">
-        <form role="form" method="post">
+        <form asp-controller="Evaluations" asp-action="StartEvaluationModal" method="post">
             <div class="form-group">
                 <label for="name">Evaluation Name</label>
                 <input type="text" class="form-control" id="name">
             </div>
             <div class="form-group">
                 <label for="name">Evaluation Form</label>
-                <select id="evaluationFormsSelect" data-placeholder="Your Favorite Types of Bear" class="chosen-select form-control" tabindex="-1">
-                    <option selected>Philadelphia Project</option>
-                    <option>Core Technical .NET</option>
-                    <option>Team Lead Evaluation</option>
+                <select id="evaluationFormsSelect" data-placeholder="Your Favorite Types of Bear"
+                        class="chosen-select form-control" tabindex="-1"
+                        asp-for="FormName" asp-items="Model.Forms">
                 </select>
             </div>
             <div class="form-group">
@@ -31,10 +30,13 @@
                     <option>John Smith</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal"
+            @*<button type="submit" class="btn btn-primary" data-dismiss="modal"
                     onclick="location.href='@Url.Action("StartEvaluationModal", "Evaluations")'">
                 Start Evaluation
-            </button>
+            </button>*@
+            <div class="form-group">
+                <input type="submit" value="Start Evaluation" class="btn btn-primary"/>
+            </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </form>
     </div>

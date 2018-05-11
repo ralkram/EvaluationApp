@@ -6,11 +6,19 @@ using System.Collections.Generic;
 using System.Text;
 using EvaluationApp.Persistence.Shared;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvaluationApp.Core
 {
     public class EvaluationFormsService : IEvaluationFormsService
     {
+        private readonly IAuthenticationService authenticationService;
+
+        public EvaluationFormsService(IAuthenticationService authenticationService)
+        {
+            this.authenticationService = authenticationService;
+        }
+
         // MOCKUP METHOD, TO BE IMPLEMENTED
         public ICollection<Form> GetAllSharedFormsForEmployee(int employeeId)
         {
@@ -214,5 +222,17 @@ namespace EvaluationApp.Core
             return form;
         }
 
+        public List<SelectListItem> GetFormNames()
+        {
+            int empId = authenticationService.GetCurrentUserId();
+            var forms = GetAllSharedFormsForEmployee(empId);
+            List<SelectListItem> names = new List<SelectListItem>();
+            foreach (var item in forms)
+            {
+                names.Add(new SelectListItem { Text = item.Name, Value = item.Name});
+            }
+
+            return names;
+        }
     }
 }

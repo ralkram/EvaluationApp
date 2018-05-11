@@ -48,7 +48,7 @@ namespace EvaluationApp.Controllers
         public IActionResult StartEvaluationModal()
         {
             var vm = new EvaluationViewModel();
-
+            vm.Forms = evaluationFormsService.GetFormNames();
             return View(vm);
         }
 
@@ -66,7 +66,7 @@ namespace EvaluationApp.Controllers
                 evaluationsService.StartEvaluation(eval);
                 return View("StartEvaluation", evaluation);
             }
-            return RedirectToAction(nameof(StartEvaluationModal));
+            return RedirectToAction(nameof(InProgress));
         }
          
     private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
