@@ -1,4 +1,5 @@
 ﻿using EvaluationApp.Domain;
+using EvaluationApp.Domain.EmployeeMockup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,8 @@ namespace EvaluationApp.Models
         public ICollection<Section> Sections { get; set; }
 
         public string EmployeeName { get; set; }
+
+        public Employee Employee { get; set; }
+        public Employee LastEvaluator { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EvaluationApp.Domain.Evaluation>
+﻿@model IEnumerable<EvaluationApp.Models.EvaluationViewModel>
 
 
 <br /><br />
@@ -8,7 +8,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Employee Name</th>
+                        <th>Evaluation Name</th>
                         <th>Evaluation Form</th>
                         <th>Employee</th>
                         <th>Last Evaluator</th>
@@ -21,8 +21,8 @@
                         <tr>
                             <td>@item.EvaluationName</td>
                             <td>@item.FormName</td>
-                            <td>@item.EmployeeId</td>
-                            <td>@item.LastEvaluatorId</td>
+                            <td>@item.Employee.Name</td>
+                            <td>@item.LastEvaluator.Name</td>
                             <td>
                                 <img src="~/images/start.png" />
                                 <img src="~/images/cancel.png" />
