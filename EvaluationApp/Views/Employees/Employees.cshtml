@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EvaluationApp.Domain.EmployeeMockup.Employee>
+﻿@model IEnumerable<IdentityServer.Domain.Employee>
 
 
 <br /><br />
@@ -22,7 +22,7 @@
                             <img src="~/images/person1.png" width="16" height="16"/>
                             @item.Name
                         </td>
-                        <td>@item.Position.Name</td>
+                        <td>@item.Position.RoleName</td>
                         <td>@item.Team.Name</td>
                         <td>
                             <img src="~/images/completed.png" />

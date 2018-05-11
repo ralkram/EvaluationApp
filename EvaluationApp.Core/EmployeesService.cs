@@ -1,5 +1,5 @@
 ﻿using EvaluationApp.Core.Shared;
-using EvaluationApp.Domain.EmployeeMockup;
+using IdentityServer.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace EvaluationApp.Core
             {
                 Id = 1,
                 Name = "Paige Turner",
-                Position = new Position { Id = 1, Name = "Team Lead" },
+                Position = new Position { Id = 1, RoleName = "Team Lead" },
                 Team = new Team { Id = 1, Name = "Team 1" }
             });
 
@@ -25,7 +25,7 @@ namespace EvaluationApp.Core
             {
                 Id = 2,
                 Name = "Sam Samuels",
-                Position = new Position { Id = 2, Name = "Developer" },
+                Position = new Position { Id = 2, RoleName = "Developer" },
                 Team = new Team { Id = 2, Name = "Team 2" }
             });
 
@@ -33,14 +33,14 @@ namespace EvaluationApp.Core
             {
                 Id = 3,
                 Name = "Leana Stevens",
-                Position = new Position { Id = 3, Name = "QA Engineer" },
+                Position = new Position { Id = 3, RoleName = "QA Engineer" },
                 Team = new Team { Id = 3, Name = "Team 3" }
             });
             employees.Add(new Employee
             {
                 Id = 4,
                 Name = "John Smith",
-                Position = new Position { Id = 1, Name = "Team Lead" },
+                Position = new Position { Id = 1, RoleName = "Team Lead" },
                 Team = new Team { Id = 2, Name = "Team 2" }
             });
             var employee = (from x in employees.OfType<Employee>() where x.Id == employeeId select x).FirstOrDefault();
@@ -55,7 +55,7 @@ namespace EvaluationApp.Core
             {
                 Id = 2,
                 Name = "Sam Samuels",
-                Position = new Position { Id = 2, Name = "Developer" },
+                Position = new Position { Id = 2, RoleName = "Developer" },
                 Team = new Team { Id = 2, Name = "Team 2" }
             });
 
@@ -63,14 +63,14 @@ namespace EvaluationApp.Core
             {
                 Id = 3,
                 Name = "Leana Stevens",
-                Position = new Position { Id = 3, Name = "QA Engineer" },
+                Position = new Position { Id = 3, RoleName = "QA Engineer" },
                 Team = new Team { Id = 3, Name = "Team 3" }
             });
             employees.Add(new Employee
             {
                 Id = 4,
                 Name = "John Smith",
-                Position = new Position { Id = 1, Name = "Team Lead" },
+                Position = new Position { Id = 1, RoleName = "Team Lead" },
                 Team = new Team { Id = 2, Name = "Team 2" }
             });
 
