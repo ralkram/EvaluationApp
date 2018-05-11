@@ -47,8 +47,9 @@ namespace EvaluationApp.Controllers
                 };
 
                 evaluationsService.StartEvaluation(eval);
+                return View("StartEvaluation", evaluation);
             }
-            return View("StartEvaluation", evaluation);
+            return RedirectToAction(nameof(StartEvaluationModal));
         }
     }
 }
