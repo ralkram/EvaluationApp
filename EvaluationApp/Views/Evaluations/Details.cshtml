@@ -1,54 +1,107 @@
 ﻿@model EvaluationApp.Models.EvaluationViewModel
 <br /> <br />
 
-<h2>Evaluation | @Model.EvaluationName | @Model.Employee.Name</h2>
-<div>
-    <ul class="nav nav-tabs nav-justified">
-        @foreach (var item in Model.Sections)
-        {
-            string anchorTarget = "#panel" + item.Id;
-            <li class="nav-item">
-                <a data-toggle="tab" href="@anchorTarget" role="tab">@item.Name</a>
-            </li>
-        }
-
-    </ul>
-    <div class="container">
-
-        <div class="tab-content">
+<h2>@Model.EvaluationName <small>for</small> @Model.Employee.Name</h2>
+<br>
+@*<div>
+        <ul class="nav nav-tabs nav-justified">
             @for (int i = 0; i < Model.Sections.Count; i++)
             {
-                string anchorTarget = "panel" + (i + 1);
+                string anchorTarget = "#panel" + (i + 1);
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="@anchorTarget" role="tab">@Model.Sections.ElementAt(i).Name</a>
+                </li>
+            }
 
-                if (Model.Sections.ElementAt(i).Id == 1)
+        </ul>
+        <div class="container">
+
+            <div class="tab-content card">
+                @for (int i = 0; i < Model.Sections.Count; i++)
                 {
-                    <div class="tab-pane fade in active" id="@anchorTarget">
+                    string anchorTarget = "panel" + (i + 1);
+
+                    if (Model.Sections.ElementAt(i).Id == 1)
+                    {
+                        <div class="tab-pane fade in show active" id="@anchorTarget" role="tabpanel">
+                            <br>
+                            @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label"> @criteria.Name</label>
+                                    <div>@criteria.Grade.Value</div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div id="@anchorTarget" class="tab-pane fade" role="tabpanel">
                         <br>
-                        <p> Criteria - @anchorTarget</p>
                         @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
                         {
                             <div class="form-group">
                                 <label class="control-label"> @criteria.Name</label>
-                                <input asp-for="@criteria.Grade.Value" class="form-control" />
-                                <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
+                                <div>@criteria.Grade.Value</div>
                             </div>
                         }
                     </div>
                 }
+            </div>
+        </div>
+        <br>
+        <div>
+            <a asp-action="Completed">Back to Completed Evaluations</a>
+        </div>
+    </div>*@
 
-                <div id="@anchorTarget" class="tab-pane fade">
-                    <br>
-                    <p> Criteria - @anchorTarget</p>
-                    @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <!-- Nav tabs --><div class="card">
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="active">
+                        <a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab">@Model.Sections.ElementAt(0).Name</a>
+                    </li>
+
+                    @for (int i = 1; i < Model.Sections.Count; i++)
                     {
-                        <div class="form-group">
-                            <label class="control-label"> @criteria.Name</label>
-                            <input asp-for="@criteria.Grade.Value" class="form-control" />
-                            <span asp-validation-for="@criteria.Grade.Value" class="text-danger"></span>
+                        string anchorTarget = "tab" + i;
+
+                        <li role="presentation">
+                            <a href="#@anchorTarget" aria-controls="@anchorTarget" role="tab" data-toggle="tab">@Model.Sections.ElementAt(i).Name</a>
+                        </li>
+                    }
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab0">
+                        @foreach (var criteria in Model.Sections.ElementAt(0).Criteria)
+                        {
+                            <h4>@criteria.Name <small>@criteria.Grade.Name</small></h4>
+                        }
+                    </div>
+
+                    @for (int i = 1; i < Model.Sections.Count; i++)
+                    {
+                        string anchorTarget = "tab" + i;
+                        <div role="tabpanel" class="tab-pane" id="@anchorTarget">
+
+                            @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+                            {
+                                <h4>@criteria.Name <small>@criteria.Grade.Name</small></h4>
+                            }
                         </div>
                     }
+
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>
+<div>
+    <a asp-action="Completed">Back to Completed Evaluations</a>
+</div>
+
+
+<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
