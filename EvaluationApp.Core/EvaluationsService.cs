@@ -16,7 +16,7 @@ namespace EvaluationApp.Core
             this.persistenceContext = persistenceContext;
         }
 
-        public ICollection<Evaluation> GetCompletedEvaluations(int employeeId)
+        public ICollection<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
         {
             ICollection<Evaluation> evaluations = new List<Evaluation>();
 
@@ -50,7 +50,7 @@ namespace EvaluationApp.Core
             return evaluations;
         }
 
-        public ICollection<Evaluation> GetInProgressEvaluations(int employeeId)
+        public ICollection<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
         {
             ICollection<Evaluation> evaluations = new List<Evaluation>();
 
@@ -105,6 +105,16 @@ namespace EvaluationApp.Core
         public Evaluation GetEvaluationById(int evaluationId)
         {
             return persistenceContext.Evaluations.GetById(evaluationId);
+        }
+
+        public ICollection<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

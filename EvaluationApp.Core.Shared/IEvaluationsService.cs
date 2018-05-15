@@ -9,8 +9,11 @@ namespace EvaluationApp.Core.Shared
     public interface IEvaluationsService
     {
         Evaluation GetEvaluationById(int evaluationId);
-        ICollection<Evaluation> GetInProgressEvaluations(int employeeId);
-        ICollection<Evaluation> GetCompletedEvaluations(int employeeId);
+        ICollection<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId);
+        ICollection<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId);
+
+        ICollection<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
+        ICollection<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
 
         void StartEvaluation(Evaluation evaluation);
         void ContinueEvaluation(int evaluationId);

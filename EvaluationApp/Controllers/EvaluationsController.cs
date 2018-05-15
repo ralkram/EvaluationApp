@@ -28,10 +28,27 @@ namespace EvaluationApp.Controllers
             this.employeesService = employeesService;
         }
 
+        [HttpGet]
+        public IActionResult DeleteModal(int id)
+        {
+            Evaluation evaluation= evaluationsService.GetEvaluationById(id);
+            EvaluationViewModel evaluationViewModel = GenerateEvaluationViewModel(evaluation);
+
+            return View("DeleteModal", evaluationViewModel);
+        }
+
+        //[HttpPost("{evaluationId}")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DoDelete(int evaluationId)
+        {
+            return RedirectToAction(nameof(Completed));
+        }
+
         public IActionResult InProgress()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var inProgressEvaluations = evaluationsService.GetInProgressEvaluations(loggedEmployeeId);
+            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEvaluator(loggedEmployeeId);
             var evaluationViewModels = GenerateEvaluationViewModels(inProgressEvaluations);
 
             return View(evaluationViewModels);
@@ -39,7 +56,7 @@ namespace EvaluationApp.Controllers
         public IActionResult Completed()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var completedEvaluations = evaluationsService.GetCompletedEvaluations(loggedEmployeeId);
+            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEvaluator(loggedEmployeeId);
             var evaluationViewModels = GenerateEvaluationViewModels(completedEvaluations);
 
             return View(evaluationViewModels);
@@ -79,7 +96,9 @@ namespace EvaluationApp.Controllers
                 IsCompleted = evaluation.IsCompleted,
                 Sections = evaluation.Sections,
                 Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
-                LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId)
+                LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId),
+                CreatedDate = evaluation.CreatedDate,
+                ModifiedDate = evaluation.ModifiedDate
             };
             return evaluationViewModel;
         }
