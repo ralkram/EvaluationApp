@@ -152,6 +152,32 @@ namespace EvaluationApp.Core
         public Form GetEvaluationForm(int formId)
         {
             ICollection<Form> forms = new List<Form>();
+            ICollection<EvaluationScaleOption> scaleOptions = new List<EvaluationScaleOption>();
+
+            scaleOptions.Add(new EvaluationScaleOption
+            {
+                Id = 1,
+                Name = "Good boi"
+            });
+
+            scaleOptions.Add(new EvaluationScaleOption
+            {
+                Id = 2,
+                Name = "Very Good boi"
+            });
+
+            scaleOptions.Add(new EvaluationScaleOption
+            {
+                Id = 3,
+                Name = "Bad boi"
+            });
+
+            EvaluationScale evaluationScale = new EvaluationScale
+            {
+                Id = 1,
+                Name = "Grades1",
+                EvaluationScaleOptions = scaleOptions
+            };
 
             ICollection<Criteria> criteria_1 = new List<Criteria>();
             criteria_1.Add(new Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
@@ -169,7 +195,8 @@ namespace EvaluationApp.Core
                 Name = "Software Engineering",
                 Description = "Basic Software Engineering Principles",
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
-                Criteria = criteria_1
+                Criteria = criteria_1,
+                EvaluationScale = evaluationScale
             });
 
             sections.Add(new Section
@@ -178,7 +205,8 @@ namespace EvaluationApp.Core
                 Name = "Programming",
                 Description = "Basic Programming Principles",
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
-                Criteria = criteria_2
+                Criteria = criteria_2,
+                EvaluationScale = evaluationScale
             });
 
             forms.Add(new Form
@@ -190,7 +218,7 @@ namespace EvaluationApp.Core
                 Status = true,
                 CreatedDate = new DateTime(2018, 5, 14, 16, 32, 0),
                 ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0),
-                Sections = sections
+                Sections = sections                
             });
 
             forms.Add(new Form
@@ -219,6 +247,18 @@ namespace EvaluationApp.Core
 
             var form = (from x in forms.OfType<Form>() where x.Id == formId select x).FirstOrDefault();
             return form;
+        }
+
+        public List<SelectListItem> GetEvaluationGrades(Domain.Section section)
+        {
+            List<SelectListItem> grades = new List<SelectListItem>();
+
+            foreach (var item in section.EvaluationScale.EvaluationScaleOptions)
+            {
+                grades.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+            }
+
+            return grades;
         }
 
         public List<SelectListItem> GetFormNames()

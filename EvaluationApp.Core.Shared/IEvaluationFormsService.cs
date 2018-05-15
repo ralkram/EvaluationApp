@@ -15,5 +15,6 @@ namespace EvaluationApp.Core.Shared
 
         Form GetEvaluationForm(int formId);
         List<SelectListItem> GetFormNames();
+        List<SelectListItem> GetEvaluationGrades(Domain.Section section);
     }
 }

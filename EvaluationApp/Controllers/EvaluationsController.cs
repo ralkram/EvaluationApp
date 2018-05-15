@@ -58,6 +58,9 @@ namespace EvaluationApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var sections = evaluationFormsService.GetEvaluationForm(1).Sections;
+                evaluation.Sections = evaluationsService.MapFormSectionsToEvaluationSections(sections);
+                
                 var eval = new Evaluation
                 {
                     EvaluationName = evaluation.EvaluationName,
@@ -77,7 +80,7 @@ namespace EvaluationApp.Controllers
                 EvaluationName = evaluation.EvaluationName,
                 FormName = evaluation.FormName,
                 IsCompleted = evaluation.IsCompleted,
-                Sections = evaluation.Sections,
+                //Sections = evaluation.Sections,
                 Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
                 LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId)
             };

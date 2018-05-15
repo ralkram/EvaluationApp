@@ -1,5 +1,6 @@
 ﻿using EvaluationApp.Core.Shared;
 using EvaluationApp.Domain;
+using EvaluationApp.Domain.FormMockup;
 using EvaluationApp.Persistence.Shared;
 using System;
 using System.Collections.Generic;
@@ -105,6 +106,49 @@ namespace EvaluationApp.Core
         public Evaluation GetEvaluationById(int evaluationId)
         {
             return persistenceContext.Evaluations.GetById(evaluationId);
+        }
+
+        public ICollection<Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> formSections)
+        {
+            List<Domain.Section> sections = new List<Domain.Section>();
+
+            foreach (var section in formSections)
+            {
+                var criteria = new List<Domain.Criteria>();
+                var evalScale = new List<Domain.EvaluationScaleOption>();
+
+                foreach (var item in section.EvaluationScale.EvaluationScaleOptions)
+                {
+                    evalScale.Add(new Domain.EvaluationScaleOption
+                    {
+                        Name = item.Name,
+                        Value = item.Value
+                    });
+                }
+
+                foreach (var item in section.Criteria)
+                {
+                    criteria.Add(new Domain.Criteria
+                    {
+                        Name = item.Name,
+                        Grade = new Domain.EvaluationScaleOption()
+                    });
+                }
+                sections.Add(new Domain.Section
+                {
+                    Name = section.Name,
+                    CreatedBy = section.CreatedBy,
+                    Criteria = criteria,
+                    EvaluationScale = new Domain.EvaluationScale
+                    {
+                        Id = 1,
+                        Name = section.EvaluationScale.Name,
+                        EvaluationScaleOptions = evalScale
+                    }
+                });
+            }
+
+            return sections;
         }
     }
 }

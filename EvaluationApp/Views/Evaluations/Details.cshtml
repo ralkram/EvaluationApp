@@ -2,7 +2,7 @@
 @model EvaluationApp.Models.EvaluationViewModel
 <br /> <br />
 
-<h2>@Model.EvaluationName <small>for</small> @Model.Employee.Name</h2>
+<h2>@Model.EvaluationName <small>for</small> @*@Model.Employee.Name*@</h2>
 <br>
 @*<div>
         <ul class="nav nav-tabs nav-justified">
@@ -78,23 +78,6 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-
-
-                    @*<tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                            </tr>
-                            <tr>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                            </tr>
-                            <tr>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                            </tr>
-                        </tbody>*@
-
 
                     <div role="tabpanel" class="tab-pane active" id="tab0">
                         <table class="table table-striped">

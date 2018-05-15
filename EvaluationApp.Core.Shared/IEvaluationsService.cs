@@ -10,10 +10,11 @@ namespace EvaluationApp.Core.Shared
     {
         Evaluation GetEvaluationById(int evaluationId);
         ICollection<Evaluation> GetInProgressEvaluations(int employeeId);
-        ICollection<Evaluation> GetCompletedEvaluations(int employeeId);
+        ICollection<Evaluation> GetCompletedEvaluations(int employeeId);        
 
         void StartEvaluation(Evaluation evaluation);
         void ContinueEvaluation(int evaluationId);
+        ICollection<EvaluationApp.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);
         Evaluation GetEvaluationForm();
     }
 }
