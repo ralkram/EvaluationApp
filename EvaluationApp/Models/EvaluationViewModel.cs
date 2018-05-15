@@ -31,5 +31,8 @@ namespace EvaluationApp.Models
 
         public Employee Employee { get; set; }
         public Employee LastEvaluator { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

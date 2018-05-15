@@ -4,6 +4,7 @@ using EvaluationApp.Persistence.Shared;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace EvaluationApp.Persistence.EF
 {
@@ -15,14 +16,32 @@ namespace EvaluationApp.Persistence.EF
 
         }
 
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
+        {
+            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorId && e.IsCompleted == true);
+
+            return completedEvaluations;
+        }
+
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
+        {
+            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorId && e.IsCompleted == false);
+
+            return inProgressEvaluations;
+        }
+
         public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
         {
-            throw new NotImplementedException();
+            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeId && e.IsCompleted == true);
+
+            return completedEvaluations;
         }
 
         public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
         {
-            throw new NotImplementedException();
+            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeId && e.IsCompleted == false);
+
+            return inProgressEvaluations;
         }
 
         //public void StartEvaluation(Evaluation evaluation)

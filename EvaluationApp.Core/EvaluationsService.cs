@@ -17,7 +17,7 @@ namespace EvaluationApp.Core
             this.persistenceContext = persistenceContext;
         }
 
-        public ICollection<Evaluation> GetCompletedEvaluations(int employeeId)
+        public ICollection<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
         {
             ICollection<Evaluation> evaluations = new List<Evaluation>();
 
@@ -51,7 +51,7 @@ namespace EvaluationApp.Core
             return evaluations;
         }
 
-        public ICollection<Evaluation> GetInProgressEvaluations(int employeeId)
+        public ICollection<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
         {
             ICollection<Evaluation> evaluations = new List<Evaluation>();
 
