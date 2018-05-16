@@ -151,17 +151,35 @@ namespace EvaluationApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Evaluations/StartEvaluation", Name = "SaveEvaluation")]
-        public IActionResult StartEvaluation(EvaluationViewModel evaluation)
+        [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
+        public IActionResult UpdateEvaluation(EvaluationData evaluation)
         {
             if (ModelState.IsValid)
             {
-                var eval = new Evaluation
+                var oldEvaluation = evaluationsService.GetEvaluationById(evaluation.Id);
+                if (oldEvaluation != null)
                 {
-                    Sections = evaluation.Sections
-                };
-
-                evaluationsService.UpdateEvaluation(eval, evaluation.Id);
+                    foreach (var criteriaData in evaluation.CriteriaData)
+                    {
+                        var criteriaSection = oldEvaluation.Sections
+                                                               .Where(section => section.Id ==  criteriaData.SectionId)
+                                                               .FirstOrDefault();
+                        if (criteriaSection != null)
+                        {
+                            var oldCriteria = criteriaSection.Criteria
+                                                             .Where(criteria => criteria.Id == criteriaData.Id)
+                                                             .FirstOrDefault();
+                            if (oldCriteria != null)
+                            {
+                                if (criteriaData.GradeId != 0)
+                                { 
+                                    oldCriteria.Grade = evaluationFormsServic
+                                }
+                            }
+                        }
+                    }
+                    evaluationsService.UpdateEvaluation(oldEvaluation, evaluation.Id);
+                }                
                 return RedirectToAction(nameof(InProgress));
             }
 

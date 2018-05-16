@@ -9,6 +9,6 @@ namespace EvaluationApp.Models
     public class EvaluationData
     {
         public int Id { get; set; }       
-        public ICollection<Section> Sections { get; set; }
+        public ICollection<CriteriaData> CriteriaData { get; set; }
     }
 }
