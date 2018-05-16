@@ -15,6 +15,7 @@ namespace EvaluationApp.Persistence.EF
         }
 
         public virtual DbSet<Evaluation> Evaluations { get; set; }
+        public virtual DbSet<EvaluationScale> EvaluationScales { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

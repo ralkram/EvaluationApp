@@ -14,6 +14,8 @@ namespace EvaluationApp.Persistence.EF
 
         public IEvaluationsRepository Evaluations { get; set; }
 
+        public IEvaluationScaleRepository EvaluationScales { get; set; }
+
         public PersistenceContext(IServiceProvider serviceProvider)
         {
             InitializeDbContext(serviceProvider);
@@ -25,6 +27,7 @@ namespace EvaluationApp.Persistence.EF
             if (context != null)
             {
                 Evaluations = new EvaluationsRepository(context);
+                EvaluationScales = new EvaluationScaleRepository(context);
             }
         }
 

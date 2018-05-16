@@ -22,5 +22,7 @@ namespace EvaluationApp.Core.Shared
         Evaluation GetEvaluationForm();
 
         void Delete(int evaluationId);
+
+        Domain.EvaluationScaleOption GetEvaluationScaleOption(int optionId);
     }
 }
