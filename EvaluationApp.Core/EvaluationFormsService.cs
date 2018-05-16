@@ -157,19 +157,19 @@ namespace EvaluationApp.Core
             scaleOptions.Add(new EvaluationScaleOption
             {
                 Id = 1,
-                Name = "Good boi"
+                Name = "Good"
             });
 
             scaleOptions.Add(new EvaluationScaleOption
             {
                 Id = 2,
-                Name = "Very Good boi"
+                Name = "Very Good"
             });
 
             scaleOptions.Add(new EvaluationScaleOption
             {
                 Id = 3,
-                Name = "Bad boi"
+                Name = "Bad"
             });
 
             EvaluationScale evaluationScale = new EvaluationScale

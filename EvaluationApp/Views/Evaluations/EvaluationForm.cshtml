@@ -1,0 +1,124 @@
+﻿@using EvaluationApp.Core.Shared
+@inject IEvaluationFormsService formService
+@model EvaluationApp.Models.EvaluationFormViewModel
+<br /> <br />
+
+       <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
+
+<script>
+    function createPostModel()
+    { 
+        var retModel = {};
+        var criteriaElements = array();
+        retModel.id = @Model.Id;
+        retModel.criteriaData = array();
+        $(".grade-val").each(function (index)
+        {
+            var criteria = {};
+            criteria.id = $(this).data("criteria");
+            criteria.sectionId = $(this).data("section");
+            criteria.gradeId = $(this).val();
+            retModel.criteriaData.push(criteria);
+        });
+
+        return retModel;
+    }
+
+    function submitEvaluation()
+    {
+        var evalObject = createPostModel();
+        $.ajax
+            ({
+                type: "POST",
+                url: "@Url.RouteUrl("UpdateEvaluation")",
+                // The key needs to match your method's input parameter (case-sensitive).
+                data: JSON.stringify(evalObject),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+             }).done(function (response)
+            { 
+
+            }).fail(function (failResponse)
+            { 
+
+
+            });
+    }
+
+</script>
+<div class="container">
+    <form asp-route="SaveEvaluation" method="post" onsubmit="return false;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" type="hidden" />
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Nav tabs -->
+                <div class="card">
+                    <ul class="nav nav-tabs" role="tablist">
+                        @{
+                        var idx = 0;
+                        }
+                        @foreach (var crtSection in Model.Sections)
+                    {
+                        var tabId = "tab" + idx;
+                        var tabRef = "#" + tabId;
+                        <li role="presentation" class="nav-item">
+                            <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="nav-link">
+                                @crtSection.Name
+                            </a>
+                        </li>
+                    idx++;
+                }
+
+
+
+
+                    </ul>
+                    <!-- Tab panes -->
+                    @{
+                    idx = 0;
+                    }
+                    @foreach (var crtSection in Model.Sections)
+                {
+                    string anchorTarget = "tab" + idx;
+                    <div role="tabpanel" class="tab-pane" id="@anchorTarget">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Criteria</th>
+                                    <th>Evaluation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var currentCriteria in crtSection.Criteria)
+                            {
+                                var selectId = "criteriaGrade_" + currentCriteria.Id;
+                                <tr>
+                                    <td>@currentCriteria.Name</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select id="@selectId" data-section="@crtSection.Id" data-criteria="@currentCriteria.Id" data-placeholder="Evaluation Grades"
+                                                    class="chosen-select form-control grade-val" tabindex="-1"
+                                                    asp-for="@currentCriteria.GradeId" asp-items="Model.EvaluationGrades"></select>
+                                        </div>
+                                    </td>
+                                </tr>
+                        }
+                            </tbody>
+                        </table>
+                    </div>
+
+                idx++;
+            }
+
+                </div>
+
+            </div>
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+</div>
