@@ -178,5 +178,13 @@ namespace EvaluationApp.Core
             persistenceContext.Evaluations.Delete(evaluation);
             persistenceContext.Complete();
         }
+
+        public void UpdateEvaluation(Evaluation evaluation, int evaluationId)
+        {
+            var evaluationToUpdate = persistenceContext.Evaluations.GetById(evaluationId);
+
+            evaluationToUpdate.Sections = evaluation.Sections;
+            persistenceContext.Complete();
+        }
     }
 }

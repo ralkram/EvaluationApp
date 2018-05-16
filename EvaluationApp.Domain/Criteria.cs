@@ -13,7 +13,7 @@ namespace EvaluationApp.Domain
 
         public int CreatedBy { get; set; }
         public int ModifiedBy { get; set; }
-
+        public int GradeId { get; set; }
         public virtual EvaluationScaleOption Grade { get; set; }
     }
 }

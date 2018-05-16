@@ -35,8 +35,13 @@
                             <td>@item.CreatedDate.ToString("dd/MM/yy")</td>
                             <td>@item.ModifiedDate.ToString("dd/MM/yy")</td>
                             <td>
-                                <img src="~/images/preview.jpg" />
-                                <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action("StartEvaluationModal", "Evaluations")')"/>
+                                @{
+
+                                    var evaluationAction = "StartFormEvaluationModal/" + item.Id;
+
+                                    <img src="~/images/preview.jpg" />
+                                    <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action(evaluationAction, "Evaluations")')" />
+                                }
                             </td>
                         </tr>
                     }

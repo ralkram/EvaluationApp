@@ -91,7 +91,7 @@ namespace EvaluationApp.Controllers
                     Sections = evaluation.Sections
                 };
 
-                evaluationsService.StartEvaluation(eval);
+                evaluationsService.UpdateEvaluation(eval, evaluation.Id);
                 return RedirectToAction(nameof(Index));
             }
 

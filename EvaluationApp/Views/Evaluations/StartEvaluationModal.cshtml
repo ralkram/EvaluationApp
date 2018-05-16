@@ -1,7 +1,7 @@
 ﻿@{ 
     Layout = null;
 }
-@model EvaluationApp.Models.EvaluationViewModel
+@model EvaluationApp.Models.StartEvaluationViewModel
 
 <!-- Modal -->
 <div>
@@ -10,24 +10,26 @@
         <h4 class="modal-title">Start Evaluation</h4>
     </div>
     <div class="modal-body">
-        <form asp-controller="Evaluations" asp-action="StartEvaluationModal" method="post">
+        <form asp-controller="Evaluations" asp-action="StartFormEvaluationModal" method="post">
             <div class="form-group">
                 <label for="name">Evaluation Name</label>
-                <input type="text" asp-for="EvaluationName" class="form-control" id="name">
+                <input type="text" asp-for="Name"  class="form-control" id="name">
             </div>
             <div class="form-group">
                 <label for="name">Evaluation Form</label>
                 <select id="evaluationFormsSelect" data-placeholder="Evaluation Forms"
                         class="chosen-select form-control" tabindex="-1"
-                        asp-for="FormName" asp-items="Model.Forms">
+                        asp-for="SelectedForm" asp-items="Model.FormsList" 
+                        disabled="@(Model.IsFormEnabled==false)" >
                 </select>
+                <input type="hidden" asp-for="@Model.SelectedForm"/>
             </div>
             <div class="form-group">
                 <label for="name">Employee</label>
-                <select id="employeeSelect" data-placeholder="Employees" class="chosen-select form-control" tabindex="-1">
-                    <option selected>Sam Samuels</option>
-                    <option >Leana Stevens</option>
-                    <option>John Smith</option>
+                <select id="employeeSelect" data-placeholder="Employees"
+                        disabled="@(Model.IsEmployeeEnabled==false)" asp-for="SelectedEmployee" asp-items="Model.EmployeesList"
+                        class="chosen-select form-control" tabindex="-1">
+                   
                 </select>
             </div>
             @*<button type="submit" class="btn btn-primary" data-dismiss="modal"

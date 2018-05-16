@@ -6,6 +6,7 @@ using EvaluationApp.Core.Shared;
 using EvaluationApp.Domain;
 using EvaluationApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvaluationApp.Controllers
 {
@@ -62,6 +63,52 @@ namespace EvaluationApp.Controllers
 
             return View(evaluationViewModels);
         }
+
+        [HttpGet]
+        public IActionResult StartFormEvaluationModal(int id)
+        {
+
+            int currentEmployeeId = authenticationService.GetCurrentUserId();
+
+            var vm = new StartEvaluationViewModel();
+            vm.SelectedForm = id;
+            vm.IsFormEnabled = false;
+            vm.Name = "";
+
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+                            .Select(employee => 
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id })
+                            .ToList();
+            vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
+                           .Select(form => 
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id, Selected = (form.Id == id) })
+                                   .ToList();
+            vm.IsEmployeeEnabled = true;
+                                
+              
+            return View("StartEvaluationModal", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StartFormEvaluationModal(StartEvaluationViewModel evaluation)
+        {
+            if (ModelState.IsValid)
+            {
+                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
+                var eval = new Evaluation
+                {
+                    EvaluationName = evaluation.Name,
+                    FormName = form.Name,
+                    EmployeeId = evaluation.SelectedEmployee                   
+                };
+                evaluationsService.StartEvaluation(eval);
+                return RedirectToAction("StartEvaluation", new { id = eval.Id, formName = form.Name, evaluationName = evaluation.Name });
+                //return View("StartEvaluation", evaluation);
+            }
+            return RedirectToAction(nameof(InProgress));
+        }
+
         [HttpGet]
         public IActionResult StartEvaluationModal()
         {
@@ -76,19 +123,52 @@ namespace EvaluationApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var sections = evaluationFormsService.GetEvaluationForm(1).Sections;
-                evaluation.Sections = evaluationsService.MapFormSectionsToEvaluationSections(sections);
-
                 var eval = new Evaluation
                 {
                     EvaluationName = evaluation.EvaluationName,
                     FormName = evaluation.FormName
                 };
                 evaluationsService.StartEvaluation(eval);
-                return View("StartEvaluation", evaluation);
+                return RedirectToAction("StartEvaluation", new { id = eval.Id, formName = evaluation.FormName, evaluationName = evaluation.EvaluationName });
+                //return View("StartEvaluation", evaluation);
             }
             return RedirectToAction(nameof(InProgress));
         }
+
+        [HttpGet]
+       // [Route("Evaluations/StartEvaluation/{activityId}", Name = "StartEvaluation")]
+        public IActionResult StartEvaluation(int id, string formName, string evaluationName)
+        {
+            var evaluation = new EvaluationViewModel();
+            var sections = evaluationFormsService.GetEvaluationForm(1).Sections;
+            evaluation.Sections = evaluationsService.MapFormSectionsToEvaluationSections(sections);
+            evaluation.Id = id;
+            evaluation.EvaluationName = evaluationName;
+            evaluation.FormName = formName;
+
+            return View("StartEvaluation", evaluation);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Evaluations/StartEvaluation", Name = "SaveEvaluation")]
+        public IActionResult StartEvaluation(EvaluationViewModel evaluation)
+        {
+            if (ModelState.IsValid)
+            {
+                var eval = new Evaluation
+                {
+                    Sections = evaluation.Sections
+                };
+
+                evaluationsService.UpdateEvaluation(eval, evaluation.Id);
+                return RedirectToAction(nameof(InProgress));
+            }
+
+            return View("StartEvaluation", evaluation);
+        }
+
+
 
         private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
         {

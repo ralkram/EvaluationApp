@@ -12,6 +12,7 @@ namespace EvaluationApp.Domain
         public virtual ICollection<Criteria> Criteria { get; set; }
 
         public virtual EvaluationScale EvaluationScale { get; set; }
+        public virtual Evaluation Evaluation { get; set; }
         
         public DateTime ModifiedDate { get; set; }
 
