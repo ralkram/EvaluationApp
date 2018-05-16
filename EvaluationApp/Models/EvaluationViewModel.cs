@@ -22,16 +22,13 @@ namespace EvaluationApp.Models
         public ICollection<SelectListItem> EvaluationGrades { get; set; }
 
         public Form SelectedForm { get; set; }
-
         public bool IsCompleted { get; set; }
-
         public ICollection<EvaluationApp.Domain.Section> Sections { get; set; }
 
         public string EmployeeName { get; set; }
 
         public Employee Employee { get; set; }
         public Employee LastEvaluator { get; set; }
-
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

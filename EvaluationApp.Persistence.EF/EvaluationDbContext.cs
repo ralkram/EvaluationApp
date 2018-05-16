@@ -15,5 +15,13 @@ namespace EvaluationApp.Persistence.EF
         }
 
         public virtual DbSet<Evaluation> Evaluations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Evaluation>()
+                .HasMany<Section>(e => e.Sections)
+                .WithOne(s => s.Evaluation);
+        }
     }
 }

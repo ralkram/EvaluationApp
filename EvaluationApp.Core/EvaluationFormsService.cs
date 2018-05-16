@@ -136,7 +136,7 @@ namespace EvaluationApp.Core
 
             forms.Add(new Form
             {
-                Id = 1,
+                Id = 2,
                 Name = "Core Technical .NET",
                 Description = "Form for all technicall staff using .NET technologies.",
                 Importance = new Importance { Id = 1, Name = "Very important", Level = 5 },
@@ -255,7 +255,7 @@ namespace EvaluationApp.Core
 
             foreach (var item in section.EvaluationScale.EvaluationScaleOptions)
             {
-                grades.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                grades.Add(new SelectListItem { Text = item.Name, Value = ""+item.Id });
             }
 
             return grades;

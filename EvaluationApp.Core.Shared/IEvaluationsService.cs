@@ -15,6 +15,7 @@ namespace EvaluationApp.Core.Shared
         ICollection<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
         ICollection<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
 
+        void UpdateEvaluation(Evaluation evaluation, int evaluationId);
         void StartEvaluation(Evaluation evaluation);
         void ContinueEvaluation(int evaluationId);
         ICollection<EvaluationApp.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);

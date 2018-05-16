@@ -150,5 +150,23 @@ namespace EvaluationApp.Core
 
             return sections;
         }
+
+        public ICollection<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEvaluation(Evaluation evaluation, int evaluationId)
+        {
+            var evaluationToUpdate = persistenceContext.Evaluations.GetById(evaluationId);
+
+            evaluationToUpdate.Sections = evaluation.Sections;
+            persistenceContext.Complete();
+        }
     }
 }
