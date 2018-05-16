@@ -35,5 +35,12 @@ namespace EvaluationApp.Persistence.EF
 
             return evaluationScaleOption;
         }
+
+        public IEnumerable<EvaluationScaleOption> GetEvaluationScaleOptionsFromScale(int scaleId)
+        {
+            var evaluationScaleOptions = LocalContext.EvaluationScales.FirstOrDefault(es => es.Id == scaleId).EvaluationScaleOptions;
+
+            return evaluationScaleOptions;
+        }
     }
 }

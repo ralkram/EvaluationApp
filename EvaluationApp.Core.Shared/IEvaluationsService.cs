@@ -24,5 +24,6 @@ namespace EvaluationApp.Core.Shared
         void Delete(int evaluationId);
 
         Domain.EvaluationScaleOption GetEvaluationScaleOption(int optionId);
+        IEnumerable<Domain.EvaluationScaleOption> GetEvaluationScaleOptionsFromScale(int scaleId);
     }
 }

@@ -19,21 +19,17 @@ namespace EvaluationApp.Core
 
         public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
         {
-
             IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEvaluator(evaluatorId);
+
             return evaluations;
         }
 
         public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
         {
-
-
             IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEvaluator(evaluatorId);
+
             return evaluations;
-
         }
-
-       
 
         public void StartEvaluation(Evaluation evaluation)
         {
@@ -133,6 +129,13 @@ namespace EvaluationApp.Core
             var evaluationScaleOption = persistenceContext.EvaluationScales.GetEvaluationScaleOptionById(optionId);
 
             return evaluationScaleOption;
+        }
+
+        public IEnumerable<Domain.EvaluationScaleOption> GetEvaluationScaleOptionsFromScale(int scaleId)
+        {
+            var evaluationScaleOptions = persistenceContext.EvaluationScales.GetEvaluationScaleOptionsFromScale(scaleId);
+
+            return evaluationScaleOptions;
         }
     }
 }
