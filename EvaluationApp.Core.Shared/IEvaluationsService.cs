@@ -9,15 +9,17 @@ namespace EvaluationApp.Core.Shared
     public interface IEvaluationsService
     {
         Evaluation GetEvaluationById(int evaluationId);
-        ICollection<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId);
-        ICollection<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId);
 
-        ICollection<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
-        ICollection<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
 
         void StartEvaluation(Evaluation evaluation);
         void ContinueEvaluation(int evaluationId);
         ICollection<EvaluationApp.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);
         Evaluation GetEvaluationForm();
+
+        void Delete(int evaluationId);
     }
 }

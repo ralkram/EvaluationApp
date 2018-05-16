@@ -17,72 +17,79 @@ namespace EvaluationApp.Core
             this.persistenceContext = persistenceContext;
         }
 
-        public ICollection<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
         {
-            ICollection<Evaluation> evaluations = new List<Evaluation>();
+            //ICollection<Evaluation> evaluations = new List<Evaluation>();
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 1,
-                EvaluationName = "Core Skills",
-                FormName = "Core Technical .NET",
-                EmployeeId = 1,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 1,
+            //    EvaluationName = "Core Skills",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 1,
+            //    LastEvaluatorId = 3
+            //});
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 2,
-                EvaluationName = "Core Skills",
-                FormName = "Core Technical .NET",
-                EmployeeId = 2,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 2,
+            //    EvaluationName = "Core Skills",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 2,
+            //    LastEvaluatorId = 3
+            //});
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 3,
-                EvaluationName = "Philadelphia Project",
-                FormName = "Core Technical .NET",
-                EmployeeId = 3,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 3,
+            //    EvaluationName = "Philadelphia Project",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 3,
+            //    LastEvaluatorId = 3
+            //});
 
+            //return evaluations;
+
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEvaluator(evaluatorId);
             return evaluations;
         }
 
-        public ICollection<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
         {
-            ICollection<Evaluation> evaluations = new List<Evaluation>();
+            //ICollection<Evaluation> evaluations = new List<Evaluation>();
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 1,
-                EvaluationName = "Core Skills",
-                FormName = "Core Technical .NET",
-                EmployeeId = 1,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 1,
+            //    EvaluationName = "Core Skills",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 1,
+            //    LastEvaluatorId = 3
+            //});
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 2,
-                EvaluationName = "Core Skills",
-                FormName = "Core Technical .NET",
-                EmployeeId = 2,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 2,
+            //    EvaluationName = "Core Skills",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 2,
+            //    LastEvaluatorId = 3
+            //});
 
-            evaluations.Add(new Evaluation
-            {
-                Id = 3,
-                EvaluationName = "Philadelphia Project",
-                FormName = "Core Technical .NET",
-                EmployeeId = 3,
-                LastEvaluatorId = 3
-            });
+            //evaluations.Add(new Evaluation
+            //{
+            //    Id = 3,
+            //    EvaluationName = "Philadelphia Project",
+            //    FormName = "Core Technical .NET",
+            //    EmployeeId = 3,
+            //    LastEvaluatorId = 3
+            //});
 
+            //return evaluations;
+
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEvaluator(evaluatorId);
             return evaluations;
+
         }
 
        
@@ -149,6 +156,27 @@ namespace EvaluationApp.Core
             }
 
             return sections;
+        }
+
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
+        {
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEmployee(employeeId);
+
+            return evaluations;
+        }
+
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
+        {
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEmployee(employeeId);
+
+            return evaluations;
+        }
+
+        public void Delete(int evaluationId)
+        {
+            Evaluation evaluation = persistenceContext.Evaluations.GetById(evaluationId);
+            persistenceContext.Evaluations.Delete(evaluation);
+            persistenceContext.Complete();
         }
     }
 }

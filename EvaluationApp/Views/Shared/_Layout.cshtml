@@ -60,10 +60,10 @@
                         <a asp-area="" asp-controller="Employees" asp-action="Index" class="nav-link">Employees (@employeesService.GetEmployeesToEvaluate(1).Count) </a>
                     </li>
                     <li class="nav-item">
-                        <a asp-area="" asp-controller="Evaluations" asp-action="InProgress" class="nav-link">In progress evaluations (@evaluationsService.GetInProgressEvaluationsForEvaluator(1).Count)</a>
+                        <a asp-area="" asp-controller="Evaluations" asp-action="InProgress" class="nav-link">In progress evaluations (@evaluationsService.GetInProgressEvaluationsForEvaluator(1).Count())</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-area="" asp-controller="Evaluations" asp-action="Completed" class="nav-link">Completed evaluations (@evaluationsService.GetCompletedEvaluationsForEvaluator(1).Count)</a>
+                        <a asp-area="" asp-controller="Evaluations" asp-action="Completed" class="nav-link">Completed evaluations (@evaluationsService.GetCompletedEvaluationsForEvaluator(1).Count())</a>
                     </li>
                 </ul>
             </div>

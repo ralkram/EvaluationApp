@@ -32,8 +32,8 @@
                                 }
                             </td>
                             <td>@item.Description</td>
-                            <td>@item.CreatedDate</td>
-                            <td>@item.ModifiedDate</td>
+                            <td>@item.CreatedDate.ToString("dd/MM/yy")</td>
+                            <td>@item.ModifiedDate.ToString("dd/MM/yy")</td>
                             <td>
                                 <img src="~/images/preview.jpg" />
                                 <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action("StartEvaluationModal", "Evaluations")')"/>

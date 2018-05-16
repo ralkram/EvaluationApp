@@ -31,7 +31,7 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public IActionResult DeleteModal(int id)
         {
-            Evaluation evaluation= evaluationsService.GetEvaluationById(id);
+            Evaluation evaluation = evaluationsService.GetEvaluationById(id);
             EvaluationViewModel evaluationViewModel = GenerateEvaluationViewModel(evaluation);
 
             return View("DeleteModal", evaluationViewModel);
@@ -42,6 +42,7 @@ namespace EvaluationApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DoDelete(int evaluationId)
         {
+            //evaluationsService.Delete(evaluationId);
             return RedirectToAction(nameof(Completed));
         }
 
@@ -77,7 +78,7 @@ namespace EvaluationApp.Controllers
             {
                 var sections = evaluationFormsService.GetEvaluationForm(1).Sections;
                 evaluation.Sections = evaluationsService.MapFormSectionsToEvaluationSections(sections);
-                
+
                 var eval = new Evaluation
                 {
                     EvaluationName = evaluation.EvaluationName,
@@ -97,16 +98,17 @@ namespace EvaluationApp.Controllers
                 EvaluationName = evaluation.EvaluationName,
                 FormName = evaluation.FormName,
                 IsCompleted = evaluation.IsCompleted,
-                //Sections = evaluation.Sections,
+                Sections = evaluation.Sections,
                 Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
                 LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId),
                 CreatedDate = evaluation.CreatedDate,
                 ModifiedDate = evaluation.ModifiedDate
             };
+
             return evaluationViewModel;
         }
 
-        private ICollection<EvaluationViewModel> GenerateEvaluationViewModels(ICollection<Evaluation> evaluations)
+        private IEnumerable<EvaluationViewModel> GenerateEvaluationViewModels(IEnumerable<Evaluation> evaluations)
         {
             ICollection<EvaluationViewModel> evaluationViewModels = new List<EvaluationViewModel>();
 
@@ -114,7 +116,10 @@ namespace EvaluationApp.Controllers
             {
                 evaluationViewModels.Add(GenerateEvaluationViewModel(evaluation));
             }
-            return evaluationViewModels;
+
+            IEnumerable<EvaluationViewModel> evaluationViewModelsEnumerable = new List<EvaluationViewModel>(evaluationViewModels);
+
+            return evaluationViewModelsEnumerable;
         }
 
         public IActionResult Details(int evaluationId)
@@ -131,5 +136,38 @@ namespace EvaluationApp.Controllers
                 return View(evaluationViewModel);
             }
         }
+
+        public IActionResult DetailsCompleted(int evaluationId)
+        {
+            var evaluation = evaluationsService.GetEvaluationById(evaluationId);
+
+            if (evaluationId == 0 || (evaluation == null))
+            {
+                return RedirectToAction("Completed");
+            }
+            else
+            {
+                var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
+                return View("DetailsCompleted", evaluationViewModel);
+            }
+        }
+
+        public IActionResult DetailsInProgress(int evaluationId)
+        {
+            var evaluation = evaluationsService.GetEvaluationById(evaluationId);
+
+            if (evaluationId == 0 || (evaluation == null))
+            {
+                return RedirectToAction("InProgress");
+            }
+            else
+            {
+                var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
+                return View("DetailsInProgress", evaluationViewModel);
+            }
+        }
+
+
     }
+
 }

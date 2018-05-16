@@ -8,11 +8,42 @@
     </button>
 </div>
 <div class="modal-body">
-    <h6>@Model.EvaluationName <small>for</small> @Model.Employee.Name</h6>
-    <h6><small>Form template </small>@Model.FormName</h6>
-    <h6><small>Created on </small>@Model.CreatedDate</h6>
-    <h6><small>Last modified on </small>@Model.ModifiedDate</h6>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Evaluation Name</td>
+                <td>@Model.EvaluationName</td>
+            </tr>
+            <tr>
+                <td>Employee</td>
+                <td>@Model.Employee.Name</td>
+            </tr>
+            @if (Model.IsCompleted == true)
+            {
+                <tr class="table-success">
+                    <td>Status</td>
+                    <td>Completed</td>
+                </tr>
+            }
+            else
+            {
+                <tr class="table-danger">
+                    <td>Status</td>
+                    <td>In Progress</td>
+                </tr>
+            }
+            <tr>
+                <td>Created</td>
+                <td>@Model.CreatedDate.ToString("dd/MM/yy")</td>
+            </tr>
+            <tr>
+                <td>Last Modified</td>
+                <td>@Model.ModifiedDate.ToString("dd/MM/yy")</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
