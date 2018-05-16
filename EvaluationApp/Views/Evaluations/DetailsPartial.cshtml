@@ -1,59 +1,13 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
 @model EvaluationApp.Models.EvaluationViewModel
 <br /> <br />
 
-<h2>@Model.EvaluationName <small>for</small> @*@Model.Employee.Name*@</h2>
+<h2>@Model.EvaluationName <small>for</small> @Model.Employee.Name</h2>
 <br>
-@*<div>
-        <ul class="nav nav-tabs nav-justified">
-            @for (int i = 0; i < Model.Sections.Count; i++)
-            {
-                string anchorTarget = "#panel" + (i + 1);
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="@anchorTarget" role="tab">@Model.Sections.ElementAt(i).Name</a>
-                </li>
-            }
-
-        </ul>
-        <div class="container">
-
-            <div class="tab-content card">
-                @for (int i = 0; i < Model.Sections.Count; i++)
-                {
-                    string anchorTarget = "panel" + (i + 1);
-
-                    if (Model.Sections.ElementAt(i).Id == 1)
-                    {
-                        <div class="tab-pane fade in show active" id="@anchorTarget" role="tabpanel">
-                            <br>
-                            @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
-                            {
-                                <div class="form-group">
-                                    <label class="control-label"> @criteria.Name</label>
-                                    <div>@criteria.Grade.Value</div>
-                                </div>
-                            }
-                        </div>
-                    }
-
-                    <div id="@anchorTarget" class="tab-pane fade" role="tabpanel">
-                        <br>
-                        @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
-                        {
-                            <div class="form-group">
-                                <label class="control-label"> @criteria.Name</label>
-                                <div>@criteria.Grade.Value</div>
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-        <br>
-        <div>
-            <a asp-action="Completed">Back to Completed Evaluations</a>
-        </div>
-    </div>*@
 
 <div class="container">
     <div class="row">
@@ -92,7 +46,15 @@
                                 {
                                     <tr>
                                         <td>@criteria.Name</td>
-                                        <td>@criteria.Grade.Name</td>
+                                        @if (@criteria.Grade != null)
+                                        {
+                                            <td>@criteria.Grade.Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Evaluated Yet</td>
+
+                                        }
                                     </tr>
                                 }
                             </tbody>
@@ -116,7 +78,15 @@
                                     {
                                         <tr>
                                             <td>@criteria.Name</td>
-                                            <td>@criteria.Grade.Name</td>
+                                            @if (@criteria.Grade != null)
+                                            {
+                                                <td>@criteria.Grade.Name</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Not Evaluated Yet</td>
+
+                                            }
                                         </tr>
                                     }
                                 </tbody>
@@ -130,9 +100,4 @@
     </div>
 </div>
 <br>
-<div>
-    <a asp-action="Completed">Back to Completed Evaluations</a>
-</div>
-
-
 <link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />

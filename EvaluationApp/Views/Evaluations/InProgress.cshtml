@@ -19,15 +19,16 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.EvaluationName</td>
+                            <td>
+                                <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id">@item.EvaluationName</a>
+                            </td>
                             <td>@item.FormName</td>
                             <td>@item.Employee.Name</td>
                             <td>@item.LastEvaluator.Name</td>
                             <td>
-                                <a asp-action="Details" asp-route-evaluationId="@item.Id"><img src="~/images/view.png" /></a>
+                                <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id"><img src="~/images/view.png" /></a>
                                 <img src="~/images/start.png" />
-                                <img src="~/images/cancel.png" />
-
+                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
                             </td>
                         </tr>
                     }
@@ -37,3 +38,17 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div id="confirmModal" class="modal-content">
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (e) {
+        $('#confirmModal').load('@Url.Action("DeleteModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#exampleModal').modal('show');
+})
+</script>
