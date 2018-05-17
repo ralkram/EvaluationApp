@@ -69,7 +69,6 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public IActionResult StartFormEvaluationModal(int id)
         {
-
             int currentEmployeeId = authenticationService.GetCurrentUserId();
 
             var vm = new StartEvaluationViewModel();
@@ -97,15 +96,20 @@ namespace EvaluationApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);                
-                
+                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
+                int currentEmployeeId = authenticationService.GetCurrentUserId();
+
                 var eval = new Evaluation
                 {
                     EvaluationName = evaluation.Name,
                     FormName = form.Name,
                     EmployeeId = evaluation.SelectedEmployee,
-                    Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections)
-                    
+                    Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections),
+                    CreatedBy = currentEmployeeId,
+                    LastEvaluatorId = currentEmployeeId,
+                    ModifiedBy = currentEmployeeId,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 };
                 evaluationsService.InsertEvaluation(eval);               
 
@@ -161,7 +165,7 @@ namespace EvaluationApp.Controllers
         [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
         public IActionResult UpdateEvaluation([FromBody]EvaluationData evaluation)
         {
-
+            
             ResponseData responseData = new ResponseData { Status = Ok().StatusCode, IsError = false, Text = "Evaluation saved successfully" };
             if (ModelState.IsValid)
             {
@@ -194,7 +198,7 @@ namespace EvaluationApp.Controllers
                                 }
                             }
                         }
-                        evaluationsService.UpdateEvaluation(oldEvaluation, evaluation.Id);                    
+                        evaluationsService.UpdateEvaluation(oldEvaluation);                    
                     }
                 }
                 catch (Exception e)

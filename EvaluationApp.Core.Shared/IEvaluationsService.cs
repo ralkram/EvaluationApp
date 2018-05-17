@@ -15,7 +15,7 @@ namespace EvaluationApp.Core.Shared
         IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
         IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
 
-        void UpdateEvaluation(Evaluation evaluation, int evaluationId);
+        void UpdateEvaluation(Evaluation evaluation);
         void InsertEvaluation(Evaluation evaluation);
         void ContinueEvaluation(int evaluationId);
         ICollection<EvaluationApp.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);
@@ -25,5 +25,6 @@ namespace EvaluationApp.Core.Shared
 
         Domain.EvaluationScaleOption GetEvaluationScaleOption(int optionId);
         IEnumerable<Domain.EvaluationScaleOption> GetEvaluationScaleOptionsFromScale(int scaleId);
+
     }
 }

@@ -3,14 +3,14 @@
 @model EvaluationApp.Models.EvaluationFormViewModel
 <br /> <br />
 
-       <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
+<h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
 
 <script>
     var hulla = new hullabaloo();
     function createPostModel()
-    { 
+    {
         var retModel = {};
-        
+
         retModel.id = @Model.Id;
         retModel.criteriaData = [];
         $(".grade-val").each(function (index)
@@ -21,7 +21,7 @@
             criteria.gradeId = $(this).val();
             retModel.criteriaData.push(criteria);
         });
-        //var retData = {retModel};        
+        //var retData = {retModel};
         return retModel;
     }
 
@@ -37,14 +37,14 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
              }).done(function (response)
-            { 
+            {
                  if (response.isError === false) {
                      //show success with response.text
                      hulla.send(response.text, "success");
                  }
                  else
                  {
-                     //success
+                     //error
                      hulla.send(response.text, "danger");
                   }
             }).fail(function (failResponse)
@@ -142,9 +142,13 @@
 
             </div>
         </div>
+        <br>
         <div class="form-group">
-            <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-primary float-right" />
+            <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
+            <button type="button" class="btn btn-success">Finalize</button>
+            <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-info" />
         </div>
     </form>
-    <input type="button" value="Home" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'" />
 </div>
+
+<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />

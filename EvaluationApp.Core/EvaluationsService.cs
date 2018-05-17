@@ -112,9 +112,9 @@ namespace EvaluationApp.Core
             persistenceContext.Complete();
         }
 
-        public void UpdateEvaluation(Evaluation evaluation, int evaluationId)
+        public void UpdateEvaluation(Evaluation evaluation)
         {
-            var evaluationToUpdate = persistenceContext.Evaluations.GetById(evaluationId);
+            var evaluationToUpdate = persistenceContext.Evaluations.GetById(evaluation.Id);
 
             evaluationToUpdate.Sections = evaluation.Sections;
             persistenceContext.Complete();
