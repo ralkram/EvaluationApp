@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using EvaluationApp.Core.Shared;
 using EvaluationApp.Domain;
@@ -21,7 +22,8 @@ namespace EvaluationApp.Controllers
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService,
-            IEmployeesService employeesService)
+            IEmployeesService employeesService
+            )
         {
             this.evaluationFormsService = evaluationFormsService;
             this.evaluationsService = evaluationsService;
@@ -95,15 +97,19 @@ namespace EvaluationApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
+                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);                
+                
                 var eval = new Evaluation
                 {
                     EvaluationName = evaluation.Name,
                     FormName = form.Name,
-                    EmployeeId = evaluation.SelectedEmployee                   
+                    EmployeeId = evaluation.SelectedEmployee,
+                    Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections)
+                    
                 };
-                evaluationsService.StartEvaluation(eval);
-                return RedirectToAction("StartEvaluation", new { id = eval.Id, formName = form.Name, evaluationName = evaluation.Name });
+                evaluationsService.StartEvaluation(eval);               
+
+                return RedirectToAction("StartEvaluation", new { id = eval.Id});
                 //return View("StartEvaluation", evaluation);
             }
             return RedirectToAction(nameof(InProgress));
@@ -137,53 +143,88 @@ namespace EvaluationApp.Controllers
 
         [HttpGet]
        // [Route("Evaluations/StartEvaluation/{activityId}", Name = "StartEvaluation")]
-        public IActionResult StartEvaluation(int id, string formName, string evaluationName)
+        public IActionResult StartEvaluation(int id)
         {
-            var evaluation = new EvaluationViewModel();
-            var sections = evaluationFormsService.GetEvaluationForm(1).Sections;
-            evaluation.Sections = evaluationsService.MapFormSectionsToEvaluationSections(sections);
-            evaluation.Id = id;
-            evaluation.EvaluationName = evaluationName;
-            evaluation.FormName = formName;
+            var eval = evaluationsService.GetEvaluationById(id);
+            EvaluationFormViewModel formVM = new EvaluationFormViewModel();
+            formVM.Id = eval.Id;
+            formVM.Sections = eval.Sections;
+            formVM.FormName = eval.FormName;
+            formVM.EvaluationName = eval.EvaluationName;
+            formVM.EmployeeName = employeesService.GetEmployeeInfo(eval.EmployeeId).Name;
+            formVM.SectionScales = new Dictionary<int, SectionScaleViewModel>();
+            //NOTE: each section has its own scale
 
-            return View("StartEvaluation", evaluation);
+            foreach (var section in eval.Sections)
+            {
+                var sectionScale = section.EvaluationScale;
+                if (sectionScale != null)
+                {
+                    var scaleOptions = evaluationsService.GetEvaluationScaleOptionsFromScale(sectionScale.Id);
+                    var scaleOptionsVM = new SectionScaleViewModel() { SectionId = section.Id};
+                    scaleOptionsVM.ScaleOptions = scaleOptions.Select(option => 
+                                                                    new SelectListItem
+                                                                    {
+                                                                        Value = "" + option.Id,
+                                                                        Text = option.Name
+                                                                    })
+                                                              .ToList();
+                    formVM.SectionScales[section.Id] = scaleOptionsVM;
+                }
+                
+            }         
+
+            return View("EvaluationForm", formVM);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]        
         [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
-        public IActionResult UpdateEvaluation(EvaluationData evaluation)
+        public IActionResult UpdateEvaluation([FromBody]EvaluationData evaluation)
         {
+
+            ResponseData responseData = new ResponseData { Status = Ok().StatusCode, IsError = false, Text = "Evaluation saved successfully" };
             if (ModelState.IsValid)
             {
-                var oldEvaluation = evaluationsService.GetEvaluationById(evaluation.Id);
-                if (oldEvaluation != null)
+                try
                 {
-                    foreach (var criteriaData in evaluation.CriteriaData)
+                    var oldEvaluation = evaluationsService.GetEvaluationById(evaluation.Id);
+                    if (oldEvaluation != null)
                     {
-                        var criteriaSection = oldEvaluation.Sections
-                                                               .Where(section => section.Id ==  criteriaData.SectionId)
-                                                               .FirstOrDefault();
-                        if (criteriaSection != null)
+                        foreach (var criteriaData in evaluation.CriteriaData)
                         {
-                            var oldCriteria = criteriaSection.Criteria
-                                                             .Where(criteria => criteria.Id == criteriaData.Id)
-                                                             .FirstOrDefault();
-                            if (oldCriteria != null)
+                            var criteriaSection = oldEvaluation.Sections
+                                                                   .Where(section => section.Id == criteriaData.SectionId)
+                                                                   .FirstOrDefault();
+                            if (criteriaSection != null)
                             {
-                                if (criteriaData.GradeId != 0)
-                                { 
-                                    oldCriteria.Grade = evaluationFormsServic
+                                var oldCriteria = criteriaSection.Criteria
+                                                                 .Where(criteria => criteria.Id == criteriaData.Id)
+                                                                 .FirstOrDefault();
+                                if (oldCriteria != null)
+                                {
+                                    if (criteriaData.GradeId != 0 &&
+                                        (oldCriteria.Grade == null ||
+                                        oldCriteria.Grade.Id != criteriaData.GradeId))
+                                    {
+                                        oldCriteria.Grade = criteriaSection.EvaluationScale
+                                                                            .EvaluationScaleOptions
+                                                                            .Where(eso => eso.Id == criteriaData.GradeId)
+                                                                            .FirstOrDefault();
+                                    }
                                 }
                             }
                         }
+                        evaluationsService.UpdateEvaluation(oldEvaluation, evaluation.Id);                    
                     }
-                    evaluationsService.UpdateEvaluation(oldEvaluation, evaluation.Id);
-                }                
-                return RedirectToAction(nameof(InProgress));
+                }
+                catch (Exception e)
+                {
+                    responseData = new ResponseData { Status = (int)HttpStatusCode.NotModified, IsError = true, Text = "Failed to save evaluation." };
+                }
+                return Ok(responseData);               
             }
 
-            return View("StartEvaluation", evaluation);
+            return BadRequest();
         }
 
 

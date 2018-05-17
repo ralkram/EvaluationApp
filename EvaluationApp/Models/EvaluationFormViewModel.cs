@@ -1,4 +1,5 @@
 ﻿using EvaluationApp.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace EvaluationApp.Models
         public string EvaluationName { get; set; }
         public string FormName { get; set; }
         public string EmployeeName { get; set; }
-        public ICollection<Section> Sections{ get; set;}
+        public ICollection<Section> Sections{ get; set;}        
+        public IDictionary<int, SectionScaleViewModel> SectionScales { get; set; }
     }
 }
