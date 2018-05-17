@@ -6,6 +6,7 @@
        <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
 
 <script>
+    var hulla = new hullabaloo();
     function createPostModel()
     { 
         var retModel = {};
@@ -39,14 +40,17 @@
             { 
                  if (response.isError === false) {
                      //show success with response.text
+                     hulla.send(response.text, "success");
                  }
                  else
                  {
                      //success
+                     hulla.send(response.text, "danger");
                   }
             }).fail(function (failResponse)
             {
                 var displayMessage = "" + failResponse.statusCode + " Failed to process the request";
+                hulla.send(displayMessage, "danger");
 
             });
     }
@@ -76,13 +80,13 @@
                                 aClass += " active show";
                                 selectedArea = "aria-selected=\"true\"";
                             }
-                        <li class="nav-item">
-                            <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
-                                @crtSection.Name
-                            </a>
-                        </li>
-                    idx++;
-                }
+                            <li class="nav-item">
+                                <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
+                                    @crtSection.Name
+                                </a>
+                            </li>
+                            idx++;
+                        }
 
 
 
@@ -90,56 +94,57 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                    @{
-                        idx = 0;
-                    }
-                    @foreach (var crtSection in Model.Sections)
-                    {
-                        var tabClass = "tab-pane";
-                        if (idx == defaultTab)
-                        {
-                            tabClass += " active show";
+                        @{
+                            idx = 0;
                         }
-                        string anchorTarget = "tab" + idx;
-                        <div role="tabpanel" class="@tabClass" id="@anchorTarget">
-
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Criteria</th>
-                                        <th>Evaluation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach (var currentCriteria in crtSection.Criteria)
-                                {
-                                    var selectId = "criteriaGrade_" + currentCriteria.Id;
-                                    <tr>
-                                        <td>@currentCriteria.Name</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <select id="@selectId" data-section="@crtSection.Id" data-criteria="@currentCriteria.Id" data-placeholder="Evaluation Grades"
-                                                        class="chosen-select form-control grade-val" tabindex="-1"
-                                                        asp-for="@currentCriteria.Grade.Id" asp-items="Model.SectionScales[crtSection.Id].ScaleOptions"></select>
-                                            </div>
-                                        </td>
-                                    </tr>
+                        @foreach (var crtSection in Model.Sections)
+                        {
+                            var tabClass = "tab-pane";
+                            if (idx == defaultTab)
+                            {
+                                tabClass += " active show";
                             }
-                                </tbody>
-                            </table>
-                        </div>
+                            string anchorTarget = "tab" + idx;
+                            <div role="tabpanel" class="@tabClass" id="@anchorTarget">
 
-                        idx++;
-                     }
-                     </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Criteria</th>
+                                            <th>Evaluation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var currentCriteria in crtSection.Criteria)
+                                        {
+                                            var selectId = "criteriaGrade_" + currentCriteria.Id;
+                                            <tr>
+                                                <td>@currentCriteria.Name</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <select id="@selectId" data-section="@crtSection.Id" data-criteria="@currentCriteria.Id" data-placeholder="Evaluation Grades"
+                                                                class="chosen-select form-control grade-val" tabindex="-1"
+                                                                asp-for="@currentCriteria.Grade.Id" asp-items="Model.SectionScales[crtSection.Id].ScaleOptions"></select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            idx++;
+                        }
+                    </div>
 
                 </div>
 
             </div>
         </div>
-            <div class="form-group">
-                <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-default" />
-            </div>
-        </form>
+        <div class="form-group">
+            <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-primary float-right" />
+        </div>
+    </form>
+    <input type="button" value="Home" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'" />
 </div>

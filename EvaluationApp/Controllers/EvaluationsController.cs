@@ -107,10 +107,9 @@ namespace EvaluationApp.Controllers
                     Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections)
                     
                 };
-                evaluationsService.StartEvaluation(eval);               
+                evaluationsService.InsertEvaluation(eval);               
 
-                return RedirectToAction("StartEvaluation", new { id = eval.Id});
-                //return View("StartEvaluation", evaluation);
+                return RedirectToAction("Evaluate", new { id = eval.Id});
             }
             return RedirectToAction(nameof(InProgress));
         }
@@ -123,27 +122,8 @@ namespace EvaluationApp.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult StartEvaluationModal(EvaluationViewModel evaluation)
-        {
-            if (ModelState.IsValid)
-            {
-                var eval = new Evaluation
-                {
-                    EvaluationName = evaluation.EvaluationName,
-                    FormName = evaluation.FormName
-                };
-                evaluationsService.StartEvaluation(eval);
-                return RedirectToAction("StartEvaluation", new { id = eval.Id, formName = evaluation.FormName, evaluationName = evaluation.EvaluationName });
-                //return View("StartEvaluation", evaluation);
-            }
-            return RedirectToAction(nameof(InProgress));
-        }
-
         [HttpGet]
-       // [Route("Evaluations/StartEvaluation/{activityId}", Name = "StartEvaluation")]
-        public IActionResult StartEvaluation(int id)
+        public IActionResult Evaluate(int id)
         {
             var eval = evaluationsService.GetEvaluationById(id);
             EvaluationFormViewModel formVM = new EvaluationFormViewModel();

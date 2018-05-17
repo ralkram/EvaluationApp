@@ -8,40 +8,42 @@
     </button>
 </div>
 <div class="modal-body">
-    <table class="table">
-        <tbody>
-            <tr>
-                <td>Evaluation Name</td>
-                <td>@Model.EvaluationName</td>
-            </tr>
-            <tr>
-                <td>Employee</td>
-                <td>@Model.Employee.Name</td>
-            </tr>
-            @if (Model.IsCompleted == true)
+    <div class="row">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Evaluation Name</td>
+                    <td>@Model.EvaluationName</td>
+                </tr>
+                <tr>
+                    <td>Employee</td>
+                    <td>@Model.Employee.Name</td>
+                </tr>
+                @if (Model.IsCompleted == true)
             {
                 <tr class="table-success">
                     <td>Status</td>
                     <td>Completed</td>
                 </tr>
-            }
-            else
-            {
-                <tr class="table-danger">
-                    <td>Status</td>
-                    <td>In Progress</td>
+        }
+        else
+        {
+            <tr class="table-danger">
+                <td>Status</td>
+                <td>In Progress</td>
+            </tr>
+    }
+                <tr>
+                    <td>Created</td>
+                    <td>@Model.CreatedDate.ToString("dd/MM/yy")</td>
                 </tr>
-            }
-            <tr>
-                <td>Created</td>
-                <td>@Model.CreatedDate.ToString("dd/MM/yy")</td>
-            </tr>
-            <tr>
-                <td>Last Modified</td>
-                <td>@Model.ModifiedDate.ToString("dd/MM/yy")</td>
-            </tr>
-        </tbody>
-    </table>
+                <tr>
+                    <td>Last Modified</td>
+                    <td>@Model.ModifiedDate.ToString("dd/MM/yy")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="modal-footer">

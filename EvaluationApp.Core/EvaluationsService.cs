@@ -31,7 +31,7 @@ namespace EvaluationApp.Core
             return evaluations;
         }
 
-        public void StartEvaluation(Evaluation evaluation)
+        public void InsertEvaluation(Evaluation evaluation)
         {
             persistenceContext.Evaluations.Insert(evaluation);
             persistenceContext.Complete();
