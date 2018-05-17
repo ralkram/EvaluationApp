@@ -75,20 +75,16 @@ namespace EvaluationApp.Core
                     criteria.Add(new Domain.Criteria
                     {
                         Name = item.Name,
-                        Grade = new Domain.EvaluationScaleOption()
+                        Grade = null
                     });
                 }
+
                 sections.Add(new Domain.Section
                 {
                     Name = section.Name,
                     CreatedBy = section.CreatedBy,
                     Criteria = criteria,
-                    EvaluationScale = new Domain.EvaluationScale
-                    {
-                        Id = 1,
-                        Name = section.EvaluationScale.Name,
-                        EvaluationScaleOptions = evalScale
-                    }
+                    EvaluationScale = persistenceContext.EvaluationScales.GetById(section.EvaluationScale.Id)
                 });
             }
 

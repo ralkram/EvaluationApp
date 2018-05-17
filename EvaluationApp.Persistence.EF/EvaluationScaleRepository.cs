@@ -27,7 +27,6 @@ namespace EvaluationApp.Persistence.EF
         {
             var evaluationScaleOption = LocalContext
                                         .EvaluationScales
-                                        .Include(es => es.EvaluationScaleOptions)
                                         .Select(es => es.EvaluationScaleOptions
                                                         .Where(eso=>eso.Id == id)
                                                         .FirstOrDefault())

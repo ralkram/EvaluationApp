@@ -37,10 +37,10 @@
                             <td>
                                 @{
 
-                                    var evaluationAction = "StartFormEvaluationModal/" + item.Id;
+                                    var evaluationAction = "StartFormEvaluationModal";
 
                                     <img src="~/images/preview.jpg" />
-                                    <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action(evaluationAction, "Evaluations")')" />
+                                    <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action(evaluationAction, "Evaluations", new { id = item.Id})')" />
                                 }
                             </td>
                         </tr>
