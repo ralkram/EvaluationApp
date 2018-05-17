@@ -1,7 +1,8 @@
-﻿@model EvaluationApp.Models.EvaluationViewModel
+﻿@model EvaluationApp.Models.EvaluationFormViewModel
+
 <br /> <br />
 
-<h2>@Model.EvaluationName <small>for</small> @Model.Employee.Name</h2>
+<h2>@Model.EvaluationName</h2>
 <br>
 
 <div class="container">
@@ -78,7 +79,7 @@
                                             }
                                             else
                                             {
-                                                <td><font color ="red">Not Evaluated Yet</font></td>
+                                                <td><font color="red">Not Evaluated Yet</font></td>
                                             }
                                         </tr>
                                     }
