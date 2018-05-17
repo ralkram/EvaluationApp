@@ -261,21 +261,6 @@ namespace EvaluationApp.Controllers
             return evaluationViewModelsEnumerable;
         }
 
-        public IActionResult Details(int evaluationId)
-        {
-            var evaluation = evaluationsService.GetEvaluationById(evaluationId);
-
-            if (evaluationId == 0 || (evaluation == null))
-            {
-                return RedirectToAction("Completed");
-            }
-            else
-            {
-                var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
-                return View(evaluationViewModel);
-            }
-        }
-
         public IActionResult DetailsCompleted(int evaluationId)
         {
             var evaluation = evaluationsService.GetEvaluationById(evaluationId);
