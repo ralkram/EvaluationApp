@@ -136,6 +136,7 @@ namespace EvaluationApp.Controllers
             formVM.FormName = eval.FormName;
             formVM.EvaluationName = eval.EvaluationName;
             formVM.EmployeeName = employeesService.GetEmployeeInfo(eval.EmployeeId).Name;
+            formVM.IsCompleted = eval.IsCompleted;
             formVM.SectionScales = new Dictionary<int, SectionScaleViewModel>();
             //NOTE: each section has its own scale
 
@@ -146,13 +147,18 @@ namespace EvaluationApp.Controllers
                 {
                     var scaleOptions = evaluationsService.GetEvaluationScaleOptionsFromScale(sectionScale.Id);
                     var scaleOptionsVM = new SectionScaleViewModel() { SectionId = section.Id};
-                    scaleOptionsVM.ScaleOptions = scaleOptions.Select(option => 
-                                                                    new SelectListItem
-                                                                    {
-                                                                        Value = "" + option.Id,
-                                                                        Text = option.Name
-                                                                    })
-                                                              .ToList();
+                    var options = new List<SelectListItem>();                  
+                    options.Add(new SelectListItem (){ Value = "0", Text = "Not Evaluated" });                  
+                        
+                   options.AddRange(scaleOptions.Select(option => 
+                                                    new SelectListItem
+                                                    {
+                                                        Value = "" + option.Id,
+                                                        Text = option.Name
+                                                    })
+                                                     .ToList());
+                    scaleOptionsVM.ScaleOptions = options;
+
                     formVM.SectionScales[section.Id] = scaleOptionsVM;
                 }
                 

@@ -5,23 +5,17 @@
 
 <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
 
-<script>
-    function isCompleted()
-    {
-        @Model.IsCompleted = true;
-        submitEvaluation();
-    }
-</script>
+
 
 <script>
     var hulla = new hullabaloo();
-    function createPostModel()
+    function createPostModel(isCompleted)
     {
         var retModel = {};
 
         retModel.id = @Model.Id;
         retModel.criteriaData = [];
-        retModel.isCompleted = @Model.IsCompleted;
+        retModel.isCompleted = isCompleted ? true : false;
         $(".grade-val").each(function (index)
         {
             var criteria = {};
@@ -33,11 +27,11 @@
         //var retData = {retModel};
         return retModel;
     }
-
-    function submitEvaluation()
+    
+    function saveEvaluation(finalized, redirectUrl)
     {
-        var evalObject = createPostModel();
-        $.ajax
+        var evalObject = createPostModel(finalized);
+        var retVal = $.ajax
             ({
                 type: "POST",
                 url: "@Url.RouteUrl("UpdateEvaluation")",
@@ -50,6 +44,11 @@
                  if (response.isError === false) {
                      //show success with response.text
                      hulla.send(response.text, "success");
+                     if (redirectUrl)
+                     {
+                         location.href = redirectUrl;
+                     }
+
                  }
                  else
                  {
@@ -62,8 +61,13 @@
                 hulla.send(displayMessage, "danger");
 
             });
-    }
 
+        return retVal;
+    }
+    function finalizeEvaluation()
+    {
+        saveEvaluation(true, location.href);
+    }
 </script>
 <div class="container">
     <form asp-route="SaveEvaluation" method="post" onsubmit="return false;">
@@ -154,8 +158,11 @@
         <br>
         <div class="form-group">
             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
-            <button type="button" class="btn btn-success" onclick="isCompleted()">Finalize</button>
-            <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-info" />
+            @if (!Model.IsCompleted)
+            { 
+                <button type="button" class="btn btn-success" onclick="finalizeEvaluation()">Finalize</button>
+                <input type="submit" value="Save" onclick='saveEvaluation(true ? ("@Model.IsCompleted" === "True") : false);' class="btn btn-info" />
+            }
         </div>
     </form>
 </div>
