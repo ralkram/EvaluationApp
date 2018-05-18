@@ -25,7 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Persistence.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Domain.FormMockup", "EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj", "{A7BC6301-FEFD-46FF-8DC6-ADF510B38220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluationApp.Domain.EmployeeMockup", "EvaluationApp.Domain.EmployeeMockup\EvaluationApp.Domain.EmployeeMockup.csproj", "{26A0A78B-0E6B-4190-B668-8C22C9FDF2C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Domain.EmployeeMockup", "EvaluationApp.Domain.EmployeeMockup\EvaluationApp.Domain.EmployeeMockup.csproj", "{26A0A78B-0E6B-4190-B668-8C22C9FDF2C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationServices", "ApplicationServices", "{068741FF-D36D-42AC-8FEC-732D80B4E7DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessServices", "BusinessServices", "{4E5ED8A2-81FC-438D-81B9-4DE5BC5DA2A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
