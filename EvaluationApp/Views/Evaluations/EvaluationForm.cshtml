@@ -9,6 +9,7 @@
     function isCompleted()
     {
         @Model.IsCompleted = true;
+        submitEvaluation();
     }
 </script>
 
@@ -153,7 +154,7 @@
         <br>
         <div class="form-group">
             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
-            <button asp-for type="button" class="btn btn-success" onclick="isCompleted()">Finalize</button>
+            <button type="button" class="btn btn-success" onclick="isCompleted()">Finalize</button>
             <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-info" />
         </div>
     </form>
