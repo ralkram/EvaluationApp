@@ -1,4 +1,4 @@
-﻿using EvaluationApp.Domain;
+﻿using EvaluationApp.DomainModel.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

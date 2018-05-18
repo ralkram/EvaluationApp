@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="IdentityServer.Domain">
-      <HintPath>..\ExternalDependencies\IdentityServer.Domain.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
   </ItemGroup>
 
 </Project>

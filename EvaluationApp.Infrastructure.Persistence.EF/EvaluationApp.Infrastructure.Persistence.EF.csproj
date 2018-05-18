@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj" />
+    <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\EvaluationApp.DomainModel.Repository.Shared.csproj" />
   </ItemGroup>
 
 </Project>

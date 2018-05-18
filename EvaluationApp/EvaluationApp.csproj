@@ -14,12 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.Core.Shared\EvaluationApp.Core.Shared.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Core\EvaluationApp.Core.csproj" />
+    <ProjectReference Include="..\EvaluationApp.AppServices.EmployeeAuthentication\EvaluationApp.AppServices.EmployeeAuthentication.csproj" />
+    <ProjectReference Include="..\EvaluationApp.AppServices.EvaluationForms\EvaluationApp.AppServices.EvaluationForms.csproj" />
+    <ProjectReference Include="..\EvaluationApp.AppServices.Evaluations\EvaluationApp.AppServices.Evaluations.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Domain\EvaluationApp.Domain.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Persistence.EF\EvaluationApp.Persistence.EF.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Persistence.Shared\EvaluationApp.Persistence.Shared.csproj" />
+    <ProjectReference Include="..\EvaluationApp.DomainModel.Domain\EvaluationApp.DomainModel.Domain.csproj" />
+    <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\EvaluationApp.DomainModel.Repository.Shared.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EmployeeAuthenticationService\EvaluationApp.Infrastructure.EmployeeAuthenticationService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationFormsService\EvaluationApp.Infrastructure.EvaluationFormsService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationsService\EvaluationApp.Infrastructure.EvaluationsService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.Persistence.EF\EvaluationApp.Infrastructure.Persistence.EF.csproj" />
   </ItemGroup>
 
   <ItemGroup>

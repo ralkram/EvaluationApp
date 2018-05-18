@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvaluationApp.AppServices.Evaluations\EvaluationApp.AppServices.Evaluations.csproj" />
+    <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\EvaluationApp.DomainModel.Repository.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

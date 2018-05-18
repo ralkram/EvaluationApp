@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EvaluationApp.AppServices.EmployeeAuthentication\EvaluationApp.AppServices.EmployeeAuthentication.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="IdentityServer.Domain">
       <HintPath>..\ExternalDependencies\IdentityServer.Domain.dll</HintPath>
     </Reference>

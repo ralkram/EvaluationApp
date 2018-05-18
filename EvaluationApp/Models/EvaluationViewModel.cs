@@ -1,5 +1,4 @@
-﻿using EvaluationApp.Domain;
-using EvaluationApp.Domain.FormMockup;
+﻿using EvaluationApp.Domain.FormMockup;
 using IdentityServer.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -23,7 +22,7 @@ namespace EvaluationApp.Models
 
         public Form SelectedForm { get; set; }
         public bool IsCompleted { get; set; }
-        public ICollection<EvaluationApp.Domain.Section> Sections { get; set; }
+        public ICollection<DomainModel.Domain.Section> Sections { get; set; }
 
         public string EmployeeName { get; set; }
 
