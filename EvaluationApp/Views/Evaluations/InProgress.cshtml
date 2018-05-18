@@ -27,7 +27,7 @@
                             <td>@item.LastEvaluator.Name</td>
                             <td>
                                 <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id"><img src="~/images/view.png" /></a>
-                                <img src="~/images/start.png" />
+                                <img src="~/images/start.png" onclick="location.href='@Url.Action("Evaluate", "Evaluations", new { id = item.Id})'"/>
                                 <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
                             </td>
                         </tr>

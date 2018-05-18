@@ -6,6 +6,13 @@
 <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
 
 <script>
+    function isCompleted()
+    {
+        @Model.IsCompleted = true;
+    }
+</script>
+
+<script>
     var hulla = new hullabaloo();
     function createPostModel()
     {
@@ -13,6 +20,7 @@
 
         retModel.id = @Model.Id;
         retModel.criteriaData = [];
+        retModel.isCompleted = @Model.IsCompleted;
         $(".grade-val").each(function (index)
         {
             var criteria = {};
@@ -145,7 +153,7 @@
         <br>
         <div class="form-group">
             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
-            <button type="button" class="btn btn-success">Finalize</button>
+            <button asp-for type="button" class="btn btn-success" onclick="isCompleted()">Finalize</button>
             <input type="submit" value="Save" onclick="submitEvaluation();" class="btn btn-info" />
         </div>
     </form>

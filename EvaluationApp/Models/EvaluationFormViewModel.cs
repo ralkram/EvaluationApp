@@ -13,6 +13,7 @@ namespace EvaluationApp.Models
         public string EvaluationName { get; set; }
         public string FormName { get; set; }
         public string EmployeeName { get; set; }
+        public bool IsCompleted { get; set; }
         public ICollection<Section> Sections{ get; set;}        
         public IDictionary<int, SectionScaleViewModel> SectionScales { get; set; }
     }

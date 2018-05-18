@@ -172,6 +172,7 @@ namespace EvaluationApp.Controllers
                 try
                 {
                     var oldEvaluation = evaluationsService.GetEvaluationById(evaluation.Id);
+                    oldEvaluation.IsCompleted = evaluation.IsCompleted;
                     if (oldEvaluation != null)
                     {
                         foreach (var criteriaData in evaluation.CriteriaData)
