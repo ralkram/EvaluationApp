@@ -1,5 +1,5 @@
 ﻿using IdentityServer.Domain;
-using EvaluationApp.AppServices.EmployeeAuthentication;
+using AppServices.EmployeeAuthentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;

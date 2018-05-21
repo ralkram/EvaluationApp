@@ -1,4 +1,4 @@
-﻿using EvaluationApp.AppServices.EmployeeAuthentication;
+﻿using AppServices.EmployeeAuthentication;
 using System;
 
 namespace EvaluationApp.Infrastructure.EmployeeAuthenticationService

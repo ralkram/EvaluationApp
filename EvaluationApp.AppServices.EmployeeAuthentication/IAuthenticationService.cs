@@ -1,4 +1,4 @@
-﻿namespace EvaluationApp.AppServices.EmployeeAuthentication
+﻿namespace AppServices.EmployeeAuthentication
 
 {
     public interface IAuthenticationService

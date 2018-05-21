@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EvaluationApp.AppServices.EmployeeAuthentication;
-using EvaluationApp.AppServices.Evaluations;
-using EvaluationApp.AppServices.EvaluationsForms;
+using AppServices.EmployeeAuthentication;
+using AppServices.Evaluations;
+using AppServices.EvaluationsForms;
 using EvaluationApp.DomainModel.Repository.Shared;
 using EvaluationApp.Infrastructure.EmployeeAuthenticationService;
 using EvaluationApp.Infrastructure.EvaluationFormsService;

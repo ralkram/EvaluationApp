@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EvaluationApp.AppServices.EmployeeAuthentication;
+using AppServices.EmployeeAuthentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EvaluationApp.Controllers

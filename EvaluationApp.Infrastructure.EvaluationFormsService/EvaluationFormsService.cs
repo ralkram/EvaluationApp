@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using EvaluationApp.AppServices.EmployeeAuthentication;
+using AppServices.EmployeeAuthentication;
 using EvaluationApp.Domain.FormMockup;
-using EvaluationApp.AppServices.EvaluationsForms;
+using AppServices.EvaluationsForms;
 
 namespace EvaluationApp.Infrastructure.EvaluationFormsService
 {

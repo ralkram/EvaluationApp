@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.AppServices.Evaluations
+namespace AppServices.Evaluations
 {
     public class CriteriaData
     {

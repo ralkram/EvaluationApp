@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 
-namespace EvaluationApp.AppServices.EvaluationsForms
+namespace AppServices.EvaluationsForms
 {
     public interface IEvaluationFormsService
     {

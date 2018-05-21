@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EvaluationApp.AppServices.Evaluations
+namespace AppServices.Evaluations
 {
     public interface IEvaluationsService
     {
@@ -19,7 +19,7 @@ namespace EvaluationApp.AppServices.Evaluations
         void UpdateEvaluationData(EvaluationData evaluationData);
 
         void InsertEvaluation(Evaluation evaluation);
-        ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);
+        ICollection<EvaluationApp.DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<EvaluationApp.Domain.FormMockup.Section> sections);
 
         void Delete(int evaluationId);
 

@@ -1,4 +1,4 @@
-﻿using EvaluationApp.AppServices.Evaluations;
+﻿using AppServices.Evaluations;
 using EvaluationApp.DomainModel.Domain;
 using EvaluationApp.DomainModel.Repository.Shared;
 using System;

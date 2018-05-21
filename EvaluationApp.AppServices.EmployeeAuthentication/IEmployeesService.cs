@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.AppServices.EmployeeAuthentication
+namespace AppServices.EmployeeAuthentication
 {
     public interface IEmployeesService
     {
