@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace EvaluationApp.DomainModel.Repository.Shared
+namespace DomainModel.Repository.Shared
 {
     public interface IRepository<T> where T : class
     {

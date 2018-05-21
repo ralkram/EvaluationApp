@@ -21,7 +21,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Criteria", b =>
+            modelBuilder.Entity("DomainModel.Domain.Criteria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("Criteria");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Evaluation", b =>
+            modelBuilder.Entity("DomainModel.Domain.Evaluation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("Evaluations");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.EvaluationScale", b =>
+            modelBuilder.Entity("DomainModel.Domain.EvaluationScale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("EvaluationScales");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.EvaluationScaleOption", b =>
+            modelBuilder.Entity("DomainModel.Domain.EvaluationScaleOption", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +123,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("EvaluationScaleOption");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Importance", b =>
+            modelBuilder.Entity("DomainModel.Domain.Importance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,7 +138,7 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("Importance");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Section", b =>
+            modelBuilder.Entity("DomainModel.Domain.Section", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,39 +167,39 @@ namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("Section");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Criteria", b =>
+            modelBuilder.Entity("DomainModel.Domain.Criteria", b =>
                 {
-                    b.HasOne("EvaluationApp.DomainModel.Domain.EvaluationScaleOption", "Grade")
+                    b.HasOne("DomainModel.Domain.EvaluationScaleOption", "Grade")
                         .WithMany()
                         .HasForeignKey("GradeId");
 
-                    b.HasOne("EvaluationApp.DomainModel.Domain.Section")
+                    b.HasOne("DomainModel.Domain.Section")
                         .WithMany("Criteria")
                         .HasForeignKey("SectionId");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Evaluation", b =>
+            modelBuilder.Entity("DomainModel.Domain.Evaluation", b =>
                 {
-                    b.HasOne("EvaluationApp.DomainModel.Domain.Importance", "Importance")
+                    b.HasOne("DomainModel.Domain.Importance", "Importance")
                         .WithMany()
                         .HasForeignKey("ImportanceId");
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.EvaluationScaleOption", b =>
+            modelBuilder.Entity("DomainModel.Domain.EvaluationScaleOption", b =>
                 {
-                    b.HasOne("EvaluationApp.DomainModel.Domain.EvaluationScale", "EvaluationScale")
+                    b.HasOne("DomainModel.Domain.EvaluationScale", "EvaluationScale")
                         .WithMany("EvaluationScaleOptions")
                         .HasForeignKey("EvaluationScaleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EvaluationApp.DomainModel.Domain.Section", b =>
+            modelBuilder.Entity("DomainModel.Domain.Section", b =>
                 {
-                    b.HasOne("EvaluationApp.DomainModel.Domain.Evaluation", "Evaluation")
+                    b.HasOne("DomainModel.Domain.Evaluation", "Evaluation")
                         .WithMany("Sections")
                         .HasForeignKey("EvaluationId");
 
-                    b.HasOne("EvaluationApp.DomainModel.Domain.EvaluationScale", "EvaluationScale")
+                    b.HasOne("DomainModel.Domain.EvaluationScale", "EvaluationScale")
                         .WithMany()
                         .HasForeignKey("EvaluationScaleId");
                 });

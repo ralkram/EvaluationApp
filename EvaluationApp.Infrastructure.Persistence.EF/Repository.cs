@@ -1,4 +1,4 @@
-﻿using EvaluationApp.DomainModel.Repository.Shared;
+﻿using DomainModel.Repository.Shared;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

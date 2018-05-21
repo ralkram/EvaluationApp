@@ -1,4 +1,4 @@
-﻿using EvaluationApp.DomainModel.Domain;
+﻿using DomainModel.Domain;
 using System;
 using System.Collections.Generic;
 
@@ -19,7 +19,7 @@ namespace AppServices.Evaluations
         void UpdateEvaluationData(EvaluationData evaluationData);
 
         void InsertEvaluation(Evaluation evaluation);
-        ICollection<EvaluationApp.DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<EvaluationApp.Domain.FormMockup.Section> sections);
+        ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<EvaluationApp.Domain.FormMockup.Section> sections);
 
         void Delete(int evaluationId);
 

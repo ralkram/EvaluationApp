@@ -1,9 +1,9 @@
-﻿using EvaluationApp.DomainModel.Domain;
+﻿using DomainModel.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.DomainModel.Repository.Shared
+namespace DomainModel.Repository.Shared
 {
     public interface IEvaluationScaleRepository : IRepository<EvaluationScale>
     {

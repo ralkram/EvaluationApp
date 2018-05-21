@@ -1,4 +1,4 @@
-﻿using EvaluationApp.DomainModel.Repository.Shared;
+﻿using DomainModel.Repository.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,6 +1,6 @@
 ﻿using AppServices.Evaluations;
-using EvaluationApp.DomainModel.Domain;
-using EvaluationApp.DomainModel.Repository.Shared;
+using DomainModel.Domain;
+using DomainModel.Repository.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
-using EvaluationApp.DomainModel.Domain;
+using DomainModel.Domain;
 using EvaluationApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

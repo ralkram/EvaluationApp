@@ -1,9 +1,9 @@
-﻿using EvaluationApp.DomainModel.Domain;
+﻿using DomainModel.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.DomainModel.Repository.Shared
+namespace DomainModel.Repository.Shared
 {
     public interface IEvaluationsRepository: IRepository<Evaluation>
     {
@@ -12,7 +12,5 @@ namespace EvaluationApp.DomainModel.Repository.Shared
 
         IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
         IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
-
-        //void StartEvaluation(Evaluation evaluation);
     }
 }

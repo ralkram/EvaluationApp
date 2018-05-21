@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
-using EvaluationApp.DomainModel.Repository.Shared;
+using DomainModel.Repository.Shared;
 using EvaluationApp.Infrastructure.EmployeeAuthenticationService;
 using EvaluationApp.Infrastructure.EvaluationFormsService;
 using EvaluationApp.Infrastructure.EvaluationsService;

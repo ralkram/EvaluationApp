@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.DomainModel.Repository.Shared
+namespace DomainModel.Repository.Shared
 {
     public interface IPersistenceContext : IDisposable
     {

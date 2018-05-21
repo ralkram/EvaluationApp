@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using EvaluationApp.DomainModel.Repository.Shared;
-using EvaluationApp.DomainModel.Domain;
+using DomainModel.Repository.Shared;
+using DomainModel.Domain;
 
 namespace EvaluationApp.Infrastructure.Persistence.EF
 {

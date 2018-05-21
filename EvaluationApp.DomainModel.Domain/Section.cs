@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.DomainModel.Domain
+namespace DomainModel.Domain
 {
     public class Section
     {
