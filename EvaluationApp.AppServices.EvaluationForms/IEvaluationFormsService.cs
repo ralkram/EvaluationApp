@@ -12,6 +12,5 @@ namespace EvaluationApp.AppServices.EvaluationsForms
 
         Form GetEvaluationForm(int formId);
         List<SelectListItem> GetFormNames();
-        //List<SelectListItem> GetEvaluationGrades(Domain.Section section);
     }
 }

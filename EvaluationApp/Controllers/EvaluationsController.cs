@@ -171,44 +171,14 @@ namespace EvaluationApp.Controllers
 
         [HttpPost]        
         [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
-        public IActionResult UpdateEvaluation([FromBody]EvaluationData evaluation)
+        public IActionResult UpdateEvaluation([FromBody]EvaluationData evaluationData)
         {
-            
             ResponseData responseData = new ResponseData { Status = Ok().StatusCode, IsError = false, Text = "Evaluation saved successfully" };
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var oldEvaluation = evaluationsService.GetEvaluationById(evaluation.Id);
-                    oldEvaluation.IsCompleted = evaluation.IsCompleted;
-                    if (oldEvaluation != null)
-                    {
-                        foreach (var criteriaData in evaluation.CriteriaData)
-                        {
-                            var criteriaSection = oldEvaluation.Sections
-                                                                   .Where(section => section.Id == criteriaData.SectionId)
-                                                                   .FirstOrDefault();
-                            if (criteriaSection != null)
-                            {
-                                var oldCriteria = criteriaSection.Criteria
-                                                                 .Where(criteria => criteria.Id == criteriaData.Id)
-                                                                 .FirstOrDefault();
-                                if (oldCriteria != null)
-                                {
-                                    if (criteriaData.GradeId != 0 &&
-                                        (oldCriteria.Grade == null ||
-                                        oldCriteria.Grade.Id != criteriaData.GradeId))
-                                    {
-                                        oldCriteria.Grade = criteriaSection.EvaluationScale
-                                                                            .EvaluationScaleOptions
-                                                                            .Where(eso => eso.Id == criteriaData.GradeId)
-                                                                            .FirstOrDefault();
-                                    }
-                                }
-                            }
-                        }
-                        evaluationsService.UpdateEvaluation(oldEvaluation);                    
-                    }
+                    evaluationsService.UpdateEvaluationData(evaluationData);
                 }
                 catch (Exception e)
                 {
@@ -219,8 +189,6 @@ namespace EvaluationApp.Controllers
 
             return BadRequest();
         }
-
-
 
         private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
         {
@@ -265,7 +233,7 @@ namespace EvaluationApp.Controllers
             else
             {
                 var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
-                return View("DetailsCompleted", evaluationViewModel);
+                return View("EvaluationDetails/DetailsCompleted", evaluationViewModel);
             }
         }
 
@@ -280,11 +248,8 @@ namespace EvaluationApp.Controllers
             else
             {
                 var evaluationViewModel = GenerateEvaluationViewModel(evaluation);
-                return View("DetailsInProgress", evaluationViewModel);
+                return View("EvaluationDetails/DetailsInProgress", evaluationViewModel);
             }
         }
-
-
     }
-
 }

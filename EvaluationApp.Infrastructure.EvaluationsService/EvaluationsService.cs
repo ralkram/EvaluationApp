@@ -3,6 +3,7 @@ using EvaluationApp.DomainModel.Domain;
 using EvaluationApp.DomainModel.Repository.Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EvaluationApp.Infrastructure.EvaluationsService
 {
@@ -33,16 +34,6 @@ namespace EvaluationApp.Infrastructure.EvaluationsService
         {
             persistenceContext.Evaluations.Insert(evaluation);
             persistenceContext.Complete();
-        }
-
-        public void ContinueEvaluation(int evaluationId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Evaluation GetEvaluationForm()
-        {
-            throw new NotImplementedException();
         }
 
         public Evaluation GetEvaluationById(int evaluationId)
@@ -130,6 +121,45 @@ namespace EvaluationApp.Infrastructure.EvaluationsService
             var evaluationScaleOptions = persistenceContext.EvaluationScales.GetEvaluationScaleOptionsFromScale(scaleId);
 
             return evaluationScaleOptions;
+        }
+
+        public void UpdateEvaluationInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEvaluationData(EvaluationData evaluationData)
+        {
+            var oldEvaluation = GetEvaluationById(evaluationData.Id);
+            oldEvaluation.IsCompleted = evaluationData.IsCompleted;
+            if (oldEvaluation != null)
+            {
+                foreach (var criteriaData in evaluationData.CriteriaData)
+                {
+                    var criteriaSection = oldEvaluation.Sections
+                                                           .Where(section => section.Id == criteriaData.SectionId)
+                                                           .FirstOrDefault();
+                    if (criteriaSection != null)
+                    {
+                        var oldCriteria = criteriaSection.Criteria
+                                                         .Where(criteria => criteria.Id == criteriaData.Id)
+                                                         .FirstOrDefault();
+                        if (oldCriteria != null)
+                        {
+                            if (criteriaData.GradeId != 0 &&
+                                (oldCriteria.Grade == null ||
+                                oldCriteria.Grade.Id != criteriaData.GradeId))
+                            {
+                                oldCriteria.Grade = criteriaSection.EvaluationScale
+                                                                    .EvaluationScaleOptions
+                                                                    .Where(eso => eso.Id == criteriaData.GradeId)
+                                                                    .FirstOrDefault();
+                            }
+                        }
+                    }
+                }
+                UpdateEvaluation(oldEvaluation);
+            }
         }
     }
 }

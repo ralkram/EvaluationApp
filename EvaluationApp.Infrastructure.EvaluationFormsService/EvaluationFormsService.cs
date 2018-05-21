@@ -249,18 +249,6 @@ namespace EvaluationApp.Infrastructure.EvaluationFormsService
             return form;
         }
 
-        //public List<SelectListItem> GetEvaluationGrades(Domain.Section section)
-        //{
-        //    List<SelectListItem> grades = new List<SelectListItem>();
-
-        //    foreach (var item in section.EvaluationScale.EvaluationScaleOptions)
-        //    {
-        //        grades.Add(new SelectListItem { Text = item.Name, Value = ""+item.Id });
-        //    }
-
-        //    return grades;
-        //}
-
         public List<SelectListItem> GetFormNames()
         {
             int empId = authenticationService.GetCurrentUserId();

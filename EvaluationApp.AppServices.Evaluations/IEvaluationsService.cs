@@ -14,16 +14,16 @@ namespace EvaluationApp.AppServices.Evaluations
         IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
 
         void UpdateEvaluation(Evaluation evaluation);
+
+        void UpdateEvaluationInfo();
+        void UpdateEvaluationData(EvaluationData evaluationData);
+
         void InsertEvaluation(Evaluation evaluation);
-        void ContinueEvaluation(int evaluationId);
         ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> sections);
-        Evaluation GetEvaluationForm();
 
         void Delete(int evaluationId);
 
         EvaluationScaleOption GetEvaluationScaleOption(int optionId);
         IEnumerable<EvaluationScaleOption> GetEvaluationScaleOptionsFromScale(int scaleId);
-
-
     }
 }
