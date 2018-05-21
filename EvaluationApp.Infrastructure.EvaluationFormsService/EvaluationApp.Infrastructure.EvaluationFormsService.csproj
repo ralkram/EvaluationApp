@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.AppServices.EmployeeAuthentication\AppServices.EmployeeAuthentication.csproj" />
-    <ProjectReference Include="..\EvaluationApp.AppServices.EvaluationForms\AppServices.EvaluationForms.csproj" />
+    <ProjectReference Include="..\AppServices.EmployeeAuthentication\AppServices.EmployeeAuthentication.csproj" />
+    <ProjectReference Include="..\AppServices.EvaluationForms\AppServices.EvaluationForms.csproj" />
   </ItemGroup>
 
 </Project>

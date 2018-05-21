@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvaluationApp.AppServices.Evaluations\AppServices.Evaluations.csproj" />
+    <ProjectReference Include="..\AppServices.Evaluations\AppServices.Evaluations.csproj" />
     <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\EvaluationApp.DomainModel.Repository.Shared.csproj" />
   </ItemGroup>
 
