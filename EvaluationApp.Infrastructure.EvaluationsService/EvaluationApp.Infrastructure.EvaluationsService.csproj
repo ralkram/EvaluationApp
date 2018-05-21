@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppServices.Evaluations\AppServices.Evaluations.csproj" />
-    <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
+    <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
   </ItemGroup>
 
 </Project>

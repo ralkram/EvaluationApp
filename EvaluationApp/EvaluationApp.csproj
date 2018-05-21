@@ -17,9 +17,9 @@
     <ProjectReference Include="..\AppServices.EmployeeAuthentication\AppServices.EmployeeAuthentication.csproj" />
     <ProjectReference Include="..\AppServices.EvaluationForms\AppServices.EvaluationForms.csproj" />
     <ProjectReference Include="..\AppServices.Evaluations\AppServices.Evaluations.csproj" />
+    <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
+    <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
-    <ProjectReference Include="..\EvaluationApp.DomainModel.Domain\DomainModel.Domain.csproj" />
-    <ProjectReference Include="..\EvaluationApp.DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
     <ProjectReference Include="..\EvaluationApp.Infrastructure.EmployeeAuthenticationService\EvaluationApp.Infrastructure.EmployeeAuthenticationService.csproj" />
     <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationFormsService\EvaluationApp.Infrastructure.EvaluationFormsService.csproj" />
     <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationsService\EvaluationApp.Infrastructure.EvaluationsService.csproj" />

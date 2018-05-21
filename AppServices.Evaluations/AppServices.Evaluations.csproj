@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
-    <ProjectReference Include="..\EvaluationApp.DomainModel.Domain\DomainModel.Domain.csproj" />
   </ItemGroup>
 
 </Project>

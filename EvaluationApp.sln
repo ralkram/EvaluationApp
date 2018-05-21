@@ -25,13 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppServices.Evaluations", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.Persistence.EF", "EvaluationApp.Infrastructure.Persistence.EF\EvaluationApp.Infrastructure.Persistence.EF.csproj", "{10CD798F-18B4-4680-9A1E-8D704483E69E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Repository.Shared", "EvaluationApp.DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj", "{1EF6F27C-31CD-4B0A-B930-253F602C2714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Repository.Shared", "DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj", "{1EF6F27C-31CD-4B0A-B930-253F602C2714}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Domain", "EvaluationApp.DomainModel.Domain\DomainModel.Domain.csproj", "{13CE0538-9839-43F8-B858-412F917A94A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Domain", "DomainModel.Domain\DomainModel.Domain.csproj", "{13CE0538-9839-43F8-B858-412F917A94A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessServices", "EvaluationApp.DomainModel.BusinessServices\DomainModel.BusinessServices.csproj", "{B8D687EF-E8D0-4E88-A4AC-B0534659ABD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessServices", "DomainModel.BusinessServices\DomainModel.BusinessServices.csproj", "{B8D687EF-E8D0-4E88-A4AC-B0534659ABD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessServices.Shared", "EvaluationApp.DomainModel.BusinessServices.Shared\DomainModel.BusinessServices.Shared.csproj", "{ECAA27DC-8B67-4A98-B3D6-122355095D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessServices.Shared", "DomainModel.BusinessServices.Shared\DomainModel.BusinessServices.Shared.csproj", "{ECAA27DC-8B67-4A98-B3D6-122355095D1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.EvaluationsService", "EvaluationApp.Infrastructure.EvaluationsService\EvaluationApp.Infrastructure.EvaluationsService.csproj", "{D2ADC53A-A13A-4FEF-9670-74B9C610C6E6}"
 EndProject
