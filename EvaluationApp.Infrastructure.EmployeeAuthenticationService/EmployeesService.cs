@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EvaluationApp.Infrastructure.EmployeeAuthenticationService
+namespace Infrastructure.EmployeeAuthenticationService
 {
     public class EmployeesService : IEmployeesService
     {

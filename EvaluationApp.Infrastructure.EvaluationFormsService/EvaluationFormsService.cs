@@ -7,7 +7,7 @@ using AppServices.EmployeeAuthentication;
 using EvaluationApp.Domain.FormMockup;
 using AppServices.EvaluationsForms;
 
-namespace EvaluationApp.Infrastructure.EvaluationFormsService
+namespace Infrastructure.EvaluationFormsService
 {
     public class EvaluationFormsService : IEvaluationFormsService
     {

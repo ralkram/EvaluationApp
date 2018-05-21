@@ -1,7 +1,7 @@
 ﻿using AppServices.EmployeeAuthentication;
 using System;
 
-namespace EvaluationApp.Infrastructure.EmployeeAuthenticationService
+namespace Infrastructure.EmployeeAuthenticationService
 {
     public class AuthenticationService : IAuthenticationService
     {

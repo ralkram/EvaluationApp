@@ -5,7 +5,7 @@ using System.Linq;
 using DomainModel.Repository.Shared;
 using DomainModel.Domain;
 
-namespace EvaluationApp.Infrastructure.Persistence.EF
+namespace Infrastructure.Persistence.EF
 {
     public class EvaluationsRepository : Repository<Evaluation>, IEvaluationsRepository 
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvaluationApp.Infrastructure.Persistence.EF
+namespace Infrastructure.Persistence.EF
 {
     public class EvaluationDbContext : DbContext
     {

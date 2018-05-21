@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EvaluationApp.Infrastructure.EvaluationsService
+namespace Infrastructure.EvaluationsService
 {
     public class EvaluationsService : IEvaluationsService
     {
@@ -41,7 +41,7 @@ namespace EvaluationApp.Infrastructure.EvaluationsService
             return persistenceContext.Evaluations.GetById(evaluationId);
         }
 
-        public ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<Domain.FormMockup.Section> formSections)
+        public ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<EvaluationApp.Domain.FormMockup.Section> formSections)
         {
             List<Section> sections = new List<Section>();
 

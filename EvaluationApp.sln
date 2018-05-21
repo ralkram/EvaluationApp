@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppServices.EvaluationForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppServices.Evaluations", "AppServices.Evaluations\AppServices.Evaluations.csproj", "{9DB75186-BDDD-44AE-95A3-5C8E8BE191B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.Persistence.EF", "EvaluationApp.Infrastructure.Persistence.EF\EvaluationApp.Infrastructure.Persistence.EF.csproj", "{10CD798F-18B4-4680-9A1E-8D704483E69E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Persistence.EF", "EvaluationApp.Infrastructure.Persistence.EF\Infrastructure.Persistence.EF.csproj", "{10CD798F-18B4-4680-9A1E-8D704483E69E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.Repository.Shared", "DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj", "{1EF6F27C-31CD-4B0A-B930-253F602C2714}"
 EndProject
@@ -33,11 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel.BusinessServices.Shared", "DomainModel.BusinessServices.Shared\DomainModel.BusinessServices.Shared.csproj", "{ECAA27DC-8B67-4A98-B3D6-122355095D1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.EvaluationsService", "EvaluationApp.Infrastructure.EvaluationsService\EvaluationApp.Infrastructure.EvaluationsService.csproj", "{D2ADC53A-A13A-4FEF-9670-74B9C610C6E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.EvaluationsService", "EvaluationApp.Infrastructure.EvaluationsService\Infrastructure.EvaluationsService.csproj", "{D2ADC53A-A13A-4FEF-9670-74B9C610C6E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.EvaluationFormsService", "EvaluationApp.Infrastructure.EvaluationFormsService\EvaluationApp.Infrastructure.EvaluationFormsService.csproj", "{2D2D6A4F-2E4E-4DF3-88CC-83BBD03F14CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.EvaluationFormsService", "EvaluationApp.Infrastructure.EvaluationFormsService\Infrastructure.EvaluationFormsService.csproj", "{2D2D6A4F-2E4E-4DF3-88CC-83BBD03F14CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvaluationApp.Infrastructure.EmployeeAuthenticationService", "EvaluationApp.Infrastructure.EmployeeAuthenticationService\EvaluationApp.Infrastructure.EmployeeAuthenticationService.csproj", "{DEB4FB1D-D513-4A96-8F04-5E41511FC81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.EmployeeAuthenticationService", "EvaluationApp.Infrastructure.EmployeeAuthenticationService\Infrastructure.EmployeeAuthenticationService.csproj", "{DEB4FB1D-D513-4A96-8F04-5E41511FC81D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

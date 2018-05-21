@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EvaluationApp.Infrastructure.Persistence.EF.Migrations
+namespace Infrastructure.Persistence.EF.Migrations
 {
     public partial class initial_migration : Migration
     {

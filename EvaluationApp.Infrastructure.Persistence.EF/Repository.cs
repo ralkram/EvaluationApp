@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace EvaluationApp.Infrastructure.Persistence.EF
+namespace Infrastructure.Persistence.EF
 {
     public class Repository<T> : IRepository<T> where T : class
     {

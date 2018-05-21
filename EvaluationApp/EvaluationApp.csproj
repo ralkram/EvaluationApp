@@ -20,10 +20,10 @@
     <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
     <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
     <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Infrastructure.EmployeeAuthenticationService\EvaluationApp.Infrastructure.EmployeeAuthenticationService.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationFormsService\EvaluationApp.Infrastructure.EvaluationFormsService.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationsService\EvaluationApp.Infrastructure.EvaluationsService.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Infrastructure.Persistence.EF\EvaluationApp.Infrastructure.Persistence.EF.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EmployeeAuthenticationService\Infrastructure.EmployeeAuthenticationService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationFormsService\Infrastructure.EvaluationFormsService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.EvaluationsService\Infrastructure.EvaluationsService.csproj" />
+    <ProjectReference Include="..\EvaluationApp.Infrastructure.Persistence.EF\Infrastructure.Persistence.EF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
