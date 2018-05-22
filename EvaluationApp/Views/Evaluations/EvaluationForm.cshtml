@@ -92,7 +92,7 @@
             </div>
         </div>
         <br>
-        <div class="form-group">
+        <div class="form-group float-right">
             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
             @if (!Model.IsCompleted)
             {
@@ -100,6 +100,7 @@
                 <input type="submit" value="Save" onclick='saveEvaluation(true ? ("@Model.IsCompleted" === "True") : false, @Model.Id, "@Url.RouteUrl("UpdateEvaluation")");' class="btn btn-info" />
             }
         </div>
+        <br><br>
     </form>
 </div>
 

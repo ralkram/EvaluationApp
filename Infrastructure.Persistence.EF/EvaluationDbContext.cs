@@ -22,7 +22,13 @@ namespace Infrastructure.Persistence.EF
             base.OnModelCreating(builder);
             builder.Entity<Evaluation>()
                 .HasMany<Section>(e => e.Sections)
-                .WithOne(s => s.Evaluation);
-        }
+                .WithOne(s => s.Evaluation)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Section>()
+                .HasMany<Criteria>(s => s.Criteria)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+                }
     }
 }
