@@ -45,9 +45,9 @@ namespace EvaluationApp.Controllers
         //[HttpPost("{evaluationId}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DoDelete(int evaluationId)
+        public IActionResult DoDelete(int id)
         {
-            //evaluationsService.Delete(evaluationId);
+            evaluationsService.Delete(id);
             return RedirectToAction(nameof(Completed));
         }
 
