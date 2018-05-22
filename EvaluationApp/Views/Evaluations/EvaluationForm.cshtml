@@ -5,70 +5,9 @@
 
 <h2>@Model.EvaluationName  with form @Model.FormName for @Model.EmployeeName</h2>
 
+<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/js/evaluation.js"></script>
 
-
-<script>
-    var hulla = new hullabaloo();
-    function createPostModel(isCompleted)
-    {
-        var retModel = {};
-
-        retModel.id = @Model.Id;
-        retModel.criteriaData = [];
-        retModel.isCompleted = isCompleted ? true : false;
-        $(".grade-val").each(function (index)
-        {
-            var criteria = {};
-            criteria.id = $(this).data("criteria");
-            criteria.sectionId = $(this).data("section");
-            criteria.gradeId = $(this).val();
-            retModel.criteriaData.push(criteria);
-        });
-        //var retData = {retModel};
-        return retModel;
-    }
-    
-    function saveEvaluation(finalized, redirectUrl)
-    {
-        var evalObject = createPostModel(finalized);
-        var retVal = $.ajax
-            ({
-                type: "POST",
-                url: "@Url.RouteUrl("UpdateEvaluation")",
-                // The key needs to match your method's input parameter (case-sensitive).
-                data: JSON.stringify(evalObject),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-             }).done(function (response)
-            {
-                 if (response.isError === false) {
-                     //show success with response.text
-                     hulla.send(response.text, "success");
-                     if (redirectUrl)
-                     {
-                         location.href = redirectUrl;
-                     }
-
-                 }
-                 else
-                 {
-                     //error
-                     hulla.send(response.text, "danger");
-                  }
-            }).fail(function (failResponse)
-            {
-                var displayMessage = "" + failResponse.statusCode + " Failed to process the request";
-                hulla.send(displayMessage, "danger");
-
-            });
-
-        return retVal;
-    }
-    function finalizeEvaluation()
-    {
-        saveEvaluation(true, location.href);
-    }
-</script>
 <div class="container">
     <form asp-route="SaveEvaluation" method="post" onsubmit="return false;">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -100,9 +39,6 @@
                             </li>
                             idx++;
                         }
-
-
-
 
                     </ul>
                     <!-- Tab panes -->
@@ -159,12 +95,11 @@
         <div class="form-group">
             <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "EvaluationForms")'">Home</button>
             @if (!Model.IsCompleted)
-            { 
-                <button type="button" class="btn btn-success" onclick="finalizeEvaluation()">Finalize</button>
-                <input type="submit" value="Save" onclick='saveEvaluation(true ? ("@Model.IsCompleted" === "True") : false);' class="btn btn-info" />
+            {
+                <button type="button" class="btn btn-success" onclick='finalizeEvaluation(@Model.Id, "@Url.RouteUrl("UpdateEvaluation")", location.href);'>Finalize</button>
+                <input type="submit" value="Save" onclick='saveEvaluation(true ? ("@Model.IsCompleted" === "True") : false, @Model.Id, "@Url.RouteUrl("UpdateEvaluation")");' class="btn btn-info" />
             }
         </div>
     </form>
 </div>
 
-<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
