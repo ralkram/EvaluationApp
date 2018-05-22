@@ -25,9 +25,9 @@
                         <td>@item.Position.RoleName</td>
                         <td>@item.Team.Name</td>
                         <td>
-                            <img src="~/images/completed.png" />
-                            <img src="~/images/progress.png" />
-                            <img src="~/images/start.png" />
+                           <a asp-action="Completed" asp-route-employeeId="@item.Id"> <img src="~/images/completed.png" /></a>
+                            <a asp-action="InProgress" asp-route-employeeId="@item.Id"> <img src="~/images/progress.png" /></a>
+                            <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action("StartFormEvaluationModal", "Employees", new { id = item.Id})')" />
                         </td>
                     </tr>
                     }
@@ -37,6 +37,13 @@
         </div>
         <div class="col-md-12 text-center">
             <ul class="pagination pagination-lg pager" id="myPager"></ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modelContent">
         </div>
     </div>
 </div>

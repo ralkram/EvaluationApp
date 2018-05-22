@@ -3,27 +3,113 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
+using AppServices.Evaluations;
+using AppServices.EvaluationsForms;
+using DomainModel.Domain;
+using EvaluationApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvaluationApp.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly IEmployeesService employeeService;
+        private readonly IEvaluationFormsService evaluationFormsService;
+        private readonly IEvaluationsService evaluationsService;
         private readonly IAuthenticationService authenticationService;
+        private readonly IEmployeesService employeesService;
 
-        public EmployeesController(IEmployeesService employeeService, IAuthenticationService authenticationService)
+
+        public EmployeesController(
+            IEmployeesService employeeService,
+            IEvaluationFormsService evaluationFormsService,
+            IEvaluationsService evaluationsService,
+            IAuthenticationService authenticationService)
         {
-            this.employeeService = employeeService;
+            this.evaluationFormsService = evaluationFormsService;
+            this.evaluationsService = evaluationsService;
+            this.employeesService = employeeService;
             this.authenticationService = authenticationService;
         }
 
         public IActionResult Index()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var vm = employeeService.GetEmployeesToEvaluate(loggedEmployeeId);
+            var vm = employeesService.GetEmployeesToEvaluate(loggedEmployeeId);
 
             return View("Employees", vm);
         }
+
+        [HttpGet]
+        public IActionResult StartFormEvaluationModal(int id)
+        {
+            int currentEmployeeId = authenticationService.GetCurrentUserId();
+
+            var vm = new StartEvaluationViewModel();
+            vm.SelectedEmployee = id;
+            vm.IsEmployeeEnabled = false;
+            vm.Name = "";
+
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+                            .Select(employee =>
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
+                            .ToList();
+            vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
+                           .Select(form =>
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id})
+                                   .ToList();
+            vm.IsFormEnabled = true;
+
+
+            return View("StartEvaluationModal", vm);
+        }
+
+        public IActionResult InProgress(int employeeId)
+        {
+            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEmployee(employeeId);
+            var evaluationViewModels = GenerateEvaluationViewModels(inProgressEvaluations);
+
+            return View(evaluationViewModels);
+        }
+        public IActionResult Completed(int employeeId)
+        {
+            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeId);
+            var evaluationViewModels = GenerateEvaluationViewModels(completedEvaluations);
+
+            return View(evaluationViewModels);
+        }
+
+        private EvaluationViewModel GenerateEvaluationViewModel(Evaluation evaluation)
+        {
+            EvaluationViewModel evaluationViewModel = new EvaluationViewModel
+            {
+                Id = evaluation.Id,
+                EvaluationName = evaluation.EvaluationName,
+                FormName = evaluation.FormName,
+                IsCompleted = evaluation.IsCompleted,
+                Sections = evaluation.Sections,
+                Employee = employeesService.GetEmployeeInfo(evaluation.EmployeeId),
+                LastEvaluator = employeesService.GetEmployeeInfo(evaluation.LastEvaluatorId),
+                CreatedDate = evaluation.CreatedDate,
+                ModifiedDate = evaluation.ModifiedDate
+            };
+
+            return evaluationViewModel;
+        }
+
+        private IEnumerable<EvaluationViewModel> GenerateEvaluationViewModels(IEnumerable<Evaluation> evaluations)
+        {
+            ICollection<EvaluationViewModel> evaluationViewModels = new List<EvaluationViewModel>();
+
+            foreach (var evaluation in evaluations)
+            {
+                evaluationViewModels.Add(GenerateEvaluationViewModel(evaluation));
+            }
+
+            IEnumerable<EvaluationViewModel> evaluationViewModelsEnumerable = new List<EvaluationViewModel>(evaluationViewModels);
+
+            return evaluationViewModelsEnumerable;
+        }
+
     }
 }

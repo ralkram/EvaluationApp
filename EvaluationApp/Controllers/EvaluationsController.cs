@@ -121,14 +121,6 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult StartEvaluationModal()
-        {
-            var vm = new EvaluationViewModel();
-            vm.Forms = evaluationFormsService.GetFormNames();
-            return View(vm);
-        }
-
-        [HttpGet]
         public IActionResult Evaluate(int id)
         {
             var eval = evaluationsService.GetEvaluationById(id);

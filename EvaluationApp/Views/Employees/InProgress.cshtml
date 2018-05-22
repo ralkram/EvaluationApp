@@ -1,0 +1,54 @@
+﻿@model IEnumerable<EvaluationApp.Models.EvaluationViewModel>
+
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Evaluation Name</th>
+                        <th>Evaluation Form</th>
+                        <th>Employee</th>
+                        <th>Last Evaluator</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id">@item.EvaluationName</a>
+                            </td>
+                            <td>@item.FormName</td>
+                            <td>@item.Employee.Name</td>
+                            <td>@item.LastEvaluator.Name</td>
+                            <td>
+                                <a asp-controller="Evaluations" asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id"><img src="~/images/view.png" /></a>
+                                <img src="~/images/start.png" onclick="location.href='@Url.Action("Evaluate", "Evaluations", new { id = item.Id})'"/>
+                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div id="confirmModal" class="modal-content">
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (e) {
+        $('#confirmModal').load('@Url.Action("DeleteModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#exampleModal').modal('show');
+})
+</script>
