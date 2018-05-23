@@ -27,8 +27,10 @@
                             <td>@item.Employee.Name</td>
                             <td>@item.LastEvaluator.Name</td>
                             <td>
-                                <a asp-controller="Evaluations" asp-action="DetailsCompleted" asp-route-evaluationId="@item.Id"><img src="~/images/view.png" /></a>
-                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
+                                <a asp-controller="Evaluations" asp-action="DetailsCompleted" asp-route-evaluationId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Evaluation"><img src="~/images/view.png" /></a>
+                                <a data-toggle="tooltip" data-placement="bottom" title="Delete Evaluation">
+                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
+                                </a>
                             </td>
                         </tr>
                     }

@@ -1,24 +1,24 @@
 ﻿@model IEnumerable<EvaluationApp.Domain.FormMockup.Form>
 
 
-<br /><br />
-<div class="container">
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table table-hover" id="table_id">
-                <thead>
-                    <tr>
-                        <th>Form Name</th>
-                        <th>Status</th>
-                        <th>Description</th>
-                        <th>Created</th>
-                        <th>Modified</th>
-                        <th class="no-sort">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="myTable">
-                    @foreach (var item in Model)
-                    {
+    <br /><br />
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-hover" id="table_id">
+                    <thead>
+                        <tr>
+                            <th>Form Name</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Created</th>
+                            <th>Modified</th>
+                            <th class="no-sort">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        @foreach (var item in Model)
+                        {
                         <tr>
                             <td>
                                 <a asp-action="FormPreview" asp-route-formId="@item.Id">@item.Name</a>
@@ -26,39 +26,41 @@
                             <td>
                                 @if (item.Status)
                                 {
-                                    <span class="badge badge-success">Enabled</span>
+                                <span class="badge badge-success">Enabled</span>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-secondary">Disabled</span>
+                                <span class="badge badge-secondary">Disabled</span>
                                 }
                             </td>
                             <td>@item.Description</td>
                             <td>@item.CreatedDate.ToString("dd/MM/yy")</td>
                             <td>@item.ModifiedDate.ToString("dd/MM/yy")</td>
                             <td>
-                                    <a asp-action="FormPreview" asp-route-formId="@item.Id"><img src="~/images/preview.jpg" /></a>
+                                <a asp-action="FormPreview" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/preview.jpg" /></a>
+                                <a data-toggle="tooltip" data-placement="bottom" title="Start Evaluation">
                                     <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" />
+                                </a>
                             </td>
                         </tr>
-                    }
+                        }
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div id="confirmModal" class="modal-content">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="confirmModal" class="modal-content">
+            </div>
         </div>
     </div>
-</div>
 
-<script>
+    <script>
     $('#exampleModal').on('show.bs.modal', function (e) {
         $('#confirmModal').load('@Url.Action("StartFormEvaluationModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
         $('#exampleModal').modal('show');
 })
-</script>
+    </script>
