@@ -21,7 +21,7 @@
                     {
                         <tr>
                             <td>
-                                <a asp-action="DetailsCompleted" asp-route-evaluationId="@item.Id">@item.EvaluationName</a>
+                                <a asp-controller="Evaluations" asp-action="DetailsCompleted" asp-route-evaluationId="@item.Id">@item.EvaluationName</a>
                             </td>
                             <td>@item.FormName</td>
                             <td>@item.Employee.Name</td>
