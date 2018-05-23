@@ -1,9 +1,9 @@
 ﻿// Write your JavaScript code.
 
-    $(document).ready(function () {
-        $(".nav-tabs a").click(function () {
-            $(this).tab('show');
-        });
+$(document).ready(function () {
+    $(".nav-tabs a").click(function () {
+        $(this).tab('show');
+    });
 });
 
 $(function () {
@@ -17,5 +17,11 @@ function createModal(url) {
 }
 
 $(document).ready(function () {
-    $('#table_id').DataTable();
+    $('#table_id').DataTable({
+        "order": [],
+        "columnDefs": [{
+            "targets": 'no-sort',
+            "orderable": false,
+        }]
+    });
 });
