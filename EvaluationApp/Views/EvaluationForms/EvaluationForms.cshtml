@@ -40,9 +40,10 @@
                                 @{
 
                                     var evaluationAction = "StartFormEvaluationModal";
-
-                                    <a asp-action="FormPreview" asp-route-formId="@item.Id"><img src="~/images/preview.jpg" /></a>
-                                    <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action(evaluationAction, "Evaluations", new { id = item.Id})')" />
+                                    <a asp-action="FormPreview" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/preview.jpg" /></a>
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Start Evaluation">
+                                        <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action(evaluationAction, "Evaluations", new { id = item.Id})')" />
+                                    </a>
                                 }
                             </td>
                         </tr>

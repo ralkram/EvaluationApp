@@ -19,3 +19,7 @@ function createModal(url) {
 $(document).ready(function () {
     $('#table_id').DataTable();
 });
+
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
