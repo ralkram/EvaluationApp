@@ -30,6 +30,9 @@
                             <a data-toggle="tooltip" data-placement="bottom" title="Evaluate Employee">
                                 <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action("StartFormEvaluationModal", "Employees", new { id = item.Id})')" />
                             </a>
+                            <a data-toggle="tooltip" data-placement="bottom" title="View Employee Progress" onclick="createModal('@Url.Action("ViewEmployeeProgressModal", "Employees", new { id = item.Id})')">
+                                <img src="~/images/progressView.png" />
+                            </a>
                         </td>
                     </tr>
                     }

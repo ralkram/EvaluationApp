@@ -64,6 +64,29 @@ namespace EvaluationApp.Controllers
             return View("StartEvaluationModal", vm);
         }
 
+        [HttpGet]
+        public IActionResult ViewEmployeeProgressModal(int id)
+        {
+            int currentEmployeeId = authenticationService.GetCurrentUserId();
+
+            var vm = new EmployeeProgressViewModel();
+            vm.SelectedEmployee = id;
+            vm.IsEmployeeEnabled = false;
+
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+                            .Select(employee =>
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
+                            .ToList();
+            vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
+                           .Select(form =>
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id })
+                                   .ToList();
+            vm.IsFormEnabled = true;
+
+
+            return View("ViewEmployeeProgressModal", vm);
+        }
+
         public IActionResult InProgress(int employeeId)
         {
             var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEmployee(employeeId);
