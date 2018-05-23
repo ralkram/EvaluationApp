@@ -17,21 +17,21 @@
                 <tbody id="myTable">
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            <img src="~/images/person1.png" width="16" height="16"/>
-                            @item.Name
-                        </td>
-                        <td>@item.Position.RoleName</td>
-                        <td>@item.Team.Name</td>
-                        <td>
-                           <a asp-action="Completed" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" /></a>
-                            <a asp-action="InProgress" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" /></a>
-                            <a data-toggle="tooltip" data-placement="bottom" title="Evaluate Employee">
-                                <img src="~/images/start.png" data-toggle="modal" onclick="createModal('@Url.Action("StartFormEvaluationModal", "Employees", new { id = item.Id})')" />
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <img src="~/images/person1.png" width="16" height="16" />
+                                @item.Name
+                            </td>
+                            <td>@item.Position.RoleName</td>
+                            <td>@item.Team.Name</td>
+                            <td>
+                                <a asp-action="Completed" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" /></a>
+                                <a asp-action="InProgress" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" /></a>
+                                <a data-toggle="tooltip" data-placement="bottom" title="Evaluate Employee">
+                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" />
+                                </a>
+                            </td>
+                        </tr>
                     }
 
                 </tbody>
@@ -43,9 +43,16 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content" id="modelContent">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div id="confirmModal" class="modal-content">
         </div>
     </div>
 </div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (e) {
+        $('#confirmModal').load('@Url.Action("StartFormEvaluationModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#exampleModal').modal('show');
+})
+</script>
