@@ -73,7 +73,7 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <select id="@selectId" data-section="@crtSection.Id" data-criteria="@currentCriteria.Id" data-placeholder="Evaluation Grades"
-                                                                class="chosen-select form-control grade-val" tabindex="-1"
+                                                                class="chosen-select form-control grade-val" tabindex="-1" disabled="@(Model.IsCompleted)"
                                                                 asp-for="@currentCriteria.Grade.Id" asp-items="Model.SectionScales[crtSection.Id].ScaleOptions"></select>
                                                     </div>
                                                 </td>
