@@ -46,9 +46,16 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content" id="modelContent">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div id="confirmModal" class="modal-content">
         </div>
     </div>
 </div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (e) {
+        $('#confirmModal').load('@Url.Action("StartFormEvaluationModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#exampleModal').modal('show');
+})
+</script>
