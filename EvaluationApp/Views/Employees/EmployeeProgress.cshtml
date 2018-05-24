@@ -2,70 +2,88 @@
 
 <h2>@Model.Name</h2>
 <br>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
             <!-- Nav tabs -->
             <div class="card">
                 <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="nav-item">
-                        <a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab" class="nav-link active">@Model.Sections.ElementAt(0).Name</a>
-                    </li>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
-                    {
-                        string anchorTarget = "tab" + i;
-
-                        <li role="presentation" class="nav-item">
-                            <a href="#@anchorTarget" aria-controls="@anchorTarget" role="tab" data-toggle="tab" class="nav-link">@Model.Sections.ElementAt(i).Name</a>
-                        </li>
+                    @{
+                        var idx = 0;
+                        var defaultTab = 0;
                     }
-
+                    @foreach (var crtSection in Model.Sections)
+                    {                        
+                        var tabId = "tab" + idx;
+                        var tabRef = "#" + tabId;
+                        var aClass = "nav-link";
+                        var selectedArea = "";
+                        if (idx == defaultTab)
+                        {
+                            aClass += " active show";
+                            selectedArea = "aria-selected=\"true\"";
+                        }
+                        <li class="nav-item">
+                            <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
+                                @crtSection.Name
+                            </a>
+                        </li>
+                        idx++;
+                    }
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane active" id="tab0">
-
-                        @* Chart here *@
-                        <div class="ct-chart ct-perfect-fourth"></div>
-
-                    </div>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
-                    {
-                        string anchorTarget = "tab" + i;
-                        <div role="tabpanel" class="tab-pane" id="@anchorTarget">
-
-                            @* Chart here *@
-                            <div class="ct-chart ct-perfect-fourth"></div>
-
-                        </div>
+                    @{
+                        idx = 0;
+                        var chartId = "ct-chart";
+                    }
+                    @foreach (var crtSection in Model.Sections)
+                    {                       
+                        var tabClass = "tab-pane";
+                        if (idx == defaultTab)
+                        {
+                            tabClass += " active show";
+                        }
+                        string anchorTarget = "tab" + idx;
+                        <div role="tabpanel" class="@tabClass" id="@anchorTarget">
+                            <div id="@chartId"></div>
+                        </div>     
+                        chartId += idx;
+                        idx++;
                     }
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
 <br>
 <link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
 
-<script>
-    new Chartist.Line('.ct-chart', {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+<script>    
+
+    var data = {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
         series: [
-            [12, 9, 7, 8, 5],
-            [2, 1, 3.5, 7, 3],
-            [1, 3, 4, 5, 6]
+            [5, 2, 4, 2, 0]
         ]
-    }, {
-            fullWidth: true,
-            chartPadding: {
-                right: 40
-            }
-        });</script>
+    };
+    
+    var options = {
+        width: 1000,
+        height: 900
+    };
+    
+    
+    var i;
+    var chartId = "#ct-chart";
+    for (i = 0; i < @Model.Sections.Count; i++)
+    {
+        new Chartist.Line(chartId, data, options);
+        chartId += i;
+    }
+</script>
 
 <div>
     <a asp-action="Index">Back to Evaluation Forms</a>
