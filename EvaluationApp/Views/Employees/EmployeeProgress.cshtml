@@ -1,0 +1,97 @@
+﻿@model EvaluationApp.Domain.FormMockup.Form
+
+<br /> <br />
+
+<h2>@Model.Name</h2>
+<br>
+
+
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "theme2",
+            animationEnabled: true,
+            title: {
+                text: "Simple Column Chart in ASP.NET MVC"
+            },
+            subtitles: [
+                { text: "Try Resizing the Browser" }
+            ],
+            data: [
+                {
+                    type: "spline", //change type to bar, line, area, pie, etc
+                    dataPoints: [
+                        { x: 10, y: 71 },
+                        { x: 20, y: 55 },
+                        { x: 30, y: 50 },
+                        { x: 40, y: 65 },
+                        { x: 50, y: 95 },
+                        { x: 60, y: 68 },
+                        { x: 70, y: 28 },
+                        { x: 80, y: 34 },
+                        { x: 90, y: 14 }
+                    ]
+                }
+            ]
+        });
+        chart.render();
+    };
+</script>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Nav tabs -->
+            <div class="card">
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="nav-item">
+                        <a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab" class="nav-link active">@Model.Sections.ElementAt(0).Name</a>
+                    </li>
+
+                    @for (int i = 1; i < Model.Sections.Count; i++)
+                    {
+                        string anchorTarget = "tab" + i;
+
+                        <li role="presentation" class="nav-item">
+                            <a href="#@anchorTarget" aria-controls="@anchorTarget" role="tab" data-toggle="tab" class="nav-link">@Model.Sections.ElementAt(i).Name</a>
+                        </li>
+                    }
+
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane active" id="tab0">
+
+                        @* Chart here *@
+                        <div id="chartContainer"></div>
+
+                    </div>
+
+                    @for (int i = 1; i < Model.Sections.Count; i++)
+                    {
+                        string anchorTarget = "tab" + i;
+                        <div role="tabpanel" class="tab-pane" id="@anchorTarget">
+
+                            @* Chart here *@
+                            <div id="chartContainer"></div>
+
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
+
+<div>
+    <a asp-action="Index">Back to Evaluation Forms</a>
+</div>

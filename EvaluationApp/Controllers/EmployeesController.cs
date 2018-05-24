@@ -87,6 +87,13 @@ namespace EvaluationApp.Controllers
             return View("ViewEmployeeProgressModal", vm);
         }
 
+        [HttpGet]
+        public IActionResult EmployeeProgress(EmployeeProgressViewModel vm)
+        {
+            var form = evaluationFormsService.GetEvaluationForm(vm.SelectedForm);
+            return View(form);
+        }
+
         public IActionResult InProgress(int employeeId)
         {
             var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEmployee(employeeId);
