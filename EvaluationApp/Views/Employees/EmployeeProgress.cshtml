@@ -4,7 +4,7 @@
 <br>
 
 
-<script>
+@*<script>
     window.onload = function () {
 
         var dataPoints = [];
@@ -40,6 +40,21 @@
         $.getJSON(url, addData);
 
     }
+</script>*@
+
+<link rel="stylesheet" href="~/lib/dist/chartist.min.js" />
+<script src="~/lib/dist/chartist.min.js"></script>
+
+<script>
+    new Chartist.Line('.ct-chart', {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8],
+        series: [
+            [5, 9, 7, 8, 5, 3, 5, 4]
+        ]
+    }, {
+            low: 0,
+            showArea: true
+        });
 </script>
 
 
@@ -71,7 +86,7 @@
                     <div role="tabpanel" class="tab-pane active" id="tab0">
 
                         @* Chart here *@
-                        <div id="chartContainer"></div>
+                        <div class="ct-chart ct-perfect-fourth"></div>
 
                     </div>
 
@@ -81,7 +96,7 @@
                         <div role="tabpanel" class="tab-pane" id="@anchorTarget">
 
                             @* Chart here *@
-                            <div id="chartContainer"></div>
+                            <div class="ct-chart ct-perfect-fourth"></div>
 
                         </div>
                     }
