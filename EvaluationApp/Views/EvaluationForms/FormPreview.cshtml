@@ -11,47 +11,43 @@
             <!-- Nav tabs -->
             <div class="card">
                 <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="nav-item">
-                        <a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab" class="nav-link active">@Model.Sections.ElementAt(0).Name</a>
-                    </li>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
-                    {
-                        string anchorTarget = "tab" + i;
-
-                        <li role="presentation" class="nav-item">
-                            <a href="#@anchorTarget" aria-controls="@anchorTarget" role="tab" data-toggle="tab" class="nav-link">@Model.Sections.ElementAt(i).Name</a>
-                        </li>
+                    @{
+                        var idx = 0;
+                        var defaultTab = 0;
                     }
-
+                    @foreach (var crtSection in Model.Sections)
+                    {
+                        var tabId = "tab" + idx;
+                        var tabRef = "#" + tabId;
+                        var aClass = "nav-link";
+                        var selectedArea = "";
+                        if (idx == defaultTab)
+                        {
+                            aClass += " active show";
+                            selectedArea = "aria-selected=\"true\"";
+                        }
+                        <li class="nav-item">
+                            <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
+                                @crtSection.Name
+                            </a>
+                        </li>
+                        idx++;
+                    }
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane active" id="tab0">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Criteria</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var criteria in Model.Sections.ElementAt(0).Criteria)
-                                {
-                                    <tr>
-                                        <td>@criteria.Name</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
+                    @{
+                        idx = 0;
+                    }
+                    @foreach (var crtSection in Model.Sections)
                     {
-                        string anchorTarget = "tab" + i;
-                        <div role="tabpanel" class="tab-pane" id="@anchorTarget">
-
+                        var tabClass = "tab-pane";
+                        if (idx == defaultTab)
+                        {
+                            tabClass += " active show";
+                        }
+                        string anchorTarget = "tab" + idx;
+                        <div role="tabpanel" class="@tabClass" id="@anchorTarget">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -59,18 +55,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var criteria in Model.Sections.ElementAt(i).Criteria)
+                                    @foreach (var currentCriteria in crtSection.Criteria)
                                     {
+                                        var selectId = "criteriaGrade_" + currentCriteria.Id;
                                         <tr>
-                                            <td>@criteria.Name</td>
+                                            <td>@currentCriteria.Name</td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
+                        idx++;
                     }
                 </div>
-
             </div>
         </div>
     </div>
