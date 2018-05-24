@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
+using AppServices.EvaluationStatistics;
 using DomainModel.Repository.Shared;
 using Infrastructure.EmployeeAuthenticationService;
 using Infrastructure.EvaluationFormsService;
@@ -41,6 +42,7 @@ namespace EvaluationApp
             services.AddScoped<IEvaluationsService, EvaluationsService>();
             services.AddScoped<IEmployeesService, EmployeesService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IEvaluationStatisticsService, EvaluationStatisticsService>();
 
             services.AddMvc();
         }

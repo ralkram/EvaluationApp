@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AppServices.EmployeeAuthentication\AppServices.EmployeeAuthentication.csproj" />
     <ProjectReference Include="..\AppServices.EvaluationForms\AppServices.EvaluationForms.csproj" />
+    <ProjectReference Include="..\AppServices.EvaluationStatistics\AppServices.EvaluationStatistics.csproj" />
     <ProjectReference Include="..\AppServices.Evaluations\AppServices.Evaluations.csproj" />
     <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
     <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />

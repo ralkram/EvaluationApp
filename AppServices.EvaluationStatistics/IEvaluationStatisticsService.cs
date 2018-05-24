@@ -4,6 +4,6 @@ namespace AppServices.EvaluationStatistics
 {
     public interface IEvaluationStatisticsService
     {
-        public ProgressForm GetStatisticsForFormAndEmployee(int formId, int employeeId);
+         ProgressForm GetStatisticsForFormAndEmployee(int formId, int employeeId);
     }
 }

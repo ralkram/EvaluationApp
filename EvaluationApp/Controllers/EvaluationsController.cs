@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
+using AppServices.EvaluationStatistics;
 using DomainModel.Domain;
 using EvaluationApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace EvaluationApp.Controllers
 {
@@ -19,18 +21,21 @@ namespace EvaluationApp.Controllers
         private readonly IEvaluationsService evaluationsService;
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
+        private readonly IEvaluationStatisticsService statisticsService;
 
         public EvaluationsController(
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService,
-            IEmployeesService employeesService
+            IEmployeesService employeesService,
+            IEvaluationStatisticsService statisticsService
             )
         {
             this.evaluationFormsService = evaluationFormsService;
             this.evaluationsService = evaluationsService;
             this.authenticationService = authenticationService;
             this.employeesService = employeesService;
+            this.statisticsService = statisticsService;
         }
 
         [HttpGet]
@@ -159,6 +164,26 @@ namespace EvaluationApp.Controllers
             }         
 
             return View("EvaluationForm", formVM);
+        }
+
+        public ContentResult JSON()
+        {
+            List<DataPoint> dataPoints = new List<DataPoint>();
+
+            var statistics = statisticsService.GetStatisticsForFormAndEmployee(1, 1);
+
+            int i = 0;
+
+            foreach (var evaluation in statistics.ProgressEvaluations)
+            {
+                foreach (var section in evaluation.ProgressSections)
+                {
+                    dataPoints.Add(new DataPoint(i++, section.SectionAverageGrade.Value));
+                }
+            }
+
+            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
+            return Content(JsonConvert.SerializeObject(dataPoints, _jsonSetting), "application/json");
         }
 
         [HttpPost]        

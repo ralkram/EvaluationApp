@@ -18,7 +18,7 @@ namespace AppServices.EvaluationStatistics
 
         public ProgressForm GetStatisticsForFormAndEmployee(int formId, int employeeId)
         {
-            IEnumerable<Evaluation> evaluations = evaluationsService.GetInProgressEvaluationsForEvaluator(employeeId).Where(e => e.FormId == formId);
+            IEnumerable<Evaluation> evaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeId).Where(e => e.FormId == formId);
 
             if (evaluations != null)
             {
