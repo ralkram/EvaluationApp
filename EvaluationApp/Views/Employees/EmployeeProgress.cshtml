@@ -3,47 +3,14 @@
 <h2>@Model.Name</h2>
 <br>
 
+<br>
+<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
 
-@*<script>
-    window.onload = function () {
+<div class="ct-chart ct-perfect-fourth"></div>
 
-        var dataPoints = [];
-
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            theme: "light2",
-            title: {
-                text: "Employee Progress"
-            },
-            axisY: {
-                title: "Grade",
-                titleFontSize: 24,
-                includeZero: false
-            },
-            data: [{
-                type: "spline",
-                dataPoints: dataPoints
-            }]
-        });
-
-        function addData(data) {
-            for (var i = 0; i < data.length; i++) {
-                dataPoints.push({
-                    x: data[i].x,
-                    y: data[i].y
-                });
-            }
-            chart.render();
-
-        }
-        var url = "/evaluations/json";
-        $.getJSON(url, addData);
-
-    }
-</script>*@
-
-<link rel="stylesheet" href="~/lib/dist/chartist.min.js" />
-<script src="~/lib/dist/chartist.min.js"></script>
+<div>
+    <a asp-action="Index">Back to Evaluation Forms</a>
+</div>
 
 <script>
     new Chartist.Line('.ct-chart', {
@@ -56,59 +23,3 @@
             showArea: true
         });
 </script>
-
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <!-- Nav tabs -->
-            <div class="card">
-                <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="nav-item">
-                        <a href="#tab0" aria-controls="tab0" role="tab" data-toggle="tab" class="nav-link active">@Model.Sections.ElementAt(0).Name</a>
-                    </li>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
-                    {
-                        string anchorTarget = "tab" + i;
-
-                        <li role="presentation" class="nav-item">
-                            <a href="#@anchorTarget" aria-controls="@anchorTarget" role="tab" data-toggle="tab" class="nav-link">@Model.Sections.ElementAt(i).Name</a>
-                        </li>
-                    }
-
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane active" id="tab0">
-
-                        @* Chart here *@
-                        <div class="ct-chart ct-perfect-fourth"></div>
-
-                    </div>
-
-                    @for (int i = 1; i < Model.Sections.Count; i++)
-                    {
-                        string anchorTarget = "tab" + i;
-                        <div role="tabpanel" class="tab-pane" id="@anchorTarget">
-
-                            @* Chart here *@
-                            <div class="ct-chart ct-perfect-fourth"></div>
-
-                        </div>
-                    }
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-<link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
-
-<div>
-    <a asp-action="Index">Back to Evaluation Forms</a>
-</div>
