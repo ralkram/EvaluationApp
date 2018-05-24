@@ -37,8 +37,11 @@ namespace AppServices.EvaluationStatistics
 
                         foreach (Criteria criteria in section.Criteria)
                         {
-                            gradesTakenIntoAccount++;
-                            averageGradeValuePrecise = ((averageGradeValuePrecise * (gradesTakenIntoAccount - 1)) + criteria.Grade.Value) / gradesTakenIntoAccount;
+                            if (criteria.Grade.Value != 0)
+                            {
+                                gradesTakenIntoAccount++;
+                                averageGradeValuePrecise = ((averageGradeValuePrecise * (gradesTakenIntoAccount - 1)) + criteria.Grade.Value) / gradesTakenIntoAccount;
+                            }
                         }
 
                         int averageGradeValue = (int)Math.Ceiling(averageGradeValuePrecise);
