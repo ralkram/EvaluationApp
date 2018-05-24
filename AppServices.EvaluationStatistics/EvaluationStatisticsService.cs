@@ -23,19 +23,23 @@ namespace AppServices.EvaluationStatistics
             if (evaluations != null)
             {
                 ProgressForm progressForm = new ProgressForm { FormId = formId };
-                progressForm.ProgressEvaluations = new List<ProgressEvaluation>();
 
-                foreach (Evaluation evaluation in evaluations)
+                progressForm.ProgressSections = new List<ProgressSection>();
+
+                foreach (Section section in evaluations.First().Sections)
                 {
-                    ProgressEvaluation progressEvaluation = new ProgressEvaluation();
-                    progressEvaluation.ProgressSections = new List<ProgressSection>();
+                    ProgressSection progressSection = new ProgressSection { Name = section.Name, EvaluationScale = section.EvaluationScale };
+                    progressSection.ProgressEvaluations = new List<ProgressEvaluation>();
 
-                    foreach (Section section in evaluation.Sections)
+                    var sectionEvaluations = evaluations.Select(e => e.Sections.Where(s => s.Name == section.Name));
+
+                    foreach (Section sectionEvaluation in sectionEvaluations)
                     {
+
                         float averageGradeValuePrecise = 0;
                         int gradesTakenIntoAccount = 0;
 
-                        foreach (Criteria criteria in section.Criteria)
+                        foreach (Criteria criteria in sectionEvaluation.Criteria)
                         {
                             if (criteria.Grade.Value != 0)
                             {
@@ -46,15 +50,49 @@ namespace AppServices.EvaluationStatistics
 
                         int averageGradeValue = (int)Math.Ceiling(averageGradeValuePrecise);
 
-                        EvaluationScale evaluationScale = section.EvaluationScale;
+                        EvaluationScale evaluationScale = sectionEvaluation.EvaluationScale;
                         EvaluationScaleOption sectionAverageGrade = evaluationScale.EvaluationScaleOptions.FirstOrDefault(eso => eso.Value == averageGradeValue);
 
-                        ProgressSection progressSection = new ProgressSection { EvaluationScale = evaluationScale, SectionAverageGrade = sectionAverageGrade };
-
-                        progressEvaluation.ProgressSections.Add(progressSection);
+                        ProgressEvaluation progressEvaluation = new ProgressEvaluation { Date = sectionEvaluation.Evaluation.ModifiedDate, SectionAverageGrade = sectionAverageGrade };
+                        progressSection.ProgressEvaluations.Add(progressEvaluation);
                     }
-                    progressForm.ProgressEvaluations.Add(progressEvaluation);
+                    progressForm.ProgressSections.Add(progressSection);
                 }
+
+                //progressForm.ProgressEvaluations = new List<ProgressEvaluation>();
+
+                //foreach (Evaluation evaluation in evaluations)
+                //{
+                //    ProgressEvaluation progressEvaluation = new ProgressEvaluation();
+                //    progressEvaluation.ProgressSections = new List<ProgressSection>();
+
+                //    foreach (Section section in evaluation.Sections)
+                //    {
+                //        float averageGradeValuePrecise = 0;
+                //        int gradesTakenIntoAccount = 0;
+
+                //        foreach (Criteria criteria in section.Criteria)
+                //        {
+                //            if (criteria.Grade.Value != 0)
+                //            {
+                //                gradesTakenIntoAccount++;
+                //                averageGradeValuePrecise = ((averageGradeValuePrecise * (gradesTakenIntoAccount - 1)) + criteria.Grade.Value) / gradesTakenIntoAccount;
+                //            }
+                //        }
+
+                //        int averageGradeValue = (int)Math.Ceiling(averageGradeValuePrecise);
+
+                //        EvaluationScale evaluationScale = section.EvaluationScale;
+                //        EvaluationScaleOption sectionAverageGrade = evaluationScale.EvaluationScaleOptions.FirstOrDefault(eso => eso.Value == averageGradeValue);
+
+                //        ProgressSection progressSection = new ProgressSection { EvaluationScale = evaluationScale, SectionAverageGrade = sectionAverageGrade };
+
+                //        progressEvaluation.ProgressSections.Add(progressSection);
+                //    }
+                //    progressForm.ProgressEvaluations.Add(progressEvaluation);
+                //}
+
+
                 return progressForm;
             }
             else

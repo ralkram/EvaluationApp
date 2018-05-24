@@ -7,7 +7,10 @@ namespace AppServices.EvaluationStatistics
 {
     public class ProgressSection
     {
+        public string Name { get; set; }
         public EvaluationScale EvaluationScale { get; set; }
-        public EvaluationScaleOption SectionAverageGrade { get; set; }
+        public ICollection<ProgressEvaluation> ProgressEvaluations { get; set; }
+
+        public IDictionary<string, ProgressEvaluation> SectionGrades { get; set; }
     }
 }

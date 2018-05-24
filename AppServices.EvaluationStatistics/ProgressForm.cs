@@ -7,6 +7,6 @@ namespace AppServices.EvaluationStatistics
     public class ProgressForm
     {
         public int FormId { get; set; }
-        public ICollection<ProgressEvaluation> ProgressEvaluations { get; set; }
+        public ICollection<ProgressSection> ProgressSections { get; set; }
     }
 }
