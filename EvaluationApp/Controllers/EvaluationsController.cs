@@ -110,6 +110,7 @@ namespace EvaluationApp.Controllers
                 {
                     EvaluationName = evaluation.Name,
                     FormName = form.Name,
+                    FormId = form.Id,
                     EmployeeId = evaluation.SelectedEmployee,
                     Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections),
                     CreatedBy = currentEmployeeId,
@@ -166,25 +167,25 @@ namespace EvaluationApp.Controllers
             return View("EvaluationForm", formVM);
         }
 
-        public ContentResult JSON()
-        {
-            List<DataPoint> dataPoints = new List<DataPoint>();
+        //public ContentResult JSON()
+        //{
+        //    List<DataPoint> dataPoints = new List<DataPoint>();
 
-            var statistics = statisticsService.GetStatisticsForFormAndEmployee(1, 1);
+        //    var statistics = statisticsService.GetStatisticsForFormAndEmployee(1, 1);
 
-            int i = 0;
+        //    int i = 0;
 
-            foreach (var evaluation in statistics.ProgressEvaluations)
-            {
-                foreach (var section in evaluation.ProgressSections)
-                {
-                    dataPoints.Add(new DataPoint(i++, section.SectionAverageGrade.Value));
-                }
-            }
+        //    foreach (var evaluation in statistics.ProgressEvaluations)
+        //    {
+        //        foreach (var section in evaluation.ProgressSections)
+        //        {
+        //            dataPoints.Add(new DataPoint(i++, section.SectionAverageGrade.Value));
+        //        }
+        //    }
 
-            JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
-            return Content(JsonConvert.SerializeObject(dataPoints, _jsonSetting), "application/json");
-        }
+        //    JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
+        //    return Content(JsonConvert.SerializeObject(dataPoints, _jsonSetting), "application/json");
+        //}
 
         [HttpPost]        
         [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
@@ -242,6 +243,8 @@ namespace EvaluationApp.Controllers
         public IActionResult DetailsCompleted(int evaluationId)
         {
             var evaluation = evaluationsService.GetEvaluationById(evaluationId);
+
+            var test = statisticsService.GetStatisticsForFormAndEmployee(1, 2);
 
             if (evaluationId == 0 || (evaluation == null))
             {

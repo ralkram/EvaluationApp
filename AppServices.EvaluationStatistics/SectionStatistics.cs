@@ -5,12 +5,11 @@ using System.Text;
 
 namespace AppServices.EvaluationStatistics
 {
-    public class ProgressSection
+    public class SectionStatistics
     {
         public string Name { get; set; }
         public EvaluationScale EvaluationScale { get; set; }
-        public ICollection<ProgressEvaluation> ProgressEvaluations { get; set; }
+        public ICollection<SectionStatisticsEntry> SectionStatisticsEntries { get; set; }
 
-        public IDictionary<string, ProgressEvaluation> SectionGrades { get; set; }
     }
 }

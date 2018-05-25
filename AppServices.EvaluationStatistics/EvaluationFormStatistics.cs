@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AppServices.EvaluationStatistics
 {
-    public class ProgressForm
+    public class EvaluationFormStatistics
     {
         public int FormId { get; set; }
-        public ICollection<ProgressSection> ProgressSections { get; set; }
+        public ICollection<SectionStatistics> SectionStatistics { get; set; }
     }
 }

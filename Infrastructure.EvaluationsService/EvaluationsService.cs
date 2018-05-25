@@ -154,6 +154,8 @@ namespace Infrastructure.EvaluationsService
                                                                     .EvaluationScaleOptions
                                                                     .Where(eso => eso.Id == criteriaData.GradeId)
                                                                     .FirstOrDefault();
+                                criteriaSection.ModifiedDate = DateTime.Now;
+                                oldEvaluation.ModifiedDate = DateTime.Now;
                             }
                         }
                     }
