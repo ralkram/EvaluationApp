@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
+using AppServices.EvaluationStatistics;
 using DomainModel.Domain;
 using EvaluationApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +19,21 @@ namespace EvaluationApp.Controllers
         private readonly IEvaluationsService evaluationsService;
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
+        private readonly IEvaluationStatisticsService evaluationStatistics;
 
 
         public EmployeesController(
             IEmployeesService employeeService,
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IEvaluationStatisticsService evaluationStatistics)
         {
             this.evaluationFormsService = evaluationFormsService;
             this.evaluationsService = evaluationsService;
             this.employeesService = employeeService;
             this.authenticationService = authenticationService;
+            this.evaluationStatistics = evaluationStatistics;
         }
 
         public IActionResult Index()
@@ -56,7 +60,7 @@ namespace EvaluationApp.Controllers
                             .ToList();
             vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
                            .Select(form =>
-                                   new SelectListItem { Text = form.Name, Value = "" + form.Id})
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id })
                                    .ToList();
             vm.IsFormEnabled = true;
 
@@ -91,7 +95,9 @@ namespace EvaluationApp.Controllers
         public IActionResult EmployeeProgress(EmployeeProgressViewModel vm)
         {
             var form = evaluationFormsService.GetEvaluationForm(vm.SelectedForm);
-            return View(form);
+
+            var EvaluationFormStatistics = evaluationStatistics.GetStatisticsForFormAndEmployee(vm.SelectedForm, vm.SelectedEmployee);
+            return View(EvaluationFormStatistics);
         }
 
         public IActionResult InProgress(int employeeId)

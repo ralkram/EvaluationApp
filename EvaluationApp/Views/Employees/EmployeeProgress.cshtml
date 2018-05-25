@@ -1,6 +1,6 @@
-﻿@model EvaluationApp.Domain.FormMockup.Form
+﻿@model AppServices.EvaluationStatistics.EvaluationFormStatistics
 
-<h2>@Model.Name</h2>
+
 <br>
 
 <div class="container">
@@ -13,8 +13,8 @@
                         var idx = 0;
                         var defaultTab = 0;
                     }
-                    @foreach (var crtSection in Model.Sections)
-                    {                        
+                    @foreach (var crtSection in Model.SectionStatistics)
+                    {
                         var tabId = "tab" + idx;
                         var tabRef = "#" + tabId;
                         var aClass = "nav-link";
@@ -38,8 +38,8 @@
                         idx = 0;
                         var chartId = "ct-chart";
                     }
-                    @foreach (var crtSection in Model.Sections)
-                    {                       
+                    @foreach (var crtSection in Model.SectionStatistics)
+                    {
                         var tabClass = "tab-pane";
                         if (idx == defaultTab)
                         {
@@ -48,7 +48,7 @@
                         string anchorTarget = "tab" + idx;
                         <div role="tabpanel" class="@tabClass" id="@anchorTarget">
                             <div id="@chartId"></div>
-                        </div>     
+                        </div>
                         chartId += idx;
                         idx++;
                     }
@@ -61,27 +61,64 @@
 <br>
 <link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
 
-<script>    
+<script>
+    //var data = {
 
-    var data = {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-        series: [
-            [5, 2, 4, 2, 0]
-        ]
-    };
-    
+    //    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+    //    series: [
+    //        [5, 2, 4, 2, 0]
+    //    ]
+    //};
+
     var options = {
         width: 1000,
         height: 900
     };
-    
-    
-    var i;
+
+
+    var i = 0;
     var chartId = "#ct-chart";
-    for (i = 0; i < @Model.Sections.Count; i++)
+
+    @*for (i = 0; i < @Model.SectionStatistics.Count; i++)
     {
+        var data = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+            series: [
+                [5, 2, 4, 2, 0]
+            ]
+        };
+
         new Chartist.Line(chartId, data, options);
         chartId += i;
+    }*@
+    var sectionIndex = 0;
+
+
+    @foreach (var sectionStatistics in @Model.SectionStatistics)
+    {
+         <text>
+            var sectionLabels = [];
+            var sectionSeries = [];
+         </text>
+
+        @foreach (var sectionStatisticsEntry in sectionStatistics.SectionStatisticsEntries)
+        {
+            <text>
+    sectionLabels.push(@sectionStatisticsEntry.Date.ToString());
+    sectionSeries.push(8);
+            </text>
+        }
+
+        <text>
+    var data = {
+        labels: sectionLabels,
+        series: sectionSeries
+    };
+
+    new Chartist.Line(chartId, data, options);
+    chartId += i;
+    i++;
+    </text>
     }
 </script>
 
