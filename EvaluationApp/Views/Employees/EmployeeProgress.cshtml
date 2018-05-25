@@ -71,8 +71,8 @@
     //};
 
     var options = {
-        width: 1000,
-        height: 900
+        //width: 1000,
+        //height: 900,
     };
 
 
@@ -104,15 +104,17 @@
         @foreach (var sectionStatisticsEntry in sectionStatistics.SectionStatisticsEntries)
         {
             <text>
-    sectionLabels.push(@sectionStatisticsEntry.Date.ToString());
-    sectionSeries.push(8);
+    sectionLabels.push('@sectionStatisticsEntry.Date.ToString("dd/MM/yy")');
+
+    sectionSeries.push(@sectionStatisticsEntry.AverageGrade.Value);
+
             </text>
         }
 
         <text>
     var data = {
         labels: sectionLabels,
-        series: sectionSeries
+        series: [sectionSeries]
     };
 
     new Chartist.Line(chartId, data, options);

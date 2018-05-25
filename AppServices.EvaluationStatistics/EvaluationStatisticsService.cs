@@ -44,29 +44,6 @@ namespace AppServices.EvaluationStatistics
 
             if (evaluations != null)
             {
-                //EvaluationFormStatistics progressForm = new EvaluationFormStatistics { FormId = formId };
-
-                //progressForm.SectionStatistics = new List<SectionStatistics>();
-
-                //foreach (Section section in evaluations.First().Sections)
-                //{
-                //    SectionStatistics progressSection = new SectionStatistics { Name = section.Name, EvaluationScale = section.EvaluationScale };
-                //    progressSection.SectionStatisticsEntries = new List<SectionStatisticsEntry>();
-
-
-                //    var sectionEvaluations = evaluations.SelectMany(e => e.Sections.Where(s => s.Name.Equals(section.Name)));
-
-
-                //    foreach (Section sectionEvaluation in sectionEvaluations)
-                //    {
-
-
-                //        SectionStatisticsEntry progressEvaluation = new SectionStatisticsEntry { Date = sectionEvaluation.Evaluation.ModifiedDate, AverageGrade = sectionAverageGrade };
-                //        progressSection.SectionStatisticsEntries.Add(progressEvaluation);
-                //    }
-                //    progressForm.SectionStatistics.Add(progressSection);
-                //}
-
                 EvaluationFormStatistics progressForm = new EvaluationFormStatistics { FormId = formId };
 
                 IDictionary<string, SectionStatistics> stats = new Dictionary<string, SectionStatistics>();
@@ -88,12 +65,15 @@ namespace AppServices.EvaluationStatistics
                             stats.Add(currentSection.Name, currentSectionStats);
                         }
 
+                        if(GetAverageOnSection(currentSection) != null) {
+
                         currentSectionStats.SectionStatisticsEntries.Add(
                             new SectionStatisticsEntry
                             {
                                 Date = evaluation.ModifiedDate,
                                 AverageGrade = GetAverageOnSection(currentSection)
                             });
+                        }
                     }
                 }
                 progressForm.SectionStatistics = stats.Values.ToList();
