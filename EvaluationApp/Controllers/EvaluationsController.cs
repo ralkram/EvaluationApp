@@ -98,32 +98,27 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult StartFormEvaluationModal(StartEvaluationViewModel evaluation)
         {
-            if (ModelState.IsValid)
+            var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
+            int currentEmployeeId = authenticationService.GetCurrentUserId();
+
+            var eval = new Evaluation
             {
-                var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
-                int currentEmployeeId = authenticationService.GetCurrentUserId();
+                EvaluationName = evaluation.Name,
+                FormName = form.Name,
+                FormId = form.Id,
+                EmployeeId = evaluation.SelectedEmployee,
+                Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections),
+                CreatedBy = currentEmployeeId,
+                LastEvaluatorId = currentEmployeeId,
+                ModifiedBy = currentEmployeeId,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+            evaluationsService.InsertEvaluation(eval);
 
-                var eval = new Evaluation
-                {
-                    EvaluationName = evaluation.Name,
-                    FormName = form.Name,
-                    FormId = form.Id,
-                    EmployeeId = evaluation.SelectedEmployee,
-                    Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections),
-                    CreatedBy = currentEmployeeId,
-                    LastEvaluatorId = currentEmployeeId,
-                    ModifiedBy = currentEmployeeId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now
-                };
-                evaluationsService.InsertEvaluation(eval);               
-
-                return RedirectToAction("Evaluate", new { id = eval.Id});
-            }
-            return RedirectToAction(nameof(InProgress));
+            return RedirectToAction("Evaluate", new { id = eval.Id });
         }
 
         [HttpGet]
