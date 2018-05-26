@@ -12,6 +12,6 @@ namespace DomainModel.Repository.Shared
         IEvaluationScaleRepository EvaluationScales { get;}
         int Complete();
         void InitializeContext(IServiceCollection services, IConfiguration config);
-        void InitializeData(IServiceProvider serviceProvider);
+        void InitializeData();
     }
 }

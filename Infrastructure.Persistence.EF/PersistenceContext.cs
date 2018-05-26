@@ -1,9 +1,11 @@
-﻿using DomainModel.Repository.Shared;
+﻿using DomainModel.Domain;
+using DomainModel.Repository.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Infrastructure.Persistence.EF
@@ -51,9 +53,27 @@ namespace Infrastructure.Persistence.EF
             InitializeDbContext(services.BuildServiceProvider());
         }
 
-        public void InitializeData(IServiceProvider serviceProvider)
+        public void InitializeData()
         {
-            throw new NotImplementedException();
+            if (!context.EvaluationScales.Any(es => es.Name == "Grades1"))
+            {
+                context.EvaluationScales.Add(new EvaluationScale
+                {
+                    Name = "Grades1",
+                    EvaluationScaleOptions = new List<EvaluationScaleOption>
+                    {
+                        new EvaluationScaleOption { Name = "Fail", Value = 1},
+                        new EvaluationScaleOption { Name = "Very Poor", Value = 2},
+                        new EvaluationScaleOption { Name = "Poor", Value = 3},
+                        new EvaluationScaleOption { Name = "Fair", Value = 4},
+                        new EvaluationScaleOption { Name = "Fairly Good", Value = 5},
+                        new EvaluationScaleOption { Name = "Very Good", Value = 6},
+                        new EvaluationScaleOption { Name = "Excellent", Value = 7}
+                    }
+                });
+            }
+
+            context.SaveChanges();
         }
     }
 }
