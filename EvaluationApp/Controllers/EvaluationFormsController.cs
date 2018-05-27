@@ -29,10 +29,10 @@ namespace EvaluationApp.Controllers
             this.employeesService = employeesService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> IndexAsync()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var vm = evaluationFormsService.GetAllSharedFormsForEmployee(loggedEmployeeId);
+            var vm = await evaluationFormsService.GetAllSharedFormsForEmployeeAsync(loggedEmployeeId);
 
             return View("EvaluationForms", vm);
         }

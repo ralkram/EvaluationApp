@@ -2,15 +2,16 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AppServices.EvaluationsForms
 {
     public interface IEvaluationFormsService
     {
-        ICollection<Form> GetAllSharedFormsForEmployee(int employeeId);
+        Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId);
         ICollection<Form> GetEnabledSharedFormsForEmployee(int employeeId);
 
         Form GetEvaluationForm(int formId);
-        List<SelectListItem> GetFormNames();
+        Task<List<SelectListItem>> GetFormNamesAsync();
     }
 }

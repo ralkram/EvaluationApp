@@ -24,7 +24,7 @@
                                 <a asp-action="FormPreview" asp-route-formId="@item.Id">@item.Name</a>
                             </td>
                             <td>
-                                @if (item.Status)
+                                @if (item.Status.Name == "Enabled")
                                 {
                                     <span class="badge badge-success">Enabled</span>
                                 }
