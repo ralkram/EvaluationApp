@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
+using AppServices.EvaluationForms;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
@@ -20,6 +21,7 @@ namespace EvaluationApp.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
         private readonly IEvaluationStatisticsService evaluationStatistics;
+        private readonly IFormsAPIService formsAPIService;
 
 
         public EmployeesController(
@@ -27,6 +29,7 @@ namespace EvaluationApp.Controllers
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService,
+            IFormsAPIService formsAPIService,
             IEvaluationStatisticsService evaluationStatistics)
         {
             this.evaluationFormsService = evaluationFormsService;
@@ -34,6 +37,7 @@ namespace EvaluationApp.Controllers
             this.employeesService = employeeService;
             this.authenticationService = authenticationService;
             this.evaluationStatistics = evaluationStatistics;
+            this.formsAPIService = formsAPIService;
         }
 
         public IActionResult Index()
@@ -45,9 +49,10 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult StartFormEvaluationModal(int id)
+        public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
+            var forms = await formsAPIService.GetAllSharedFormsForEmployeeAsync(currentEmployeeId);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedEmployee = id;
@@ -58,9 +63,8 @@ namespace EvaluationApp.Controllers
                             .Select(employee =>
                                     new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
                             .ToList();
-            vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
-                           .Select(form =>
-                                   new SelectListItem { Text = form.Name, Value = "" + form.Id })
+            vm.FormsList = forms.Select(form =>
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id, Selected = (form.Id == id) })
                                    .ToList();
             vm.IsFormEnabled = true;
 
@@ -69,9 +73,10 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewEmployeeProgressModal(int id)
+        public async Task<IActionResult> ViewEmployeeProgressModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
+            var forms = await formsAPIService.GetAllSharedFormsForEmployeeAsync(currentEmployeeId);
 
             var vm = new EmployeeProgressViewModel();
             vm.SelectedEmployee = id;
@@ -81,9 +86,8 @@ namespace EvaluationApp.Controllers
                             .Select(employee =>
                                     new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
                             .ToList();
-            vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
-                           .Select(form =>
-                                   new SelectListItem { Text = form.Name, Value = "" + form.Id })
+            vm.FormsList = forms.Select(form =>
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id, Selected = (form.Id == id) })
                                    .ToList();
             vm.IsFormEnabled = true;
 
