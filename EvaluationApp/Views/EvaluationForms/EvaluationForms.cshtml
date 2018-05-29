@@ -60,7 +60,7 @@
 
 <script>
     $('#exampleModal').on('show.bs.modal', function (e) {
-        $('#confirmModal').load('@Url.Action("StartFormEvaluationModalAsync", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#confirmModal').load('@Url.Action("StartFormEvaluationModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
         $('#exampleModal').modal('show');
 })
 </script>

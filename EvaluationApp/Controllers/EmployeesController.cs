@@ -52,7 +52,7 @@ namespace EvaluationApp.Controllers
         public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployeeAsync(currentEmployeeId);
+            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedEmployee = id;
@@ -76,7 +76,7 @@ namespace EvaluationApp.Controllers
         public async Task<IActionResult> ViewEmployeeProgressModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployeeAsync(currentEmployeeId);
+            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
 
             var vm = new EmployeeProgressViewModel();
             vm.SelectedEmployee = id;

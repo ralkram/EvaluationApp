@@ -78,7 +78,7 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> StartFormEvaluationModalAsync(int id)
+        public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
             var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
@@ -107,7 +107,7 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> StartFormEvaluationModalAsync(StartEvaluationViewModel evaluation)
+        public async Task<IActionResult> StartFormEvaluationModal(StartEvaluationViewModel evaluation)
         {
             //var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
             int currentEmployeeId = authenticationService.GetCurrentUserId();
