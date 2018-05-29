@@ -37,7 +37,7 @@
                             <td>@item.CreatedDate.ToString("dd/MM/yy")</td>
                             <td>@item.ModifiedDate.ToString("dd/MM/yy")</td>
                             <td>
-                                <a asp-action="FormPreview" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/preview.jpg" /></a>
+                                <a asp-action="FormPreviewAsync" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/preview.jpg" /></a>
                                 <a data-toggle="tooltip" data-placement="bottom" title="Start Evaluation">
                                     <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" />
                                 </a>
@@ -60,7 +60,7 @@
 
 <script>
     $('#exampleModal').on('show.bs.modal', function (e) {
-        $('#confirmModal').load('@Url.Action("StartFormEvaluationModal", "Evaluations")/' + $(e.relatedTarget).data('id'));
+        $('#confirmModal').load('@Url.Action("StartFormEvaluationModalAsync", "Evaluations")/' + $(e.relatedTarget).data('id'));
         $('#exampleModal').modal('show');
 })
 </script>

@@ -37,9 +37,13 @@ namespace EvaluationApp.Controllers
             return View("EvaluationForms", vm);
         }
 
-        public IActionResult FormPreview(int formId)
+        public async Task<IActionResult> FormPreviewAsync(int formId)
         {
-            var form = evaluationFormsService.GetEvaluationForm(formId);
+            //var form = evaluationFormsService.GetEvaluationForm(formId);
+
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllSharedFormsForEmployeeAsync(loggedEmployeeId);
+            var form = forms.FirstOrDefault(f => f.Id == formId);
 
             if (formId == 0 || (form == null))
             {

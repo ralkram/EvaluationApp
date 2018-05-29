@@ -26,10 +26,25 @@ namespace Infrastructure.EvaluationFormsService
             return forms;
         }
 
+        public async Task<Form> GetForm(int formId, int userId)
+        {
+            Form form = null;
+            var url = "api/forms/" + formId + "?userId=" + userId;
+            HttpClient client = Initialize();
+            HttpResponseMessage responseMessage = await client.GetAsync(url);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var result = responseMessage.Content.ReadAsStringAsync().Result;
+                form = JsonConvert.DeserializeObject<Form>(result);
+            }
+            return form;
+        }
+
         public HttpClient Initialize()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:58549/");
+            client.BaseAddress = new Uri("http://localhost:55953/");
             return client;
         }
     }

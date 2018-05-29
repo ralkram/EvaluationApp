@@ -11,5 +11,6 @@ namespace AppServices.EvaluationForms
     {
         HttpClient Initialize();
         Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId);
+        Task<Form> GetForm(int formId, int userId);
     }
 }

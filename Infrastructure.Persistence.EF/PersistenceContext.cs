@@ -55,11 +55,13 @@ namespace Infrastructure.Persistence.EF
 
         public void InitializeData()
         {
-            if (!context.EvaluationScales.Any(es => es.Name == "Grades1"))
+            // Add here evaluation scales and options
+
+            if (!context.EvaluationScales.Any(es => es.Name == "Grades"))
             {
                 context.EvaluationScales.Add(new EvaluationScale
                 {
-                    Name = "Grades1",
+                    Name = "Grades",
                     EvaluationScaleOptions = new List<EvaluationScaleOption>
                     {
                         new EvaluationScaleOption { Name = "Fail", Value = 1},
@@ -69,6 +71,19 @@ namespace Infrastructure.Persistence.EF
                         new EvaluationScaleOption { Name = "Fairly Good", Value = 5},
                         new EvaluationScaleOption { Name = "Very Good", Value = 6},
                         new EvaluationScaleOption { Name = "Excellent", Value = 7}
+                    }
+                });
+            }
+
+            if (!context.EvaluationScales.Any(es => es.Name == "Agreement"))
+            {
+                context.EvaluationScales.Add(new EvaluationScale
+                {
+                    Name = "Agreement",
+                    EvaluationScaleOptions = new List<EvaluationScaleOption>
+                    {
+                        new EvaluationScaleOption { Name = "Agree", Value = 1},
+                        new EvaluationScaleOption { Name = "Disagree", Value = 2},
                     }
                 });
             }

@@ -50,28 +50,32 @@ namespace Infrastructure.EvaluationsService
                 var criteria = new List<Criteria>();
                 var evalScale = new List<EvaluationScaleOption>();
 
-                //foreach (var item in section.EvaluationScale.EvaluationScaleOptions)
-                //{
-                //    evalScale.Add(new EvaluationScaleOption
-                //    {
-                //        Name = item.Name,
-                //        Value = item.Value
-                //    });
-                //}
+                var scaleOptions = persistenceContext.EvaluationScales.GetEvaluationScaleOptionsFromScale((int)section.EvaluationScale);
+
+                foreach (var item in scaleOptions)
+                {
+                    evalScale.Add(new EvaluationScaleOption
+                    {
+                        Name = item.Name,
+                        Value = item.Value
+                    });
+                }
 
                 foreach (var item in section.Criteria)
                 {
                     criteria.Add(new Criteria
                     {
                         Name = item.Name,
-                        Grade = null
+                        Grade = null,
+                        ModifiedDate = DateTime.Now
                     });
                 }
 
                 sections.Add(new Section
                 {
                     Name = section.Name,
-                    CreatedBy = Int32.Parse(section.CreatedBy),
+                    // for test
+                    CreatedBy = 1,
                     Criteria = criteria,
                     EvaluationScale = persistenceContext.EvaluationScales.GetById((int)section.EvaluationScale)
                 });
