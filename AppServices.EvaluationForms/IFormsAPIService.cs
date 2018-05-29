@@ -10,7 +10,7 @@ namespace AppServices.EvaluationForms
     public interface IFormsAPIService
     {
         HttpClient Initialize();
-        Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId);
+        Task<ICollection<Form>> GetAllSharedFormsForEmployee(int employeeId);
         Task<Form> GetForm(int formId, int userId);
     }
 }

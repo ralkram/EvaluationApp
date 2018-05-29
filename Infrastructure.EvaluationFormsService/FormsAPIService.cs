@@ -11,7 +11,7 @@ namespace Infrastructure.EvaluationFormsService
 {
     public class FormsAPIService : IFormsAPIService
     {
-        public async Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId)
+        public async Task<ICollection<Form>> GetAllSharedFormsForEmployee(int employeeId)
         {
             ICollection<Form> forms = new List<Form>();
 
@@ -44,7 +44,7 @@ namespace Infrastructure.EvaluationFormsService
         public HttpClient Initialize()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:55953/");
+            client.BaseAddress = new Uri("http://localhost:63774/");
             return client;
         }
     }

@@ -8,10 +8,10 @@ namespace AppServices.EvaluationsForms
 {
     public interface IEvaluationFormsService
     {
-        Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId);
+        Task<ICollection<Form>> GetAllSharedFormsForEmployee(int employeeId);
         ICollection<Form> GetEnabledSharedFormsForEmployee(int employeeId);
 
         Form GetEvaluationForm(int formId);
-        Task<List<SelectListItem>> GetFormNamesAsync();
+        Task<List<SelectListItem>> GetFormNames();
     }
 }

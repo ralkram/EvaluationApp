@@ -25,11 +25,11 @@ namespace Infrastructure.EvaluationFormsService
         }
 
         // MOCKUP METHOD, TO BE IMPLEMENTED
-        public async Task<ICollection<Form>> GetAllSharedFormsForEmployeeAsync(int employeeId)
+        public async Task<ICollection<Form>> GetAllSharedFormsForEmployee(int employeeId)
         {
             ICollection<Form> forms = new List<Form>();
 
-            forms = await formsAPI.GetAllSharedFormsForEmployeeAsync(employeeId);
+            forms = await formsAPI.GetAllSharedFormsForEmployee(employeeId);
 
             //ICollection<Criteria> criteria_1 = new List<Criteria>();
             //criteria_1.Add(new Criteria { Id = 1, Name = "Naming + proper comments", ModifiedDate = new DateTime(2018, 5, 16, 18, 13, 0) });
@@ -257,10 +257,10 @@ namespace Infrastructure.EvaluationFormsService
             return form;
         }
 
-        public async Task<List<SelectListItem>> GetFormNamesAsync()
+        public async Task<List<SelectListItem>> GetFormNames()
         {
             int empId = authenticationService.GetCurrentUserId();
-            var forms = await GetAllSharedFormsForEmployeeAsync(empId);
+            var forms = await GetAllSharedFormsForEmployee(empId);
             List<SelectListItem> names = new List<SelectListItem>();
             foreach (var item in forms)
             {

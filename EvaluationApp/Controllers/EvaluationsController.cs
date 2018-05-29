@@ -81,7 +81,7 @@ namespace EvaluationApp.Controllers
         public async Task<IActionResult> StartFormEvaluationModalAsync(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployeeAsync(currentEmployeeId);
+            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedForm = id;

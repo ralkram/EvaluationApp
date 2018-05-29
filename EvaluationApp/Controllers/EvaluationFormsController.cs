@@ -29,20 +29,20 @@ namespace EvaluationApp.Controllers
             this.employeesService = employeesService;
         }
 
-        public async Task<ActionResult> IndexAsync()
+        public async Task<ActionResult> Index()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var vm = await evaluationFormsService.GetAllSharedFormsForEmployeeAsync(loggedEmployeeId);
+            var vm = await evaluationFormsService.GetAllSharedFormsForEmployee(loggedEmployeeId);
 
             return View("EvaluationForms", vm);
         }
 
-        public async Task<IActionResult> FormPreviewAsync(int formId)
+        public async Task<IActionResult> FormPreview(int formId)
         {
             //var form = evaluationFormsService.GetEvaluationForm(formId);
 
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await evaluationFormsService.GetAllSharedFormsForEmployeeAsync(loggedEmployeeId);
+            var forms = await evaluationFormsService.GetAllSharedFormsForEmployee(loggedEmployeeId);
             var form = forms.FirstOrDefault(f => f.Id == formId);
 
             if (formId == 0 || (form == null))
