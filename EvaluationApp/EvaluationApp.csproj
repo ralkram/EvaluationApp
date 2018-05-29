@@ -20,7 +20,6 @@
     <ProjectReference Include="..\AppServices.Evaluations\AppServices.Evaluations.csproj" />
     <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
     <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
     <ProjectReference Include="..\Infrastructure.EmployeeAuthenticationService\Infrastructure.EmployeeAuthenticationService.csproj" />
     <ProjectReference Include="..\Infrastructure.EvaluationFormsService\Infrastructure.EvaluationFormsService.csproj" />
     <ProjectReference Include="..\Infrastructure.EvaluationsService\Infrastructure.EvaluationsService.csproj" />
@@ -28,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EvaluationFormsManager.DataTransferObjects">
+      <HintPath>..\ExternalDependencies\EvaluationFormsManager.DataTransferObjects.dll</HintPath>
+    </Reference>
     <Reference Include="IdentityServer.Domain">
       <HintPath>..\ExternalDependencies\IdentityServer.Domain.dll</HintPath>
     </Reference>

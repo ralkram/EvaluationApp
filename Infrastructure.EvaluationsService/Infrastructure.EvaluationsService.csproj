@@ -9,4 +9,10 @@
     <ProjectReference Include="..\DomainModel.Repository.Shared\DomainModel.Repository.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EvaluationFormsManager.DataTransferObjects">
+      <HintPath>..\ExternalDependencies\EvaluationFormsManager.DataTransferObjects.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

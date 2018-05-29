@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
-using AppServices.EvaluationForms;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
@@ -44,7 +43,6 @@ namespace EvaluationApp
             services.AddScoped<IEmployeesService, EmployeesService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IEvaluationStatisticsService, EvaluationStatisticsService>();
-            services.AddScoped<IFormsAPIService, FormsAPIService>();
 
             services.AddMvc();
         }

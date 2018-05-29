@@ -1,6 +1,7 @@
 ﻿using AppServices.Evaluations;
 using DomainModel.Domain;
 using DomainModel.Repository.Shared;
+using EvaluationFormsManager.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace Infrastructure.EvaluationsService
             return persistenceContext.Evaluations.GetById(evaluationId);
         }
 
-        public ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<EvaluationApp.Domain.FormMockup.Section> formSections)
+        public ICollection<DomainModel.Domain.Section> MapFormSectionsToEvaluationSections(ICollection<SectionDTO> formSections)
         {
             List<Section> sections = new List<Section>();
 
@@ -61,7 +62,7 @@ namespace Infrastructure.EvaluationsService
                     });
                 }
 
-                foreach (var item in section.Criteria)
+                foreach (CriteriaDTO item in section.Criteria)
                 {
                     criteria.Add(new Criteria
                     {

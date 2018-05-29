@@ -1,4 +1,4 @@
-﻿using EvaluationApp.Domain.FormMockup;
+﻿using EvaluationFormsManager.DataTransferObjects;
 using IdentityServer.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -20,7 +20,7 @@ namespace EvaluationApp.Models
         public string EvaluationGrade { get; set; }
         public ICollection<SelectListItem> EvaluationGrades { get; set; }
 
-        public Form SelectedForm { get; set; }
+        public EvaluationFormDTO SelectedForm { get; set; }
         public bool IsCompleted { get; set; }
         public ICollection<DomainModel.Domain.Section> Sections { get; set; }
 

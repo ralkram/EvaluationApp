@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
-using AppServices.EvaluationForms;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
@@ -23,14 +22,12 @@ namespace EvaluationApp.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
         private readonly IEvaluationStatisticsService statisticsService;
-        private readonly IFormsAPIService formsAPIService;
 
         public EvaluationsController(
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService,
             IEmployeesService employeesService,
-            IFormsAPIService formsAPIService,
             IEvaluationStatisticsService statisticsService
             )
         {
@@ -39,7 +36,6 @@ namespace EvaluationApp.Controllers
             this.authenticationService = authenticationService;
             this.employeesService = employeesService;
             this.statisticsService = statisticsService;
-            this.formsAPIService = formsAPIService;
         }
 
         [HttpGet]
@@ -81,7 +77,7 @@ namespace EvaluationApp.Controllers
         public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
             int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(currentEmployeeId);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedForm = id;
@@ -111,7 +107,7 @@ namespace EvaluationApp.Controllers
         {
             //var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
             int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var form = await formsAPIService.GetForm(evaluation.SelectedForm, currentEmployeeId);
+            var form = await evaluationFormsService.GetForm(evaluation.SelectedForm, currentEmployeeId);
 
             var eval = new Evaluation
             {

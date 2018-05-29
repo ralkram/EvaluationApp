@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DomainModel.Domain\DomainModel.Domain.csproj" />
-    <ProjectReference Include="..\EvaluationApp.Domain.FormMockup\EvaluationApp.Domain.FormMockup.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EvaluationFormsManager.DataTransferObjects">
+      <HintPath>..\ExternalDependencies\EvaluationFormsManager.DataTransferObjects.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

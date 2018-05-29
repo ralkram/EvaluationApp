@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppServices.EmployeeAuthentication;
-using AppServices.EvaluationForms;
 using AppServices.Evaluations;
 using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
@@ -21,7 +20,6 @@ namespace EvaluationApp.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
         private readonly IEvaluationStatisticsService evaluationStatistics;
-        private readonly IFormsAPIService formsAPIService;
 
 
         public EmployeesController(
@@ -29,7 +27,6 @@ namespace EvaluationApp.Controllers
             IEvaluationFormsService evaluationFormsService,
             IEvaluationsService evaluationsService,
             IAuthenticationService authenticationService,
-            IFormsAPIService formsAPIService,
             IEvaluationStatisticsService evaluationStatistics)
         {
             this.evaluationFormsService = evaluationFormsService;
@@ -37,7 +34,6 @@ namespace EvaluationApp.Controllers
             this.employeesService = employeeService;
             this.authenticationService = authenticationService;
             this.evaluationStatistics = evaluationStatistics;
-            this.formsAPIService = formsAPIService;
         }
 
         public IActionResult Index()
@@ -51,15 +47,15 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
-            int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedEmployeeId);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedEmployee = id;
             vm.IsEmployeeEnabled = false;
             vm.Name = "";
 
-            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedEmployeeId)
                             .Select(employee =>
                                     new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
                             .ToList();
@@ -75,14 +71,14 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewEmployeeProgressModal(int id)
         {
-            int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await formsAPIService.GetAllSharedFormsForEmployee(currentEmployeeId);
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedEmployeeId);
 
             var vm = new EmployeeProgressViewModel();
             vm.SelectedEmployee = id;
             vm.IsEmployeeEnabled = false;
 
-            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedEmployeeId)
                             .Select(employee =>
                                     new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
                             .ToList();
@@ -98,7 +94,8 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public IActionResult EmployeeProgress(EmployeeProgressViewModel vm)
         {
-            var form = evaluationFormsService.GetEvaluationForm(vm.SelectedForm);
+            int loggedEmployeeId = authenticationService.GetCurrentUserId();
+            var form = evaluationFormsService.GetForm(vm.SelectedForm, loggedEmployeeId);
 
             var EvaluationFormStatistics = evaluationStatistics.GetStatisticsForFormAndEmployee(vm.SelectedForm, vm.SelectedEmployee);
             return View(EvaluationFormStatistics);
