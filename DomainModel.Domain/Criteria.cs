@@ -12,8 +12,6 @@ namespace DomainModel.Domain
         public int CreatedBy { get; set; }
         public int ModifiedBy { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
-
         public virtual EvaluationScaleOption Grade { get; set; }
     }
 }

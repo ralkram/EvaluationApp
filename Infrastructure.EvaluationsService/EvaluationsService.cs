@@ -67,7 +67,6 @@ namespace Infrastructure.EvaluationsService
                     {
                         Name = item.Name,
                         Grade = null,
-                        ModifiedDate = DateTime.Now
                     });
                 }
 
