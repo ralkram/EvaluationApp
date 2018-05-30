@@ -1,4 +1,5 @@
 ﻿using AppServices.EmployeeAuthentication;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Infrastructure.EmployeeAuthenticationService
@@ -9,6 +10,13 @@ namespace Infrastructure.EmployeeAuthenticationService
         public int GetCurrentUserId()
         {
             return 1;
+        }
+
+        public void Initialize(IServiceCollection services)
+        {
+
+
+            throw new NotImplementedException();
         }
 
         // MOCKUP METHOD, TO BE IMPLEMENTED
