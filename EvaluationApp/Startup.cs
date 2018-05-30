@@ -26,6 +26,7 @@ namespace EvaluationApp
         }
 
         public IConfiguration Configuration { get; }
+        public IAuthenticationService AuthService { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,8 +44,14 @@ namespace EvaluationApp
             services.AddScoped<IEmployeesService, EmployeesService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IEvaluationStatisticsService, EvaluationStatisticsService>();
-
+            
             services.AddMvc();
+            AuthService = services.BuildServiceProvider().GetService<IAuthenticationService>();
+            if (AuthService != null)
+            {
+                AuthService.Initialize(services, Configuration);
+            }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +67,11 @@ namespace EvaluationApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            if (AuthService != null)
+            {
+                AuthService.Configure(app);
+            }
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -68,6 +80,7 @@ namespace EvaluationApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+           
         }
     }
 }

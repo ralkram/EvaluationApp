@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AppServices.EmployeeAuthentication
 
@@ -7,6 +9,8 @@ namespace AppServices.EmployeeAuthentication
     {
         int GetCurrentUserId();
         bool IsUserAuthenticated();
-        void Initialize(IServiceCollection services);
+        void Initialize(IServiceCollection services, IConfiguration config);
+        void Configure(IApplicationBuilder applicationBuilder);
+        void SignOut( );
     }
 }

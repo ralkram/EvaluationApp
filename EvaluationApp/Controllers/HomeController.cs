@@ -5,14 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EvaluationApp.Models;
+using AppServices.EmployeeAuthentication;
 
 namespace EvaluationApp.Controllers
 {
     public class HomeController : Controller
     {
+        private IAuthenticationService authenticationService;
+
+        public HomeController(IAuthenticationService auth)
+        {
+            authenticationService = auth;
+        }
         public IActionResult Index()
         {
-            return View();
+            return View();            
         }
 
         public IActionResult About()
@@ -32,6 +39,12 @@ namespace EvaluationApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult SignOut()
+        {
+            authenticationService.SignOut();
+            return View("Index");
         }
     }
 }

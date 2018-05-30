@@ -9,12 +9,14 @@ using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
 using DomainModel.Domain;
 using EvaluationApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace EvaluationApp.Controllers
 {
+    
     public class EvaluationsController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;

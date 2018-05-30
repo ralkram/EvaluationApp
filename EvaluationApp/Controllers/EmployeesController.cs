@@ -8,11 +8,13 @@ using AppServices.EvaluationsForms;
 using AppServices.EvaluationStatistics;
 using DomainModel.Domain;
 using EvaluationApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvaluationApp.Controllers
 {
+    
     public class EmployeesController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;
@@ -20,7 +22,6 @@ namespace EvaluationApp.Controllers
         private readonly IAuthenticationService authenticationService;
         private readonly IEmployeesService employeesService;
         private readonly IEvaluationStatisticsService evaluationStatistics;
-
 
         public EmployeesController(
             IEmployeesService employeeService,
@@ -36,6 +37,7 @@ namespace EvaluationApp.Controllers
             this.evaluationStatistics = evaluationStatistics;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             int loggedEmployeeId = authenticationService.GetCurrentUserId();
