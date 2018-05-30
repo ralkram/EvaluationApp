@@ -33,7 +33,6 @@ namespace EvaluationApp.Controllers
         {
             int loggedUserId = authenticationService.GetCurrentUserId();
             var vm = await evaluationFormsService.GetAllFormsForEmployee(loggedUserId);
-
             return View("EvaluationForms", vm);
         }
 

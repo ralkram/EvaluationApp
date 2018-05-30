@@ -266,7 +266,6 @@ namespace Infrastructure.EvaluationFormsService
 
             return names;
         }
-
         public async Task<ICollection<EvaluationFormDTO>> GetAllFormsForEmployee(int employeeId)
         {
             ICollection<EvaluationFormDTO> forms = new List<EvaluationFormDTO>();
@@ -302,7 +301,7 @@ namespace Infrastructure.EvaluationFormsService
         public HttpClient Initialize()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:63774/");
+            client.BaseAddress = new Uri("http://localhost:55953/");
             return client;
         }
     }
