@@ -270,31 +270,51 @@ namespace Infrastructure.EvaluationFormsService
         {
             ICollection<EvaluationFormDTO> forms = new List<EvaluationFormDTO>();
 
-            var loggedUserId = authenticationService.GetCurrentUserId();
-
-            HttpClient client = Initialize();
-            HttpResponseMessage responseMessage = await client.GetAsync("api/forms?userId=" + loggedUserId);
-
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                var result = responseMessage.Content.ReadAsStringAsync().Result;
-                forms = JsonConvert.DeserializeObject<List<EvaluationFormDTO>>(result);
+                var loggedUserId = authenticationService.GetCurrentUserId();
+
+                HttpClient client = Initialize();
+                HttpResponseMessage responseMessage = await client.GetAsync("api/forms?userId=" + loggedUserId);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var result = responseMessage.Content.ReadAsStringAsync().Result;
+                    forms = JsonConvert.DeserializeObject<List<EvaluationFormDTO>>(result);
+                }
             }
+            catch (HttpRequestException e)
+            {
+                return forms;
+            }
+
+            
             return forms;
         }
 
         public async Task<EvaluationFormDTO> GetForm(int formId, int userId)
         {
             EvaluationFormDTO form = null;
-            var url = "api/forms/" + formId + "?userId=" + userId;
-            HttpClient client = Initialize();
-            HttpResponseMessage responseMessage = await client.GetAsync(url);
 
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                var result = responseMessage.Content.ReadAsStringAsync().Result;
-                form = JsonConvert.DeserializeObject<EvaluationFormDTO>(result);
+                var url = "api/forms/" + formId + "?userId=" + userId;
+                HttpClient client = Initialize();
+                HttpResponseMessage responseMessage = await client.GetAsync(url);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var result = responseMessage.Content.ReadAsStringAsync().Result;
+                    form = JsonConvert.DeserializeObject<EvaluationFormDTO>(result);
+                }
             }
+            catch (HttpRequestException e)
+            {
+                return null;
+            }
+            
+
+
             return form;
         }
 
