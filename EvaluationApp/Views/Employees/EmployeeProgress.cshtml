@@ -62,35 +62,14 @@
 <link href="@Url.Content("~/css/DetailsCompleted.css")" rel="stylesheet" type="text/css" />
 
 <script>
-    //var data = {
-
-    //    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-    //    series: [
-    //        [5, 2, 4, 2, 0]
-    //    ]
-    //};
 
     var options = {
         //width: 1000,
         //height: 900,
     };
 
-
     var i = 0;
-    var chartId = "#ct-chart";
-
-    @*for (i = 0; i < @Model.SectionStatistics.Count; i++)
-    {
-        var data = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-            series: [
-                [5, 2, 4, 2, 0]
-            ]
-        };
-
-        new Chartist.Line(chartId, data, options);
-        chartId += i;
-    }*@
+    var chartId = "#ct-chart";    
     var sectionIndex = 0;
 
 

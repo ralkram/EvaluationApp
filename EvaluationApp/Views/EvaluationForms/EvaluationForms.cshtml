@@ -1,5 +1,16 @@
 ﻿@model IEnumerable<EvaluationFormsManager.DataTransferObjects.EvaluationFormDTO>
 
+@*<style>
+/* Zoom button*/
+.zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+</style>*@
 
 <br /><br />
 <div class="container">
@@ -37,9 +48,9 @@
                             <td>@item.CreatedDate.ToString("dd/MM/yy")</td>
                             <td>@item.ModifiedDate.ToString("dd/MM/yy")</td>
                             <td>
-                                <a asp-action="FormPreview" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/view.png" /></a>
+                                <a asp-action="FormPreview" asp-route-formId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="Preview Evaluation Form"><img src="~/images/view.png" class="zoom" /></a>
                                 <a data-toggle="tooltip" data-placement="bottom" title="Start Evaluation">
-                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" />
+                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" class="zoom" />
                                 </a>
                             </td>
                         </tr>
@@ -64,3 +75,4 @@
         $('#exampleModal').modal('show');
 })
 </script>
+@*<link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css" />*@

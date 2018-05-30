@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<IdentityServer.Domain.Employee>
 
+<link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css" />
 
 <br /><br />
 <div class="container">
@@ -25,13 +26,13 @@
                         <td>@item.Position.RoleName</td>
                         <td>@item.Team.Name</td>
                         <td>
-                           <a asp-action="Completed" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" /></a>
-                            <a asp-action="InProgress" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" /></a>
+                           <a asp-action="Completed" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" class="zoom"/></a>
+                            <a asp-action="InProgress" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" class="zoom" /></a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Evaluate Employee">
-                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" />
+                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" class="zoom" />
                             </a>
                             <a data-toggle="tooltip" data-placement="bottom" title="View Employee Progress">
-                                <img src="~/images/progressView.png"  data-toggle="modal" data-id="@item.Id" data-target="#progressModal"/>
+                                <img src="~/images/progressView.png"  data-toggle="modal" data-id="@item.Id" data-target="#progressModal" class="zoom"/>
                             </a>
                         </td>
                     </tr>

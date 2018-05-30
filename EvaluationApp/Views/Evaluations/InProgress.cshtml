@@ -26,12 +26,12 @@
                             <td>@item.Employee.Name</td>
                             <td>@item.LastEvaluator.Name</td>
                             <td>
-                                <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Evaluation"><img src="~/images/view.png" /></a>
+                                <a asp-action="DetailsInProgress" asp-route-evaluationId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Evaluation"><img src="~/images/view.png"  class="zoom"/></a>
                                 <a data-toggle="tooltip" data-placement="bottom" title="Continue Evaluation">
-                                    <img src="~/images/start.png" onclick="location.href='@Url.Action("Evaluate", "Evaluations", new { id = item.Id})'" />
+                                    <img src="~/images/start.png" onclick="location.href='@Url.Action("Evaluate", "Evaluations", new { id = item.Id})'"  class="zoom"/>
                                 </a>
                                 <a data-toggle="tooltip" data-placement="bottom" title="Delete Evaluation">
-                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" />
+                                    <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/cancel.png" class="zoom" />
                                 </a>
                                 
                             </td>
