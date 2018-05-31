@@ -14,8 +14,8 @@ namespace AppServices.EvaluationsForms
         //Form GetEvaluationForm(int formId);
 
         Task<List<SelectListItem>> GetFormNames();
-        HttpClient Initialize();
-        Task<ICollection<EvaluationFormDTO>> GetAllFormsForEmployee(int employeeId);
-        Task<EvaluationFormDTO> GetForm(int formId, int userId);
+        void Initialize();
+        Task<ICollection<EvaluationFormDTO>> GetAllFormsForEmployee(string userName);
+        Task<EvaluationFormDTO> GetForm(int formId, string userName);
     }
 }

@@ -4,77 +4,81 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Infrastructure.EmployeeAuthenticationService
 {
     public class EmployeesService : IEmployeesService
     {
-        // MOCKUP METHOD, TO BE IMPLEMENTED
-        public Employee GetEmployeeInfo(int employeeId)
+        private readonly IAuthenticationService authenticationService;
+        private readonly IConfiguration config;
+        private HttpClient client = null;
+
+        public EmployeesService(IAuthenticationService authService, IConfiguration configuration)
         {
-            ICollection<Employee> employees = new List<Employee>();
-            employees.Add(new Employee
+            authenticationService = authService;
+            config = configuration;
+            Initialize();
+        }
+        // MOCKUP METHOD, TO BE IMPLEMENTED
+        public Employee GetEmployeeInfo(string userName)
+        {
+            Employee employee = null;
+            try
             {
-                Id = 1,
-                Name = "Paige Turner",
-                Position = new Position { Id = 1, RoleName = "Team Lead" },
-                Team = new Team { Id = 1, Name = "Team 1" }
-            });
+                var url = "api/GetEmployeeInfo/" + userName;                
+                HttpResponseMessage responseMessage = client?.GetAsync(url).Result;
 
-            employees.Add(new Employee
+                if (responseMessage != null && responseMessage.IsSuccessStatusCode)
+                {
+                    var result = responseMessage.Content.ReadAsStringAsync().Result;
+                    employee = JsonConvert.DeserializeObject<Employee>(result);
+                }
+            }
+            catch (Exception)
             {
-                Id = 2,
-                Name = "Sam Samuels",
-                Position = new Position { Id = 2, RoleName = "Developer" },
-                Team = new Team { Id = 2, Name = "Team 2" }
-            });
+               //to do: add logs
+            }
 
-            employees.Add(new Employee
-            {
-                Id = 3,
-                Name = "Leana Stevens",
-                Position = new Position { Id = 3, RoleName = "QA Engineer" },
-                Team = new Team { Id = 3, Name = "Team 3" }
-            });
-            employees.Add(new Employee
-            {
-                Id = 4,
-                Name = "John Smith",
-                Position = new Position { Id = 1, RoleName = "Team Lead" },
-                Team = new Team { Id = 2, Name = "Team 2" }
-            });
-            var employee = (from x in employees.OfType<Employee>() where x.Id == employeeId select x).FirstOrDefault();
-            return employee;
+            return employee;            
         }
 
         // MOCKUP METHOD, TO BE IMPLEMENTED
-        public ICollection<Employee> GetEmployeesToEvaluate(int employeeId)
+        public ICollection<Employee> GetEmployeesToEvaluate(string userName)
         {
             ICollection<Employee> employees = new List<Employee>();
-            employees.Add(new Employee
+            
+            try
             {
-                Id = 2,
-                Name = "Sam Samuels",
-                Position = new Position { Id = 2, RoleName = "Developer" },
-                Team = new Team { Id = 2, Name = "Team 2" }
-            });
+                var url = "api/GetEmployeesToEvaluate/" + userName;               
 
-            employees.Add(new Employee
+                HttpResponseMessage responseMessage = client?.GetAsync(url).Result; 
+                if (responseMessage != null && responseMessage.IsSuccessStatusCode)
+                {
+                    var result = responseMessage.Content.ReadAsStringAsync().Result;
+                    employees = JsonConvert.DeserializeObject <List <Employee>>(result);
+                }
+            }
+            catch (Exception)
             {
-                Id = 3,
-                Name = "Leana Stevens",
-                Position = new Position { Id = 3, RoleName = "QA Engineer" },
-                Team = new Team { Id = 3, Name = "Team 3" }
-            });
-            employees.Add(new Employee
-            {
-                Id = 4,
-                Name = "John Smith",
-                Position = new Position { Id = 1, RoleName = "Team Lead" },
-                Team = new Team { Id = 2, Name = "Team 2" }
-            });
+                //to do: add logs
+            }  
 
             return employees;
+        }
+
+        private void Initialize()
+        {
+            var employeesProviderSection = config?.GetSection("EmployeeProvider");
+            var employeesProviderUrl = "http://localhost";
+            client = new HttpClient();
+            employeesProviderUrl = employeesProviderSection?.GetValue<string>("BaseUrl");
+            client.BaseAddress = new Uri(employeesProviderUrl);
+            
+            //return client;
         }
     }
 }

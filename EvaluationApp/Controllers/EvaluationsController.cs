@@ -60,16 +60,16 @@ namespace EvaluationApp.Controllers
 
         public IActionResult InProgress()
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEvaluator(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEvaluator(loggedUserName);
             var evaluationViewModels = GenerateEvaluationViewModels(inProgressEvaluations);
 
             return View(evaluationViewModels);
         }
         public IActionResult Completed()
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEvaluator(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEvaluator(loggedUserName);
             var evaluationViewModels = GenerateEvaluationViewModels(completedEvaluations);
 
             return View(evaluationViewModels);
@@ -78,17 +78,17 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public async Task<IActionResult> StartFormEvaluationModal(int id)
         {
-            int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await evaluationFormsService.GetAllFormsForEmployee(currentEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedUserName);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedForm = id;
             vm.IsFormEnabled = false;
             vm.Name = "";
 
-            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(currentEmployeeId)
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedUserName)
                             .Select(employee => 
-                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id })
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Username })
                             .ToList();
             //vm.FormsList = evaluationFormsService.GetEnabledSharedFormsForEmployee(currentEmployeeId)
             //               .Select(form => 
@@ -108,8 +108,8 @@ namespace EvaluationApp.Controllers
         public async Task<IActionResult> StartFormEvaluationModal(StartEvaluationViewModel evaluation)
         {
             //var form = evaluationFormsService.GetEvaluationForm(evaluation.SelectedForm);
-            int currentEmployeeId = authenticationService.GetCurrentUserId();
-            var form = await evaluationFormsService.GetForm(evaluation.SelectedForm, currentEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var form = await evaluationFormsService.GetForm(evaluation.SelectedForm, loggedUserName);
 
             var eval = new Evaluation
             {
@@ -118,9 +118,9 @@ namespace EvaluationApp.Controllers
                 FormId = form.Id,
                 EmployeeId = evaluation.SelectedEmployee,
                 Sections = evaluationsService.MapFormSectionsToEvaluationSections(form.Sections),
-                CreatedBy = currentEmployeeId,
-                LastEvaluatorId = currentEmployeeId,
-                ModifiedBy = currentEmployeeId,
+                CreatedBy = loggedUserName,
+                LastEvaluatorId = loggedUserName,
+                ModifiedBy = loggedUserName,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
@@ -169,26 +169,6 @@ namespace EvaluationApp.Controllers
 
             return View("EvaluationForm", formVM);
         }
-
-        //public ContentResult JSON()
-        //{
-        //    List<DataPoint> dataPoints = new List<DataPoint>();
-
-        //    var statistics = statisticsService.GetStatisticsForFormAndEmployee(1, 1);
-
-        //    int i = 0;
-
-        //    foreach (var evaluation in statistics.ProgressEvaluations)
-        //    {
-        //        foreach (var section in evaluation.ProgressSections)
-        //        {
-        //            dataPoints.Add(new DataPoint(i++, section.SectionAverageGrade.Value));
-        //        }
-        //    }
-
-        //    JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
-        //    return Content(JsonConvert.SerializeObject(dataPoints, _jsonSetting), "application/json");
-        //}
 
         [HttpPost]        
         [Route("Evaluations/UpdateEvaluation", Name = "UpdateEvaluation")]
@@ -246,8 +226,6 @@ namespace EvaluationApp.Controllers
         public IActionResult DetailsCompleted(int evaluationId)
         {
             var evaluation = evaluationsService.GetEvaluationById(evaluationId);
-
-            var test = statisticsService.GetStatisticsForFormAndEmployee(1, 2);
 
             if (evaluationId == 0 || (evaluation == null))
             {

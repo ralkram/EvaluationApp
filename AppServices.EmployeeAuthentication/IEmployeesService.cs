@@ -7,7 +7,7 @@ namespace AppServices.EmployeeAuthentication
 {
     public interface IEmployeesService
     {
-        Employee GetEmployeeInfo(int employeeId);
-        ICollection<Employee> GetEmployeesToEvaluate(int employeeId);
+        Employee GetEmployeeInfo(string userName);
+        ICollection<Employee> GetEmployeesToEvaluate(string userName);
     }
 }

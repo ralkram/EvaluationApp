@@ -38,9 +38,9 @@ namespace AppServices.EvaluationStatistics
             return sectionAverageGrade;
         }
 
-        public EvaluationFormStatistics GetStatisticsForFormAndEmployee(int formId, int employeeId)
+        public EvaluationFormStatistics GetStatisticsForFormAndEmployee(int formId, string employeeUserName)
         {
-            IEnumerable<Evaluation> evaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeId).Where(e => e.FormId == formId);
+            IEnumerable<Evaluation> evaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeUserName).Where(e => e.FormId == formId);
 
             if (evaluations != null)
             {

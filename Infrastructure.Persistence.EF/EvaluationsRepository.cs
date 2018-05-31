@@ -15,30 +15,30 @@ namespace Infrastructure.Persistence.EF
 
         }
 
-        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(string evaluatorUserName)
         {
-            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorId && e.IsCompleted == true);
+            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorUserName && e.IsCompleted == true);
 
             return completedEvaluations;
         }
 
-        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(string evaluatorUserName)
         {
-            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorId && e.IsCompleted == false);
+            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.CreatedBy == evaluatorUserName && e.IsCompleted == false);
 
             return inProgressEvaluations;
         }
 
-        public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(string employeeUserName)
         {
-            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeId && e.IsCompleted == true);
+            var completedEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeUserName && e.IsCompleted == true);
 
             return completedEvaluations;
         }
 
-        public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(string employeeUserName)
         {
-            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeId && e.IsCompleted == false);
+            var inProgressEvaluations = EvaluationDbContext.Evaluations.Where(e => e.EmployeeId == employeeUserName && e.IsCompleted == false);
 
             return inProgressEvaluations;
         }

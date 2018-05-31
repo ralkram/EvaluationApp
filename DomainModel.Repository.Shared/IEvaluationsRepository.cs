@@ -7,10 +7,10 @@ namespace DomainModel.Repository.Shared
 {
     public interface IEvaluationsRepository: IRepository<Evaluation>
     {
-        IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId);
-        IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(string evaluatorUserName);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(string evaluatorUserName);
 
-        IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
-        IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(string employeeUserName);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(string employeeUserName);
     }
 }

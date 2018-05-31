@@ -23,16 +23,16 @@
                             <img src="~/images/person1.png" width="16" height="16"/>
                             @item.Name
                         </td>
-                        <td>@item.Position.RoleName</td>
-                        <td>@item.Team.Name</td>
+                        <td>@item.Position?.RoleName</td>
+                        <td>@item.Team?.Name</td>
                         <td>
-                           <a asp-action="Completed" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" class="zoom"/></a>
-                            <a asp-action="InProgress" asp-route-employeeId="@item.Id" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" class="zoom" /></a>
+                           <a asp-action="Completed" asp-route-employeeUserName="@item.Username" data-toggle="tooltip" data-placement="bottom" title="View Completed Evaluations for Employee"> <img src="~/images/completed.png" class="zoom"/></a>
+                            <a asp-action="InProgress" asp-route-employeeUserName="@item.Username" data-toggle="tooltip" data-placement="bottom" title="View In Pprogress Evaluations for Employee"> <img src="~/images/progress.png" class="zoom" /></a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Evaluate Employee">
-                                <img data-toggle="modal" data-id="@item.Id" data-target="#exampleModal" src="~/images/start.png" class="zoom" />
+                                <img data-toggle="modal" data-id="@item.Username" data-target="#exampleModal" src="~/images/start.png" class="zoom" />
                             </a>
                             <a data-toggle="tooltip" data-placement="bottom" title="View Employee Progress">
-                                <img src="~/images/progressView.png"  data-toggle="modal" data-id="@item.Id" data-target="#progressModal" class="zoom"/>
+                                <img src="~/images/progressView.png"  data-toggle="modal" data-id="@item.Username" data-target="#progressModal" class="zoom"/>
                             </a>
                         </td>
                     </tr>

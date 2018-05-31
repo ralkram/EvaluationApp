@@ -18,6 +18,7 @@
                         var tabId = "tab" + idx;
                         var tabRef = "#" + tabId;
                         var aClass = "nav-link";
+                        var aId = "a" + tabId;
                         var selectedArea = "";
                         if (idx == defaultTab)
                         {
@@ -25,7 +26,7 @@
                             selectedArea = "aria-selected=\"true\"";
                         }
                         <li class="nav-item">
-                            <a href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
+                            <a id="@aId" href="@tabRef" aria-controls="@tabId" role="tab" data-toggle="tab" class="@aClass" @selectedArea>
                                 @crtSection.Name
                             </a>
                         </li>
@@ -36,20 +37,22 @@
                 <div class="tab-content">
                     @{
                         idx = 0;
-                        var chartId = "ct-chart";
+                        
                     }
                     @foreach (var crtSection in Model.SectionStatistics)
                     {
                         var tabClass = "tab-pane";
+                        var chartId = "ct-chart";
                         if (idx == defaultTab)
                         {
                             tabClass += " active show";
                         }
                         string anchorTarget = "tab" + idx;
+                        chartId += idx;
                         <div role="tabpanel" class="@tabClass" id="@anchorTarget">
                             <div id="@chartId"></div>
                         </div>
-                        chartId += idx;
+                       
                         idx++;
                     }
                 </div>
@@ -69,7 +72,8 @@
     };
 
     var i = 0;
-    var chartId = "#ct-chart";    
+    var chartId = "#ct-chart";
+    var tabAnchorId = "#atab";
     var sectionIndex = 0;
 
 
@@ -95,10 +99,13 @@
         labels: sectionLabels,
         series: [sectionSeries]
     };
-
-    new Chartist.Line(chartId, data, options);
-    chartId += i;
+    chartToUse = chartId + i;
+    aTabToUse = tabAnchorId + i;
+    new Chartist.Line(chartToUse, data, options);    
     i++;
+    $(aTabToUse).on('shown.bs.tab', function (e) {
+        document.querySelector(chartToUse).__chartist__.update();
+    });    
     </text>
     }
 </script>

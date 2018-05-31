@@ -19,9 +19,8 @@ namespace EvaluationApp
             // BuildWebHost(args).Run();
 
             var host = BuildWebHost(args);
-            var scope = host.Services.CreateScope();
+            var scope = host.Services.CreateScope();            
             var serviceProvider = scope.ServiceProvider;
-
             var dataServices = serviceProvider.GetRequiredService<IPersistenceContext>();
             dataServices.InitializeData();
 

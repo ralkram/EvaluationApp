@@ -33,8 +33,8 @@ namespace EvaluationApp.Controllers
 
         public async Task<ActionResult> Index()
         {
-            int loggedUserId = authenticationService.GetCurrentUserId();
-            var vm = await evaluationFormsService.GetAllFormsForEmployee(loggedUserId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var vm = await evaluationFormsService.GetAllFormsForEmployee(loggedUserName);
             return View("EvaluationForms", vm);
         }
 
@@ -42,8 +42,8 @@ namespace EvaluationApp.Controllers
         {
             //var form = evaluationFormsService.GetEvaluationForm(formId);
 
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedUserName);
             var form = forms.FirstOrDefault(f => f.Id == formId);
 
             if (formId == 0 || (form == null))

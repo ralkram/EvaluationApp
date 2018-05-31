@@ -8,11 +8,11 @@ namespace AppServices.Evaluations
     public interface IEvaluationsService
     {
         Evaluation GetEvaluationById(int evaluationId);
-        IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId);
-        IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(string evaluatorUserName);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(string evaluatorUserName);
 
-        IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId);
-        IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId);
+        IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(string employeeUserName);
+        IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(string employeeUserName);
 
         void UpdateEvaluation(Evaluation evaluation);
 

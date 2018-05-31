@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace Infrastructure.EmployeeAuthenticationService
 {
@@ -24,9 +25,19 @@ namespace Infrastructure.EmployeeAuthenticationService
         }
 
         // MOCKUP METHOD, TO BE IMPLEMENTED
-        public int GetCurrentUserId()
+        public string GetCurrentUserId()
         {
-            return 1;
+            string userId = "";
+            if (currentContext != null)
+            {
+                if (currentContext.User != null)
+                {
+                    var nameClaim = currentContext.User.Claims.Where(claim => claim.Type.Equals("name")).FirstOrDefault();
+                    userId = nameClaim?.Value;
+                }
+            }
+
+            return userId;
         }
 
         public void Initialize(IServiceCollection services, IConfiguration config)
@@ -47,7 +58,7 @@ namespace Infrastructure.EmployeeAuthenticationService
                     options.SignInScheme = "Cookies";
                     options.Authority = authSettings["Authority"];
                     options.RequireHttpsMetadata = false;
-                    options.CallbackPath = PathString.FromUriComponent("/" + returnUrl);                    
+                    options.CallbackPath = PathString.FromUriComponent("/" + returnUrl);
                     options.ClientId = authSettings["ClientId"];
                     options.ClientSecret = authSettings["ClientSecret"];
                     options.ResponseType = "code id_token";
@@ -62,7 +73,14 @@ namespace Infrastructure.EmployeeAuthenticationService
         // MOCKUP METHOD, TO BE IMPLEMENTED
         public bool IsUserAuthenticated()
         {
-            return true;
+            if (currentContext != null)
+            {
+                if (currentContext.User.Identity.IsAuthenticated)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void SignOut()

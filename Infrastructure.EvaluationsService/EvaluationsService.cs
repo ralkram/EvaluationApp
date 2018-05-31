@@ -17,16 +17,16 @@ namespace Infrastructure.EvaluationsService
             this.persistenceContext = persistenceContext;
         }
 
-        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEvaluator(string evaluatorUserName)
         {
-            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEvaluator(evaluatorId);
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEvaluator(evaluatorUserName);
 
             return evaluations;
         }
 
-        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(int evaluatorId)
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEvaluator(string evaluatorUserName)
         {
-            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEvaluator(evaluatorId);
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEvaluator(evaluatorUserName);
 
             return evaluations;
         }
@@ -75,7 +75,7 @@ namespace Infrastructure.EvaluationsService
                 {
                     Name = section.Name,
                     // for test
-                    CreatedBy = 1,
+                    CreatedBy = "1",
                     Criteria = criteria,
                     EvaluationScale = persistenceContext.EvaluationScales.GetById((int)section.EvaluationScale)
                 });
@@ -84,16 +84,16 @@ namespace Infrastructure.EvaluationsService
             return sections;
         }
 
-        public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(int employeeId)
+        public IEnumerable<Evaluation> GetInProgressEvaluationsForEmployee(string employeeUserName)
         {
-            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEmployee(employeeId);
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetInProgressEvaluationsForEmployee(employeeUserName);
 
             return evaluations;
         }
 
-        public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(int employeeId)
+        public IEnumerable<Evaluation> GetCompletedEvaluationsForEmployee(string employeeUserName)
         {
-            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEmployee(employeeId);
+            IEnumerable<Evaluation> evaluations = persistenceContext.Evaluations.GetCompletedEvaluationsForEmployee(employeeUserName);
 
             return evaluations;
         }

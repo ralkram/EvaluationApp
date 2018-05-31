@@ -55,6 +55,8 @@ namespace Infrastructure.Persistence.EF
 
         public void InitializeData()
         {
+            context.Database.Migrate();
+
             // Add here evaluation scales and options
 
             if (!context.EvaluationScales.Any(es => es.Name == "Grades"))

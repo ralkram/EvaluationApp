@@ -13,6 +13,7 @@ using Infrastructure.EvaluationsService;
 using Infrastructure.Persistence.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +32,7 @@ namespace EvaluationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            bool httpContextAvailable = false;
             services.AddScoped<IPersistenceContext, PersistenceContext>();
             var dataService = services.BuildServiceProvider().GetService<IPersistenceContext>();
             if (dataService != null)
@@ -42,7 +44,27 @@ namespace EvaluationApp
             services.AddScoped<IEvaluationFormsService, EvaluationFormsService>();
             services.AddScoped<IEvaluationsService, EvaluationsService>();
             services.AddScoped<IEmployeesService, EmployeesService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            try
+            {
+                var contextAccessor = services.BuildServiceProvider().GetService<IHttpContextAccessor>();
+                if (contextAccessor != null)
+                {
+                    httpContextAvailable = true;
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                httpContextAvailable = false;
+            }
+            if (httpContextAvailable)
+            {
+                services.AddScoped<IAuthenticationService, AuthenticationService>();
+            }
+            else
+            {
+                services.AddScoped<IAuthenticationService>(sp => new AuthenticationService(null));
+            }
+            
             services.AddScoped<IEvaluationStatisticsService, EvaluationStatisticsService>();
             
             services.AddMvc();

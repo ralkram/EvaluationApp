@@ -40,29 +40,29 @@ namespace EvaluationApp.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var vm = employeesService.GetEmployeesToEvaluate(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var vm = employeesService.GetEmployeesToEvaluate(loggedUserName);
 
             return View("Employees", vm);
         }
 
         [HttpGet]
-        public async Task<IActionResult> StartFormEvaluationModal(int id)
+        public async Task<IActionResult> StartFormEvaluationModal(string id)
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedUserName);
 
             var vm = new StartEvaluationViewModel();
             vm.SelectedEmployee = id;
             vm.IsEmployeeEnabled = false;
             vm.Name = "";
 
-            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedEmployeeId)
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedUserName)
                             .Select(employee =>
-                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Username, Selected = (employee.Username == id) })
                             .ToList();
             vm.FormsList = forms.Select(form =>
-                                   new SelectListItem { Text = form.Name, Value = "" + form.Id, Selected = (form.Id == id) })
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id})
                                    .ToList();
             vm.IsFormEnabled = true;
 
@@ -71,24 +71,23 @@ namespace EvaluationApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewEmployeeProgressModal(int id)
+        public async Task<IActionResult> ViewEmployeeProgressModal(string id)
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var forms = await evaluationFormsService.GetAllFormsForEmployee(loggedUserName);
 
             var vm = new EmployeeProgressViewModel();
             vm.SelectedEmployee = id;
             vm.IsEmployeeEnabled = false;
 
-            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedEmployeeId)
+            vm.EmployeesList = employeesService.GetEmployeesToEvaluate(loggedUserName)
                             .Select(employee =>
-                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Id, Selected = (employee.Id == id) })
+                                    new SelectListItem { Text = employee.Name, Value = "" + employee.Username, Selected = (employee.Username == id) })
                             .ToList();
             vm.FormsList = forms.Select(form =>
-                                   new SelectListItem { Text = form.Name, Value = "" + form.Id, Selected = (form.Id == id) })
+                                   new SelectListItem { Text = form.Name, Value = "" + form.Id })
                                    .ToList();
             vm.IsFormEnabled = true;
-
 
             return View("ViewEmployeeProgressModal", vm);
         }
@@ -96,23 +95,23 @@ namespace EvaluationApp.Controllers
         [HttpGet]
         public IActionResult EmployeeProgress(EmployeeProgressViewModel vm)
         {
-            int loggedEmployeeId = authenticationService.GetCurrentUserId();
-            var form = evaluationFormsService.GetForm(vm.SelectedForm, loggedEmployeeId);
+            string loggedUserName = authenticationService.GetCurrentUserId();
+            var form = evaluationFormsService.GetForm(vm.SelectedForm, loggedUserName);
 
             var EvaluationFormStatistics = evaluationStatistics.GetStatisticsForFormAndEmployee(vm.SelectedForm, vm.SelectedEmployee);
             return View(EvaluationFormStatistics);
         }
 
-        public IActionResult InProgress(int employeeId)
+        public IActionResult InProgress(string employeeUserName)
         {
-            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEmployee(employeeId);
+            var inProgressEvaluations = evaluationsService.GetInProgressEvaluationsForEmployee(employeeUserName);
             var evaluationViewModels = GenerateEvaluationViewModels(inProgressEvaluations);
 
             return View(evaluationViewModels);
         }
-        public IActionResult Completed(int employeeId)
+        public IActionResult Completed(string employeeUserName)
         {
-            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeId);
+            var completedEvaluations = evaluationsService.GetCompletedEvaluationsForEmployee(employeeUserName);
             var evaluationViewModels = GenerateEvaluationViewModels(completedEvaluations);
 
             return View(evaluationViewModels);

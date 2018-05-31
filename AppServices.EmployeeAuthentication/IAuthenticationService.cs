@@ -7,7 +7,7 @@ namespace AppServices.EmployeeAuthentication
 {
     public interface IAuthenticationService
     {
-        int GetCurrentUserId();
+        string GetCurrentUserId();
         bool IsUserAuthenticated();
         void Initialize(IServiceCollection services, IConfiguration config);
         void Configure(IApplicationBuilder applicationBuilder);
