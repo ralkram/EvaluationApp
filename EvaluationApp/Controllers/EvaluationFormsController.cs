@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvaluationApp.Controllers
 {
-    
+    [Authorize]
     public class EvaluationFormsController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;

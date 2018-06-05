@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EvaluationApp.Models;
 using AppServices.EmployeeAuthentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EvaluationApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IAuthenticationService authenticationService;

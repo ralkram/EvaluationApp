@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace EvaluationApp.Controllers
 {
-    
+    [Authorize]
     public class EvaluationsController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;

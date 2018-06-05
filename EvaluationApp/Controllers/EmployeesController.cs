@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EvaluationApp.Controllers
 {
-    
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEvaluationFormsService evaluationFormsService;
@@ -37,7 +37,6 @@ namespace EvaluationApp.Controllers
             this.evaluationStatistics = evaluationStatistics;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             string loggedUserName = authenticationService.GetCurrentUserId();

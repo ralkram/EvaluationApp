@@ -24,7 +24,6 @@ namespace Infrastructure.EmployeeAuthenticationService
             applicationBuilder.UseAuthentication();
         }
 
-        // MOCKUP METHOD, TO BE IMPLEMENTED
         public string GetCurrentUserId()
         {
             string userId = "";
@@ -70,7 +69,6 @@ namespace Infrastructure.EmployeeAuthenticationService
             Services = services;
         }
 
-        // MOCKUP METHOD, TO BE IMPLEMENTED
         public bool IsUserAuthenticated()
         {
             if (currentContext != null)
